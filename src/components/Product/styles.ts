@@ -6,12 +6,15 @@ export const Card = styled.div`
   background-color: ${cores.corBranca};
   margin-top: 50px;
   margin-bottom: 50px;
+  position: relative;
+  border: solid 1px ${cores.corVermelha};
 `
 
 export const Titulo = styled.h3`
   font-weight: bold;
   font-size: 18px;
   color: ${cores.corVermelha};
+  margin-left: 5px;
 `
 
 export const Nota = styled.h3`
@@ -19,10 +22,10 @@ export const Nota = styled.h3`
   font-size: 18px;
   color: ${cores.corVermelha};
   margin-left: auto;
-  padding-right: 10px;
+  margin-right: 10px;
 `
 export const Estrelinha = styled.img`
-  padding-right: 5px;
+  margin-right: 5px;
 `
 
 export const EnLinha = styled.div`
@@ -32,13 +35,17 @@ export const EnLinha = styled.div`
   margin-top: 5px;
   margin-bottom: 16px;
 `
-export const AlinhaTag = styled.div`
-  gap: 5px;
-`
 
 export const Descricao = styled.p`
   font-size: 14px;
   line-height: 22px;
   display: block;
-  margin-top: 0cqw;
+  margin: 5px;
+  text-align: justify;
+  padding-bottom: 10px;
+`
+export const Categoria = styled.div`
+  position: absolute;
+  top: 16px;
+  right: 16px;
 `
