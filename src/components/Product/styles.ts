@@ -60,7 +60,6 @@ export const Categoria = styled.div`
   right: 16px;
 
   @media (max-width: 768px) {
-    position: static; /* Ajustar a posição em telas menores */
     margin-top: 10px; /* Espaço superior para categorias em telas menores */
   }
 `
