@@ -1,12 +1,19 @@
+import Footer from './components/Footer'
 import Header from './components/Header'
-import { GlobalCss } from './styles'
+import ProductsList from './components/ProductList'
+
+import { Container, GlobalCss } from './styles'
 
 function App() {
   return (
     <>
       <div>
-        <Header />
         <GlobalCss />
+        <Header />
+        <Container>
+          <ProductsList />
+        </Container>
+        <Footer />
       </div>
     </>
   )
