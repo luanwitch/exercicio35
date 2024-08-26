@@ -4,12 +4,13 @@ import face from '../../assets/image/facebook.png'
 import x from '../../assets/image/x.png'
 import { DescricaoFooter, FooterFundo, FooterLogo, RedeSociais } from './styles'
 import { Container } from '../../styles'
+import { LogoImagem } from '../Header/styles'
 
 const Footer = () => (
   <FooterFundo>
     <div>
       <FooterLogo>
-        <img src={logo} alt="logo" />
+        <LogoImagem src={logo} alt="logo" />
       </FooterLogo>
 
       <div>

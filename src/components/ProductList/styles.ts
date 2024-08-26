@@ -1,18 +1,20 @@
+// ProductsList/styles.ts
+
 import styled from 'styled-components'
 
-export const SectionContainer = styled.section`
+export const SectionContainer = styled.div`
+  max-width: 100%;
+  padding: 0 15px; /* Padding horizontal para evitar o overflow */
+  box-sizing: border-box;
+
   @media (max-width: 768px) {
-    padding: 10px; /* Adiciona padding interno em dispositivos móveis */
+    padding: 0 10px; /* Ajuste para telas menores */
   }
 `
 
-export const List = styled.ul`
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  column-gap: 48px;
-
-  @media (max-width: 768px) {
-    grid-template-columns: 1fr; /* Ajusta para uma coluna em telas menores */
-    row-gap: 20px; /* Adiciona espaçamento entre linhas */
-  }
+export const List = styled.div`
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  justify-content: center; /* Centralizar a lista de produtos */
 `

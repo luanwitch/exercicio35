@@ -2,16 +2,19 @@ import styled from 'styled-components'
 import { cores } from '../../styles'
 
 export const Card = styled.div`
-  width: 472px;
+  width: 100%; /* Ajustar largura para se adaptar ao tamanho do contêiner */
+  max-width: 472px;
   background-color: ${cores.corBranca};
   margin-top: 50px;
   margin-bottom: 50px;
   position: relative;
   border: solid 1px ${cores.corVermelha};
+  padding: 15px; /* Adicionar padding para garantir espaço interno adequado */
 
-  @media (max-width: 768px) {
-    width: 100%; /* Faz com que o card ocupe toda a largura disponível */
-    margin: 10px 0; /* Adiciona um espaçamento vertical */
+  img {
+    max-width: 100%; /* Garantir que as imagens não excedam o tamanho do contêiner */
+    height: auto; /* Manter a proporção das imagens */
+    display: block; /* Evitar espaçamento indesejado abaixo da imagem */
   }
 `
 
@@ -20,10 +23,6 @@ export const Titulo = styled.h3`
   font-size: 18px;
   color: ${cores.corVermelha};
   margin-left: 5px;
-
-  @media (max-width: 768px) {
-    font-size: 16px; /* Reduz o tamanho da fonte para telas menores */
-  }
 `
 
 export const Nota = styled.h3`
@@ -32,15 +31,10 @@ export const Nota = styled.h3`
   color: ${cores.corVermelha};
   margin-left: auto;
   margin-right: 10px;
-
-  @media (max-width: 768px) {
-    font-size: 16px; /* Reduz o tamanho da fonte para telas menores */
-  }
 `
 
 export const Estrelinha = styled.img`
   margin-right: 5px;
-  max-width: 20px; /* Ajusta o tamanho das imagens para telas menores */
 `
 
 export const EnLinha = styled.div`
@@ -49,11 +43,6 @@ export const EnLinha = styled.div`
   justify-content: space-between;
   margin-top: 5px;
   margin-bottom: 16px;
-
-  @media (max-width: 768px) {
-    flex-direction: column; /* Alinha os elementos em coluna em telas menores */
-    align-items: flex-start; /* Alinha os itens à esquerda */
-  }
 `
 
 export const Descricao = styled.p`
@@ -63,11 +52,6 @@ export const Descricao = styled.p`
   margin: 5px;
   text-align: justify;
   padding-bottom: 10px;
-
-  @media (max-width: 768px) {
-    font-size: 12px; /* Reduz o tamanho da fonte para telas menores */
-    padding-bottom: 5px; /* Reduz o padding inferior */
-  }
 `
 
 export const Categoria = styled.div`
@@ -76,7 +60,7 @@ export const Categoria = styled.div`
   right: 16px;
 
   @media (max-width: 768px) {
-    position: static; /* Remove a posição absoluta em telas menores */
-    margin-top: 10px; /* Adiciona margem superior para dispositivos móveis */
+    position: static; /* Ajustar a posição em telas menores */
+    margin-top: 10px; /* Espaço superior para categorias em telas menores */
   }
 `

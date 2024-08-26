@@ -3,15 +3,14 @@ import HeaderBackImage from '../../assets/image/header_fundo.png'
 
 export const HeaderBar = styled.header`
   background-image: url(${HeaderBackImage});
+  text-align: center;
   background-size: cover;
   background-position: center;
   height: 254px;
   display: block;
-  text-align: center;
   padding-top: 40px;
 
   @media (max-width: 768px) {
-    height: auto; /* Ajusta a altura para dispositivos móveis */
     padding-top: 20px; /* Reduz o padding superior */
   }
 `
@@ -24,4 +23,10 @@ export const HeaderTitulo = styled.h1`
   @media (max-width: 768px) {
     font-size: 28px; /* Reduz o tamanho da fonte para telas menores */
   }
+`
+export const LogoImagem = styled.img`
+  max-width: 100%; /* Garante que a imagem não exceda o contêiner */
+  height: auto;
+  display: block; /* Remove espaçamentos extras */
+  margin: 0 auto; /* Centraliza a imagem horizontalmente */
 `
