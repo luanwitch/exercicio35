@@ -1,11 +1,11 @@
 import Product from '../Product'
 import { List, SectionContainer } from './styles'
 import hioki_sushi from '../../assets/image/hioki_sushi.png'
-import la_doce_vita from '../../assets/image/la_doce_vita.png'
 import lanches from '../../assets/image/lanches.jpeg'
 import burritos from '../../assets/image/burritos.jpeg'
 import cafe_da_manha from '../../assets/image/café-da-manha.jpeg'
 import pizzas from '../../assets/image/pizzas.jpeg'
+import massas from '../../assets/image/massas.png'
 
 const ProductsList = () => (
   <div className="container">
@@ -46,7 +46,7 @@ const ProductsList = () => (
         <Product
           title="La doce vita"
           category={['Italiana']}
-          image={la_doce_vita}
+          image={massas}
           infos="Saiba mais"
           nota={4.6}
           description="A La Dolce Vita Trattoria leva a autêntica cozinha italiana até você! Desfrute de massas caseiras, pizzas deliciosas e risotos incríveis, tudo no conforto do seu lar. Entrega rápida, pratos bem embalados e sabor inesquecível. Peça já!"
