@@ -9,6 +9,7 @@ import {
   Titulo
 } from './styles'
 import Estrela from '../../assets/image/estrela.png'
+import Button from '../Button'
 
 type Props = {
   title: string
@@ -43,7 +44,9 @@ const Product = ({
     </EnLinha>
 
     <Descricao>{description}</Descricao>
-    <Tag size="big">{infos}</Tag>
+    <Button type="link" to="/produto" title="Saiba mais">
+      {infos}
+    </Button>
   </Card>
 )
 

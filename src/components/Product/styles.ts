@@ -9,7 +9,7 @@ export const Card = styled.div`
   margin-bottom: 50px;
   position: relative;
   border: solid 1px ${cores.corVermelha};
-  padding: 15px; /* Adicionar padding para garantir espaço interno adequado */
+  padding-bottom: 10px;
 
   img {
     max-width: 100%; /* Garantir que as imagens não excedam o tamanho do contêiner */
