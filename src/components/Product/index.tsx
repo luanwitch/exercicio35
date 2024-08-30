@@ -44,7 +44,7 @@ const Product = ({
     </EnLinha>
 
     <Descricao>{description}</Descricao>
-    <Button type="link" to="/produto" title="Saiba mais">
+    <Button type="link" to="/Saibamais" title="Saiba mais">
       {infos}
     </Button>
   </Card>
