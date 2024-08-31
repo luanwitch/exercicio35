@@ -1,9 +1,10 @@
-import { createBrowserRouter, RouterProvider, Outlet } from 'react-router-dom'
+import { createBrowserRouter, RouterProvider } from 'react-router-dom'
 import Footer from './components/Footer'
 import Header from './components/Header'
 import { Container, GlobalCss } from './styles'
 import Home from './pages/Home'
 import HeaderSaiba from './components/HeaderSaiba'
+import Perfil from './pages/Perfil'
 
 const rotas = createBrowserRouter([
   {
@@ -24,7 +25,7 @@ const rotas = createBrowserRouter([
       <>
         <HeaderSaiba />
         <Container>
-          {/* Componente específico da página "Saiba mais" */}
+          <Perfil />
         </Container>
         <Footer />
       </>
