@@ -2,13 +2,14 @@ import styled from 'styled-components'
 import { cores } from '../../styles'
 
 export const Card = styled.div`
-  width: 380px;
-  height: 338px;
+  width: 100%;
+  max-width: 300px; /* Reduzindo o tamanho máximo */
+  height: auto;
   background-color: ${cores.corVermelha};
   margin-top: 50px;
-  margin-bottom: 50px;
-  padding-bottom: 10px;
+  padding: 10px;
   color: ${cores.corClara};
+  box-sizing: border-box;
 
   img {
     width: 100%;
@@ -38,14 +39,4 @@ export const Descricao = styled.p`
   margin: 10px;
   text-align: justify;
   padding-bottom: 10px;
-`
-
-export const Categoria = styled.div`
-  position: absolute;
-  top: 16px;
-  right: 16px;
-
-  @media (max-width: 768px) {
-    margin-top: 10px; /* Espaço superior para categorias em telas menores */
-  }
 `
