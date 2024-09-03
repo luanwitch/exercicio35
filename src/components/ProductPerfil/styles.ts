@@ -4,15 +4,25 @@ import { cores } from '../../styles'
 export const Card = styled.div`
   width: 100%;
   max-width: 300px; /* Reduzindo o tamanho máximo */
-  height: auto;
   background-color: ${cores.corVermelha};
   margin-top: 50px;
-  padding: 10px;
+  margin-bottom: 50px;
   color: ${cores.corClara};
-  box-sizing: border-box;
+  display: flex;
+  flex-direction: column; /* Garantir que os elementos internos sejam empilhados */
+  align-items: stretch; /* Esticar os elementos para ocupar a largura total */
+  padding: 0; /* Remover padding para evitar espaçamento extra */
 
   img {
-    width: 100%;
+    width: 100%; /* Garantir que a imagem ocupe toda a largura do Card */
+    height: auto; /* Manter a proporção da imagem */
+    object-fit: cover; /* Cobrir o contêiner sem distorcer a imagem */
+    margin-bottom: 10px; /* Espaçamento entre a imagem e o conteúdo */
+  }
+
+  @media (max-width: 768px) {
+    max-width: 90%; // Ajustar largura dos cards em dispositivos móveis
+    margin: 20px auto; // Centralizar os cards e ajustar margens
   }
 `
 
@@ -20,23 +30,31 @@ export const Titulo = styled.h3`
   font-weight: 900;
   font-size: 16px;
   line-height: 19px;
-  color: ${cores.corClara};
-  margin-left: 10px;
+  color: ${cores.corFooter};
+
+  @media (max-width: 768px) {
+    font-size: 14px; // Ajustar tamanho da fonte em dispositivos móveis
+  }
 `
 
 export const EnLinha = styled.div`
+  width: 100%; /* Garantir que o EnLinha ocupe toda a largura do Card */
   display: flex;
-  align-items: center;
-  justify-content: space-between;
-  margin-top: 5px;
-  margin-bottom: 16px;
+  justify-content: space-between; /* Espaçamento entre os itens */
+  align-items: center; /* Alinhar verticalmente os itens no centro */
+  padding: 0 10px; /* Espaçamento horizontal interno */
 `
 
 export const Descricao = styled.p`
   font-size: 14px;
   font-weight: 400;
   line-height: 22px;
-  margin: 10px;
+  margin: 10px; /* Espaçamento ao redor da descrição */
   text-align: justify;
-  padding-bottom: 10px;
+  flex-grow: 1; /* Faz a descrição crescer para ocupar espaço disponível */
+  color: ${cores.corFooter};
+
+  @media (max-width: 768px) {
+    font-size: 12px; // Ajustar tamanho da fonte em dispositivos móveis
+  }
 `

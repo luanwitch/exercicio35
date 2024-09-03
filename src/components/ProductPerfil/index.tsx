@@ -17,9 +17,12 @@ const ProductPerfil = ({ title, description, infos, image }: Props) => (
     <EnLinha>
       <Titulo>{title}</Titulo>
     </EnLinha>
-
     <Descricao>{description}</Descricao>
-    <ButtonPerfil title="Adicionar ao carrinho">{infos}</ButtonPerfil>
+    <div style={{ padding: '10px' }}>
+      {' '}
+      {/* Adicionando contêiner para controlar o layout */}
+      <ButtonPerfil title="Adicionar ao carrinho">{infos}</ButtonPerfil>
+    </div>
   </Card>
 )
 

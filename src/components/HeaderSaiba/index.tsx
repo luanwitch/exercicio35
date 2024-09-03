@@ -3,12 +3,12 @@ import {
   HeaderCarrinho,
   ImageFundoSaiba,
   LogoSaibaMais,
+  StyledContainer,
   TituloCategorySaiba,
   TituloRodizioSaiba,
   TituloSaiba
 } from './styles'
 import logo from '../../assets/image/logo.png'
-import { Container } from '../../styles'
 
 const HeaderSaiba = () => (
   <>
@@ -27,10 +27,18 @@ const HeaderSaiba = () => (
     </HeaderBarSaiba>
 
     <ImageFundoSaiba>
-      <Container>
+      <StyledContainer
+        style={{
+          display: 'flex',
+          flexDirection: 'column',
+          justifyContent: 'space-between',
+          alignItems: 'flex-start', // Garante alinhamento à esquerda
+          height: '100%' // Garante que o Container ocupe toda a altura disponível
+        }}
+      >
         <TituloCategorySaiba>Italiana</TituloCategorySaiba>
         <TituloRodizioSaiba>Rodízio de pizzas</TituloRodizioSaiba>
-      </Container>
+      </StyledContainer>
     </ImageFundoSaiba>
   </>
 )
