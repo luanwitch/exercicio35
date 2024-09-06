@@ -1,7 +1,9 @@
 import {
   HeaderBarSaiba,
-  HeaderCarrinho,
   ImageFundoSaiba,
+  LinkCar,
+  Links,
+  LinksItem,
   LogoSaibaMais,
   StyledContainer,
   TituloCategorySaiba,
@@ -9,33 +11,31 @@ import {
   TituloSaiba
 } from './styles'
 import logo from '../../assets/image/logo.png'
+import { Link } from 'react-router-dom'
 
 const HeaderSaiba = () => (
   <>
     <HeaderBarSaiba>
-      <li>
-        <TituloSaiba>Restaurantes</TituloSaiba>
-      </li>
-      <li>
-        <LogoSaibaMais src={logo} alt="e-food" />
-      </li>
-      <li>
-        <HeaderCarrinho>
-          <a href="">0 produto(s) no carrinho</a>
-        </HeaderCarrinho>
-      </li>
+      <nav>
+        <Links>
+          <li>
+            <TituloSaiba>Restaurantes</TituloSaiba>
+          </li>
+          <LinksItem>
+            <Link to="/">Home</Link>
+          </LinksItem>
+          <li>
+            <LogoSaibaMais src={logo} alt="e-food" />
+          </li>
+          <LinksItem>
+            <LinkCar href="#">0 produto(s) no carrinho</LinkCar>
+          </LinksItem>
+        </Links>
+      </nav>
     </HeaderBarSaiba>
 
     <ImageFundoSaiba>
-      <StyledContainer
-        style={{
-          display: 'flex',
-          flexDirection: 'column',
-          justifyContent: 'space-between',
-          alignItems: 'flex-start', // Garante alinhamento à esquerda
-          height: '100%' // Garante que o Container ocupe toda a altura disponível
-        }}
-      >
+      <StyledContainer>
         <TituloCategorySaiba>Italiana</TituloCategorySaiba>
         <TituloRodizioSaiba>Rodízio de pizzas</TituloRodizioSaiba>
       </StyledContainer>

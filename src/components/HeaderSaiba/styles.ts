@@ -5,62 +5,71 @@ import ImageBackSaiba from '../../assets/image/pizzas_fundo.jpeg'
 
 export const HeaderBarSaiba = styled.header`
   background-image: url(${HeaderBackImage});
+  padding: 56px 20px 60px; /* Adicionado padding lateral */
   display: flex;
-  gap: 200px;
-  padding-bottom: 60px;
-  padding-top: 56px;
-  font-size: 36px;
-  font-weight: 900;
+  justify-content: center; /* Centralizar o conteúdo */
+  align-items: center; /* Centralizar verticalmente */
+`
+
+export const Links = styled.ul`
+  display: flex;
+  justify-content: space-between; /* Distribui os itens */
+  align-items: center;
+  gap: 135px; /* Diminui o espaço entre itens */
+  width: 100%;
+  max-width: 1200px; /* Define um max-width para o container */
 
   @media (max-width: 768px) {
-    gap: 50px; // Reduzindo o gap
-    padding: 20px; // Ajustando o padding para telas menores
-    flex-direction: column; // Mudando para coluna em telas menores
-    align-items: center; // Centralizando os itens
+    gap: 25px; /* Reduzindo o gap */
+    flex-direction: column; /* Mudando para coluna em telas menores */
+    align-items: center; /* Centralizando os itens */
+  }
+`
+
+export const LinksItem = styled.li`
+  a {
+    font-size: 18px;
+    font-weight: 900;
+    text-align: center;
+    color: ${cores.corVermelha};
+    text-decoration: none;
   }
 `
 
 export const TituloSaiba = styled.h1`
-  font-size: 18px;
+  font-size: 24px; /* Tamanho ajustado */
   font-weight: 900;
   line-height: 22px;
   text-align: center;
-  margin-left: 168px;
-  margin-top: 21px;
+  margin: 0; /* Remove margens */
+  padding: 0; /* Remove padding */
+  display: flex;
+  align-items: center; /* Alinha verticalmente no centro */
 
   @media (max-width: 768px) {
-    margin-left: 0; // Removendo margem esquerda em telas menores
-    margin-top: 10px; // Ajustando margem superior
-    font-size: 16px; // Reduzindo tamanho da fonte
+    font-size: 18px; /* Reduzindo tamanho da fonte */
   }
 `
 
 export const LogoSaibaMais = styled.img`
-  width: 45%;
-  height: 58px;
-  margin-left: 158px;
-  margin-top: 16px;
+  width: 180px; /* Tamanho da logo */
+  height: auto;
+  margin: 0 auto; /* Centraliza a logo horizontalmente */
 
   @media (max-width: 768px) {
-    width: 80px; // Ajustando tamanho da logo
-    margin-left: 0; // Centralizando logo
+    width: 80px; /* Ajustando tamanho da logo em telas menores */
   }
 `
 
-export const HeaderCarrinho = styled.div`
-  margin-top: 21px;
+export const LinkCar = styled.a`
   font-size: 18px;
-  line-height: 22px;
-  text-align: center;
+  font-weight: 900;
+  color: ${cores.corVermelha};
+  text-decoration: none;
 
   @media (max-width: 768px) {
-    font-size: 14px; // Reduzindo tamanho da fonte
-    margin-top: 10px; // Ajustando margem superior
-  }
-
-  a {
-    text-decoration: none;
-    color: ${cores.corVermelha};
+    font-size: 14px; /* Reduzindo tamanho da fonte */
+    margin-top: 10px; /* Ajustando margem superior */
   }
 `
 
@@ -96,7 +105,7 @@ export const ImageFundoSaiba = styled.div`
   }
 
   @media (max-width: 768px) {
-    height: 200px; // Ajustando altura para telas menores
+    height: 200px; /* Ajustando altura para telas menores */
   }
 `
 
@@ -110,9 +119,9 @@ export const TituloCategorySaiba = styled.h1`
   margin-top: 20px; /* Espaçamento do topo */
 
   @media (max-width: 768px) {
-    font-size: 24px; // Reduzindo tamanho da fonte
-    text-align: center; // Centralizando texto
-    margin-top: 10px; // Ajustando margem superior
+    font-size: 24px; /* Reduzindo tamanho da fonte */
+    text-align: center; /* Centralizando texto */
+    margin-top: 10px; /* Ajustando margem superior */
   }
 `
 
@@ -125,11 +134,12 @@ export const TituloRodizioSaiba = styled.h1`
   margin-bottom: 20px; /* Espaçamento da parte inferior */
 
   @media (max-width: 768px) {
-    font-size: 24px; // Reduzindo tamanho da fonte
-    text-align: center; // Centralizando texto
-    margin-bottom: 10px; // Ajustando margem inferior
+    font-size: 24px; /* Reduzindo tamanho da fonte */
+    text-align: center; /* Centralizando texto */
+    margin-bottom: 10px; /* Ajustando margem inferior */
   }
 `
+
 export const StyledContainer = styled.div`
   display: flex;
   flex-direction: column;
@@ -143,7 +153,7 @@ export const StyledContainer = styled.div`
   height: 100%; /* Garante que o Container ocupe toda a altura disponível */
 
   @media (max-width: 768px) {
-    max-width: 100%; // Usar largura total em telas menores
-    padding: 0 10px; // Reduzindo padding
+    max-width: 100%; /* Usar largura total em telas menores */
+    padding: 0 10px; /* Reduzindo padding */
   }
 `
