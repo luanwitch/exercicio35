@@ -1,44 +1,15 @@
-import { createBrowserRouter, RouterProvider } from 'react-router-dom'
-import Footer from './components/Footer'
-import Header from './components/Header'
-import { Container, GlobalCss } from './styles'
-import Home from './pages/Home'
-import HeaderSaiba from './components/HeaderSaiba'
-import Perfil from './pages/Perfil'
-
-const rotas = createBrowserRouter([
-  {
-    path: '/',
-    element: (
-      <>
-        <Header />
-        <Container>
-          <Home />
-        </Container>
-        <Footer />
-      </>
-    )
-  },
-  {
-    path: '/Saibamais',
-    element: (
-      <>
-        <HeaderSaiba />
-        <Container>
-          <Perfil />
-        </Container>
-        <Footer />
-      </>
-    )
-  }
-])
+import { BrowserRouter } from 'react-router-dom'
+import { GlobalCss } from './styles'
+import ScrollToTop from './components/ScrollToTop' // Importe o componente
+import Rotas from './routes'
 
 function App() {
   return (
-    <>
+    <BrowserRouter>
       <GlobalCss />
-      <RouterProvider router={rotas} />
-    </>
+      <ScrollToTop />
+      <Rotas />
+    </BrowserRouter>
   )
 }
 
