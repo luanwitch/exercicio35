@@ -18,6 +18,7 @@ export const Card = styled.div`
     height: auto; /* Manter a proporção da imagem */
     object-fit: cover; /* Cobrir o contêiner sem distorcer a imagem */
     margin-bottom: 10px; /* Espaçamento entre a imagem e o conteúdo */
+    padding: 10px;
   }
 
   @media (max-width: 768px) {
