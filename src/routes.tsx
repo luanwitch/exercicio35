@@ -5,6 +5,7 @@ import { Container } from './styles'
 import Home from './pages/Home'
 import HeaderSaiba from './components/HeaderSaiba'
 import Perfil from './pages/Perfil'
+import PerfilDetails from './pages/Perfildetails'
 
 const Rotas = () => (
   <Routes>
@@ -27,6 +28,19 @@ const Rotas = () => (
           <HeaderSaiba />
           <Container>
             <Perfil />
+          </Container>
+          <Footer />
+        </>
+      }
+    />
+
+    <Route
+      path="/PerfilDetails"
+      element={
+        <>
+          <HeaderSaiba />
+          <Container>
+            <PerfilDetails />
           </Container>
           <Footer />
         </>

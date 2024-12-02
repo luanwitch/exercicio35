@@ -4,9 +4,10 @@ import { List, SectionContainer } from '../ProductList/styles'
 
 export type PerfilProps = {
   perfils: ProdutoPerfil[]
+  onProductClick: (perfil: ProdutoPerfil) => void
 }
 
-const PerfilList = ({ perfils }: PerfilProps) => (
+const PerfilList = ({ perfils, onProductClick }: PerfilProps) => (
   <SectionContainer>
     <List>
       {perfils.map((perfil) => (
@@ -16,6 +17,7 @@ const PerfilList = ({ perfils }: PerfilProps) => (
           image={perfil.image}
           infos={perfil.infos}
           description={perfil.description}
+          onClick={() => onProductClick(perfil)}
         />
       ))}
     </List>

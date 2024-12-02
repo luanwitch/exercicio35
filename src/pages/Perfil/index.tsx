@@ -58,9 +58,10 @@ const cardapio: ProdutoPerfil[] = [
   }
 ]
 const Perfil = () => (
-  <>
-    <PerfilList perfils={cardapio} />
-  </>
+  <PerfilList
+    perfils={cardapio}
+    onProductClick={(perfil) => console.log('Produto clicado:', perfil)}
+  />
 )
 
 export default Perfil
