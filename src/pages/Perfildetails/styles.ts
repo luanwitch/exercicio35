@@ -18,7 +18,7 @@ export const Modal = styled.div`
 
   @media (max-width: 768px) {
     top: 515px;
-    left: 10px;
+    left: 9px;
     width: 95%;
     height: auto;
   }
