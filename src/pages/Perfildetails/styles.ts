@@ -5,6 +5,7 @@ export const Modal = styled.div`
   position: absolute;
   top: 399px;
   left: 110px;
+  z-index: 1000;
   width: 1045px;
   height: 600px;
   display: none;
@@ -16,9 +17,9 @@ export const Modal = styled.div`
   }
 
   @media (max-width: 768px) {
-    top: 50px;
-    left: 20px;
-    width: 90%;
+    top: 515px;
+    left: 10px;
+    width: 95%;
     height: auto;
   }
 `
@@ -50,6 +51,7 @@ export const ModalContent = styled.div`
     margin-right: 20px;
 
     @media (max-width: 768px) {
+      padding-top: 20px;
       width: 100%;
       height: auto;
       margin-right: 0;
