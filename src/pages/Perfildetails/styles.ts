@@ -14,14 +14,22 @@ export const Modal = styled.div`
   &.visivel {
     display: flex;
   }
+
+  @media (max-width: 768px) {
+    top: 50px;
+    left: 20px;
+    width: 90%;
+    height: auto;
+  }
 `
 
 export const ModalContent = styled.div`
   display: flex;
+  flex-direction: row; /* Layout padrão */
   background-color: ${cores.corVermelha};
   max-width: 1024px;
   width: 90%;
-  padding: 38px;
+  padding: 28px;
   position: relative;
 
   header {
@@ -39,28 +47,39 @@ export const ModalContent = styled.div`
   img {
     width: 340px;
     height: 340px;
-    margin-right: 20px; /* Espaçamento entre imagem e conteúdo */
+    margin-right: 20px;
+
+    @media (max-width: 768px) {
+      width: 100%;
+      height: auto;
+      margin-right: 0;
+    }
   }
 
   div {
     display: flex;
     flex-direction: column;
     justify-content: center;
-    flex: 1; /* Ocupa o espaço restante ao lado da imagem */
+    flex: 1;
 
     h4 {
       font-size: 18px;
       font-weight: bold;
       color: ${cores.corBranca};
-      margin-bottom: 10px; /* Espaçamento entre título e descrição */
+      margin-bottom: 10px;
     }
 
     p {
       font-size: 14px;
       line-height: 22px;
       color: ${cores.corBranca};
-      margin-bottom: 20px; /* Espaçamento entre descrição e botão */
+      margin-bottom: 20px;
       text-align: justify;
+
+      @media (max-width: 768px) {
+        font-size: 12px;
+        line-height: 18px;
+      }
     }
 
     button {
@@ -72,6 +91,20 @@ export const ModalContent = styled.div`
       font-weight: bold;
       border: none;
       cursor: pointer;
+
+      @media (max-width: 768px) {
+        width: 100%;
+        font-size: 12px;
+      }
+    }
+  }
+
+  @media (max-width: 768px) {
+    flex-direction: column; /* Alinha os elementos em coluna */
+    padding: 10px;
+
+    div {
+      margin-top: 20px;
     }
   }
 `
