@@ -42,6 +42,13 @@ export const ModalContent = styled.div`
       width: 16px;
       height: 16px;
       cursor: pointer;
+
+      @media (max-width: 768px) {
+        display: block;
+        width: 15px;
+        height: 15px;
+        padding: 0;
+      }
     }
   }
 
