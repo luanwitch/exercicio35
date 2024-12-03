@@ -16,18 +16,10 @@ type Props = {
   category: string[]
   nota: number
   description: string
-  infos: string
   image: string
 }
 
-const Product = ({
-  title,
-  category,
-  nota,
-  description,
-  infos,
-  image
-}: Props) => (
+const Product = ({ title, category, nota, description, image }: Props) => (
   <Card>
     <div>
       <img src={image} alt={title} />
@@ -45,7 +37,7 @@ const Product = ({
 
     <Descricao>{description}</Descricao>
     <Button type="link" to="/Saibamais" title="Saiba mais">
-      {infos}
+      Saiba mais
     </Button>
   </Card>
 )

@@ -1,3 +1,4 @@
+import React from 'react'
 import { ButtonCantainer, ButtonLink } from './styles'
 
 type Props = {
@@ -5,7 +6,7 @@ type Props = {
   title: string
   to?: string
   onClick?: () => void
-  children: string
+  children: React.ReactNode
 }
 
 const Button = ({ type, title, to, onClick, children }: Props) => {
