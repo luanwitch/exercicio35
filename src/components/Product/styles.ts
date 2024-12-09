@@ -2,7 +2,6 @@ import styled from 'styled-components'
 import { cores } from '../../styles'
 
 export const Card = styled.div`
-  width: 100%; /* Ajustar largura para se adaptar ao tamanho do contêiner */
   max-width: 472px;
   background-color: ${cores.corBranca};
   margin-top: 50px;
@@ -12,9 +11,8 @@ export const Card = styled.div`
   padding-bottom: 10px;
 
   img {
-    max-width: 100%; /* Garantir que as imagens não excedam o tamanho do contêiner */
-    height: auto; /* Manter a proporção das imagens */
-    display: block; /* Evitar espaçamento indesejado abaixo da imagem */
+    width: 100%;
+    max-height: 315px;
   }
 `
 
@@ -34,6 +32,7 @@ export const Nota = styled.h3`
 `
 
 export const Estrelinha = styled.img`
+  max-width: 4%;
   margin-right: 5px;
 `
 
@@ -49,7 +48,7 @@ export const Descricao = styled.p`
   font-size: 14px;
   line-height: 22px;
   display: block;
-  margin: 5px;
+  margin: 10px;
   text-align: justify;
   padding-bottom: 10px;
 `

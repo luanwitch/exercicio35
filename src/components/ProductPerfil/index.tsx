@@ -5,18 +5,11 @@ import { useNavigate } from 'react-router-dom'
 type Props = {
   title: string
   description: string
-  infos: string
   image: string
   onClick: () => void
 }
 
-const ProductPerfil = ({
-  title,
-  description,
-  infos,
-  image,
-  onClick
-}: Props) => {
+const ProductPerfil = ({ title, description, image, onClick }: Props) => {
   const navigate = useNavigate()
 
   const handleAddToCart = () => {
@@ -27,15 +20,22 @@ const ProductPerfil = ({
   return (
     <Card>
       <div>
-        <img src={image} alt={title} />
+        {/* Renderizando a imagem */}
+        <img
+          src={image}
+          alt={title}
+          style={{ width: '100%', height: 'auto' }}
+        />
       </div>
       <EnLinha>
         <Titulo>{title}</Titulo>
       </EnLinha>
+      {/* Descrição do produto */}
       <Descricao>{description}</Descricao>
       <div style={{ padding: '10px' }}>
+        {/* Botão */}
         <ButtonPerfil title="Adicionar ao carrinho" onClick={handleAddToCart}>
-          {infos}
+          Adicionar ao carrinho
         </ButtonPerfil>
       </div>
     </Card>

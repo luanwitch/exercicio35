@@ -1,6 +1,6 @@
 import Perfil from '../ProductPerfil'
-import ProdutoPerfil from '../../models/ProdutoPerfil'
 import { List, SectionContainer } from '../ProductList/styles'
+import { ProdutoPerfil } from '../../pages/Perfil'
 
 export type PerfilProps = {
   perfils: ProdutoPerfil[]
@@ -12,11 +12,10 @@ const PerfilList = ({ perfils, onProductClick }: PerfilProps) => (
     <List>
       {perfils.map((perfil) => (
         <Perfil
-          key={perfil.id}
-          title={perfil.title}
-          image={perfil.image}
-          infos={perfil.infos}
-          description={perfil.description}
+          key={perfil.cardapio.id}
+          title={perfil.cardapio.nome}
+          image={perfil.cardapio.foto}
+          description={perfil.cardapio.descricao}
           onClick={() => onProductClick(perfil)}
         />
       ))}

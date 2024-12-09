@@ -2,8 +2,7 @@ import styled from 'styled-components'
 import { cores } from '../../styles'
 
 export const Card = styled.div`
-  width: 100%;
-  max-width: 300px; /* Reduzindo o tamanho máximo */
+  max-width: 318px;
   background-color: ${cores.corVermelha};
   margin-top: 50px;
   margin-bottom: 50px;
@@ -14,10 +13,7 @@ export const Card = styled.div`
   padding: 0; /* Remover padding para evitar espaçamento extra */
 
   img {
-    width: 100%; /* Garantir que a imagem ocupe toda a largura do Card */
-    height: auto; /* Manter a proporção da imagem */
-    object-fit: cover; /* Cobrir o contêiner sem distorcer a imagem */
-    margin-bottom: 10px; /* Espaçamento entre a imagem e o conteúdo */
+    max-height: 190px;
     padding: 10px;
   }
 
