@@ -12,6 +12,7 @@ import Estrela from '../../assets/image/estrela.png'
 import Button from '../Button'
 
 type Props = {
+  id: number
   title: string
   category: string[]
   nota: number
@@ -19,7 +20,7 @@ type Props = {
   image: string
 }
 
-const Product = ({ title, category, nota, description, image }: Props) => (
+const Product = ({ id, title, category, nota, description, image }: Props) => (
   <Card>
     <div>
       <img src={image} alt={title} />
@@ -36,7 +37,7 @@ const Product = ({ title, category, nota, description, image }: Props) => (
     </EnLinha>
 
     <Descricao>{description}</Descricao>
-    <Button type="link" to="/Saibamais" title="Saiba mais">
+    <Button type="link" to={`/Perfil/${id}`} title="Saiba mais">
       Saiba mais
     </Button>
   </Card>

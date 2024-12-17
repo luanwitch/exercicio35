@@ -22,7 +22,7 @@ const Rotas = () => (
       }
     />
     <Route
-      path="/Saibamais"
+      path="/Perfil/:id"
       element={
         <>
           <HeaderSaiba />

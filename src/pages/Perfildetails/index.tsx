@@ -4,9 +4,9 @@ import { ButtonCantainer } from '../../components/Button/styles'
 import fechar_modal from '../../assets/image/fechar-modal.png'
 import { Modal, ModalContent } from './styles'
 import { useState } from 'react'
-import { ProdutoPerfil } from '../Perfil'
+import { Produto } from '../Home'
 
-const cardapio: ProdutoPerfil[] = []
+const cardapio: Produto[] = []
 
 const PerfilDetails = () => {
   const [modalIsOpen, setModalIsOpen] = useState(false)
