@@ -1,28 +1,30 @@
 import styled from 'styled-components'
 import HeaderBackImage from '../../assets/image/header_fundo.png'
 import { cores } from '../../styles'
-import ImageBackSaiba from '../../assets/image/pizzas_fundo.jpeg'
 
 export const HeaderBarSaiba = styled.header`
   background-image: url(${HeaderBackImage});
-  padding: 56px 20px 60px; /* Adicionado padding lateral */
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+  padding: 56px 20px; /* Padding ajustado */
   display: flex;
-  justify-content: center; /* Centralizar o conteúdo */
-  align-items: center; /* Centralizar verticalmente */
+  justify-content: center;
+  align-items: center;
 `
 
 export const Links = styled.ul`
   display: flex;
-  justify-content: space-between; /* Distribui os itens */
+  justify-content: space-between;
   align-items: center;
-  gap: 135px; /* Diminui o espaço entre itens */
+  gap: 135px;
   width: 100%;
-  max-width: 1200px; /* Define um max-width para o container */
+  max-width: 1200px;
 
   @media (max-width: 768px) {
-    gap: 25px; /* Reduzindo o gap */
-    flex-direction: column; /* Mudando para coluna em telas menores */
-    align-items: center; /* Centralizando os itens */
+    gap: 25px;
+    flex-direction: column;
+    align-items: center;
   }
 `
 
@@ -30,34 +32,26 @@ export const LinksItem = styled.li`
   a {
     font-size: 18px;
     font-weight: 900;
-    text-align: center;
     color: ${cores.corVermelha};
     text-decoration: none;
   }
 `
 
 export const TituloSaiba = styled.h1`
-  font-size: 24px; /* Tamanho ajustado */
+  font-size: 24px;
   font-weight: 900;
-  line-height: 22px;
   text-align: center;
-  margin: 0; /* Remove margens */
-  padding: 0; /* Remove padding */
-  display: flex;
-  align-items: center; /* Alinha verticalmente no centro */
 
   @media (max-width: 768px) {
-    font-size: 18px; /* Reduzindo tamanho da fonte */
+    font-size: 18px;
   }
 `
 
 export const LogoSaibaMais = styled.img`
-  width: 180px; /* Tamanho da logo */
-  height: auto;
-  margin: 0 auto; /* Centraliza a logo horizontalmente */
+  width: 180px;
 
   @media (max-width: 768px) {
-    width: 80px; /* Ajustando tamanho da logo em telas menores */
+    width: 80px;
   }
 `
 
@@ -68,21 +62,26 @@ export const LinkCar = styled.a`
   text-decoration: none;
 
   @media (max-width: 768px) {
-    font-size: 14px; /* Reduzindo tamanho da fonte */
-    margin-top: 10px; /* Ajustando margem superior */
+    font-size: 14px;
+    margin-top: 10px;
   }
 `
 
 export const ImageFundoSaiba = styled.div`
-  position: relative; /* Necessário para posicionar o overlay */
+  background-repeat: no-repeat;
+  background-size: cover; /* Garante que a imagem preencha a área sem distorcer */
+  background-position: center; /* Centraliza a imagem */
+  position: relative;
   width: 100%;
   max-width: 1366px;
-  height: 280px; /* Ajuste de altura conforme necessário */
-  color: ${cores.corVermelha};
-  margin: 0 auto; /* Centralizar o contêiner horizontalmente */
-  padding: 0 20px; /* Adiciona padding lateral */
+  height: 280px;
+  margin: 0 auto;
+  padding: 0 20px;
 
-  /* Camada de overlay */
+  /* Melhorar a qualidade de renderização */
+  image-rendering: auto;
+
+  /* Camada de escurecimento */
   &::before {
     content: '';
     position: absolute;
@@ -90,53 +89,18 @@ export const ImageFundoSaiba = styled.div`
     left: 0;
     width: 100%;
     height: 100%;
-    background-image: url(${ImageBackSaiba});
-    background-size: cover;
-    background-position: center;
-    filter: brightness(50%); /* Escurece apenas a imagem de fundo */
-    z-index: 1; /* Coloca o overlay abaixo do conteúdo */
+    background: rgba(0, 0, 0, 0.5); /* Camada preta com 50% de opacidade */
+    z-index: 1;
   }
 
-  /* Ajusta o z-index dos elementos internos para estarem acima do pseudo-elemento */
+  /* Garantir que o conteúdo fique acima do escurecimento */
   & > * {
     position: relative;
     z-index: 2;
-    height: 100%;
   }
 
   @media (max-width: 768px) {
-    height: 200px; /* Ajustando altura para telas menores */
-  }
-`
-
-export const TituloCategorySaiba = styled.h1`
-  font-size: 32px;
-  font-weight: 100;
-  line-height: 38px;
-  color: ${cores.corBranca};
-  opacity: 0.6;
-  text-align: left;
-  margin-top: 20px; /* Espaçamento do topo */
-
-  @media (max-width: 768px) {
-    font-size: 24px; /* Reduzindo tamanho da fonte */
-    text-align: center; /* Centralizando texto */
-    margin-top: 10px; /* Ajustando margem superior */
-  }
-`
-
-export const TituloRodizioSaiba = styled.h1`
-  font-size: 32px;
-  font-weight: 900;
-  line-height: 38px;
-  color: ${cores.corBranca};
-  text-align: left;
-  margin-bottom: 20px; /* Espaçamento da parte inferior */
-
-  @media (max-width: 768px) {
-    font-size: 24px; /* Reduzindo tamanho da fonte */
-    text-align: center; /* Centralizando texto */
-    margin-bottom: 10px; /* Ajustando margem inferior */
+    height: 200px;
   }
 `
 
@@ -144,16 +108,45 @@ export const StyledContainer = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  align-items: flex-start; /* Garante alinhamento à esquerda */
+  align-items: flex-start;
   width: 100%;
-  max-width: 994px; /* Use o mesmo valor de max-width dos Cards */
-  padding: 0 20px; /* Padding lateral para alinhar com os Cards */
-  box-sizing: border-box; /* Inclui padding no cálculo da largura */
-  margin: 0 auto; /* Centraliza o container */
-  height: 100%; /* Garante que o Container ocupe toda a altura disponível */
+  max-width: 994px;
+  padding: 0 20px;
+  box-sizing: border-box;
+  margin: 0 auto;
+  height: 100%;
 
   @media (max-width: 768px) {
-    max-width: 100%; /* Usar largura total em telas menores */
-    padding: 0 10px; /* Reduzindo padding */
+    max-width: 100%;
+    padding: 0 10px;
+  }
+`
+
+export const TituloCategorySaiba = styled.h1`
+  padding-top: 10px;
+  font-size: 32px;
+  font-weight: 100;
+  color: ${cores.corBranca};
+  opacity: 0.6;
+  text-align: left;
+  margin-bottom: auto;
+
+  @media (max-width: 768px) {
+    font-size: 24px;
+    text-align: center;
+  }
+`
+
+export const TituloRodizioSaiba = styled.h1`
+  font-size: 32px;
+  font-weight: 900;
+  color: ${cores.corBranca};
+  text-align: left;
+  margin-top: auto;
+  padding-bottom: 10px;
+
+  @media (max-width: 768px) {
+    font-size: 24px;
+    text-align: center;
   }
 `
