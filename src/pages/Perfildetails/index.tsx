@@ -1,53 +1,84 @@
+import { useEffect, useState, useRef } from 'react'
+import { useParams } from 'react-router-dom'
 import PerfilList from '../../components/PerfilList'
-import marquerita from '../../assets/image/1-marguerita.png'
 import { ButtonCantainer } from '../../components/Button/styles'
 import fechar_modal from '../../assets/image/fechar-modal.png'
 import { Modal, ModalContent } from './styles'
-import { useState } from 'react'
 import { Produto } from '../Home'
 
-const cardapio: Produto[] = []
-
 const PerfilDetails = () => {
+  const { id } = useParams()
   const [modalIsOpen, setModalIsOpen] = useState(false)
+  const [cardapio, setCardapio] = useState<Produto[]>([]) // Apenas o cardápio carregado pelo restaurante
+  const [selectedItem, setSelectedItem] = useState<
+    Produto['cardapio'][0] | null
+  >(null) // Item do modal
+  const listRef = useRef<HTMLDivElement | null>(null)
 
-  const openModal = () => {
-    setModalIsOpen(true)
+  // Busca os dados do restaurante com base no ID da rota
+  useEffect(() => {
+    if (id) {
+      fetch(`https://fake-api-tau.vercel.app/api/efood/restaurantes/${id}`)
+        .then((res) => res.json())
+        .then((res) => {
+          setCardapio([res]) // Armazena os dados do restaurante no estado
+        })
+        .catch((err) => console.error('Erro ao buscar os dados:', err))
+    }
+  }, [id])
+
+  // Rola a tela até o topo da lista quando o modal é aberto
+  useEffect(() => {
+    if (modalIsOpen && listRef.current) {
+      window.scrollTo({
+        top: listRef.current.offsetTop,
+        behavior: 'smooth'
+      })
+    }
+  }, [modalIsOpen])
+
+  // Abre o modal com o item selecionado
+  const openModal = (item: Produto['cardapio'][0]) => {
+    setSelectedItem(item) // Define o prato selecionado
+    setModalIsOpen(true) // Abre o modal
   }
 
+  // Fecha o modal
   const closeModal = () => {
-    setModalIsOpen(false)
+    setModalIsOpen(false) // Fecha o modal
+    setSelectedItem(null) // Remove o item selecionado
   }
 
   return (
     <>
-      <PerfilList perfils={cardapio} onProductClick={openModal} />
+      <div ref={listRef}>
+        <PerfilList
+          perfils={cardapio} // Passa os dados do restaurante e pratos
+          onProductClick={(_, item) => openModal(item)} // Abre o modal com o prato selecionado
+        />
+      </div>
       <Modal className={modalIsOpen ? 'visivel' : ''} onClick={closeModal}>
-        <ModalContent onClick={(e) => e.stopPropagation()}>
+        <ModalContent
+          onClick={(e) => e.stopPropagation()} // Impede o fechamento ao clicar dentro do modal
+        >
           <header>
-            <img src={fechar_modal} alt="icône fechar" onClick={closeModal} />
+            <img src={fechar_modal} alt="Ícone fechar" onClick={closeModal} />
           </header>
-          <img src={marquerita} alt="Pizza Marguerita" />
-          <div>
-            <h4>Pizza Marguerita</h4>
-            <p>
-              A pizza Margherita é uma pizza clássica da culinária italiana,
-              reconhecida por sua simplicidade e sabor inigualável. Ela é feita
-              com uma base de massa fina e crocante, coberta com molho de tomate
-              fresco, queijo mussarela de alta qualidade, manjericão fresco e
-              azeite de oliva extra-virgem. A combinação de sabores é perfeita,
-              com o molho de tomate suculento e ligeiramente ácido, o queijo
-              derretido e cremoso e as folhas de manjericão frescas, que
-              adicionam um toque de sabor herbáceo. É uma pizza simples, mas
-              deliciosa, que agrada a todos os paladares e é uma ótima opção
-              para qualquer ocasião.
-              <br />
-              <br />
-              <br />
-              Serve: de 2 a 3 pessoas
-            </p>
-            <ButtonCantainer>Adicionar ao carrinho - R$ 60,90</ButtonCantainer>
-          </div>
+          {selectedItem ? (
+            <>
+              <img src={selectedItem.foto} alt={selectedItem.nome} />
+              <div>
+                <h4>{selectedItem.nome}</h4>
+                <p>{selectedItem.descricao}</p>
+                <p>Porção: {selectedItem.porcao}</p>
+                <ButtonCantainer>
+                  Adicionar ao carrinho - R$ {selectedItem.preco.toFixed(2)}
+                </ButtonCantainer>
+              </div>
+            </>
+          ) : (
+            <p>Carregando...</p>
+          )}
         </ModalContent>
       </Modal>
     </>

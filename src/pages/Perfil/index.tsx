@@ -1,4 +1,3 @@
-// Perfil.tsx
 import { useEffect, useState } from 'react'
 import PerfilList from '../../components/PerfilList'
 import { Produto } from '../Home'
@@ -12,7 +11,13 @@ const Perfil = () => {
       .then((res) => setCardapio(res))
   }, [])
 
-  return <PerfilList perfils={cardapio} onProductClick={Perfil} />
+  // Função para lidar com cliques em produtos
+  const handleProductClick = (produto: Produto) => {
+    console.log('Produto clicado:', produto)
+    // Você pode navegar para outra página, abrir um modal ou executar outra ação
+  }
+
+  return <PerfilList perfils={cardapio} onProductClick={handleProductClick} />
 }
 
 export default Perfil

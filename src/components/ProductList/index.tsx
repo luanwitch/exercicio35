@@ -10,15 +10,7 @@ const ProductsList = ({ produtos }: Props) => (
   <SectionContainer>
     <List>
       {produtos.map((produto) => (
-        <Product
-          key={produto.id}
-          id={produto.id}
-          title={produto.titulo}
-          category={[produto.tipo]}
-          image={produto.capa}
-          nota={produto.avaliacao}
-          description={produto.descricao}
-        />
+        <Product key={produto.id} {...produto} />
       ))}
     </List>
   </SectionContainer>

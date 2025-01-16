@@ -3,24 +3,26 @@ import ButtonPerfil from '../ButtonPerfil'
 import { useNavigate } from 'react-router-dom'
 
 type Props = {
+  id: number
   title: string
   description: string
   image: string
-  onClick: () => void
+  onClick?: () => void
 }
 
-const ProductPerfil = ({ title, description, image, onClick }: Props) => {
+const ProductPerfil = ({ id, title, description, image, onClick }: Props) => {
   const navigate = useNavigate()
 
   const handleAddToCart = () => {
-    navigate('/perfildetails') // Ajuste a rota conforme necessário
-    onClick()
+    navigate(`/PerfilDetails/${id}`) // Navegação para a página de detalhes do perfil
+    if (onClick) {
+      onClick()
+    }
   }
 
   return (
     <Card>
       <div>
-        {/* Renderizando a imagem */}
         <img
           src={image}
           alt={title}
@@ -30,11 +32,13 @@ const ProductPerfil = ({ title, description, image, onClick }: Props) => {
       <EnLinha>
         <Titulo>{title}</Titulo>
       </EnLinha>
-      {/* Descrição do produto */}
       <Descricao>{description}</Descricao>
       <div style={{ padding: '10px' }}>
-        {/* Botão */}
-        <ButtonPerfil title="Adicionar ao carrinho" onClick={handleAddToCart}>
+        {/* Removendo o "to" já que a navegação é feita pelo "onClick" */}
+        <ButtonPerfil
+          title="Adicionar ao carrinho"
+          onClick={handleAddToCart} // Navegação ao clicar no botão
+        >
           Adicionar ao carrinho
         </ButtonPerfil>
       </div>

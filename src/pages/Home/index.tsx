@@ -1,4 +1,3 @@
-// Home.tsx
 import ProductsList from '../../components/ProductList'
 import { useEffect, useState } from 'react'
 

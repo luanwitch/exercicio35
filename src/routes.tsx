@@ -35,7 +35,7 @@ const Rotas = () => (
     />
 
     <Route
-      path="/PerfilDetails"
+      path="/PerfilDetails/:id"
       element={
         <>
           <HeaderSaiba />
