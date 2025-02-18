@@ -1,40 +1,66 @@
 import Perfil from '../ProductPerfil'
 import { List, SectionContainer } from '../ProductList/styles'
-import { useParams } from 'react-router-dom'
 import { Produto } from '../../pages/Home'
 
 export type PerfilProps = {
-  perfils: Produto[] // Lista de restaurantes
-  onProductClick: (perfil: Produto, item: Produto['cardapio'][0]) => void // Função ao clicar no prato
+  perfils: Produto[]
+  restauranteId?: number
+  onProductClick: (restaurante: Produto, item: Produto['cardapio'][0]) => void
 }
 
-const PerfilList = ({ perfils, onProductClick }: PerfilProps) => {
-  const { id } = useParams() // Obtém o ID do restaurante via URL
+const PerfilList = ({
+  perfils,
+  restauranteId,
+  onProductClick
+}: PerfilProps) => {
+  // Encontra o restaurante específico
+  const restaurante = perfils.find(
+    (perfil) => perfil.id === Number(restauranteId)
+  )
 
-  // Filtra o restaurante correspondente ao ID
-  const filteredPerfils = id
-    ? perfils.filter((perfil) => perfil.id === Number(id)) // Filtra apenas o restaurante com o ID correspondente
-    : []
+  if (restauranteId && !restaurante) {
+    return (
+      <SectionContainer>
+        <p>Restaurante não encontrado ou sem pratos disponíveis.</p>
+      </SectionContainer>
+    )
+  }
 
+  if (restauranteId && restaurante) {
+    return (
+      <SectionContainer>
+        <List>
+          {restaurante.cardapio.map((item) => (
+            <Perfil
+              key={`${restaurante.id}-${item.id}`}
+              restauranteId={restaurante.id}
+              id={item.id}
+              title={item.nome}
+              image={item.foto}
+              description={item.descricao}
+              onClick={() => onProductClick(restaurante, item)}
+            />
+          ))}
+        </List>
+      </SectionContainer>
+    )
+  }
+
+  // Lista de restaurantes
   return (
     <SectionContainer>
       <List>
-        {filteredPerfils.length > 0 ? (
-          filteredPerfils.map((restaurante) =>
-            restaurante.cardapio.map((item) => (
-              <Perfil
-                key={item.id}
-                id={item.id}
-                title={item.nome}
-                image={item.foto}
-                description={item.descricao}
-                onClick={() => onProductClick(restaurante, item)} // Apenas abre o modal
-              />
-            ))
-          )
-        ) : (
-          <p>Restaurante não encontrado ou sem pratos disponíveis.</p>
-        )}
+        {perfils.map((perfil) => (
+          <Perfil
+            key={perfil.id}
+            restauranteId={perfil.id}
+            id={perfil.id}
+            title={perfil.titulo}
+            image={perfil.capa}
+            description={perfil.descricao}
+            onClick={() => onProductClick(perfil, perfil.cardapio[0])}
+          />
+        ))}
       </List>
     </SectionContainer>
   )

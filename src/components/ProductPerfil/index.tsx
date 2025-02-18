@@ -3,6 +3,7 @@ import ButtonPerfil from '../ButtonPerfil'
 import { useNavigate } from 'react-router-dom'
 
 type Props = {
+  restauranteId: number
   id: number
   title: string
   description: string
@@ -10,11 +11,17 @@ type Props = {
   onClick?: () => void
 }
 
-const ProductPerfil = ({ id, title, description, image, onClick }: Props) => {
+const ProductPerfil = ({
+  restauranteId,
+  title,
+  description,
+  image,
+  onClick
+}: Props) => {
   const navigate = useNavigate()
 
   const handleAddToCart = () => {
-    navigate(`/PerfilDetails/${id}`) // Navegação para a página de detalhes do perfil
+    navigate(`/PerfilDetails/${restauranteId}`)
     if (onClick) {
       onClick()
     }
@@ -34,11 +41,7 @@ const ProductPerfil = ({ id, title, description, image, onClick }: Props) => {
       </EnLinha>
       <Descricao>{description}</Descricao>
       <div style={{ padding: '10px' }}>
-        {/* Removendo o "to" já que a navegação é feita pelo "onClick" */}
-        <ButtonPerfil
-          title="Adicionar ao carrinho"
-          onClick={handleAddToCart} // Navegação ao clicar no botão
-        >
+        <ButtonPerfil title="Adicionar ao carrinho" onClick={handleAddToCart}>
           Adicionar ao carrinho
         </ButtonPerfil>
       </div>

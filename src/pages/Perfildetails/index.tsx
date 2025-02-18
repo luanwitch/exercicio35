@@ -8,26 +8,48 @@ import { Produto } from '../Home'
 
 const PerfilDetails = () => {
   const { id } = useParams()
+  const [restaurantes, setRestaurantes] = useState<Produto[]>([])
+  const [restaurante, setRestaurante] = useState<Produto | null>(null)
+  const [loading, setLoading] = useState(true) // 🔹 Novo estado para indicar carregamento
   const [modalIsOpen, setModalIsOpen] = useState(false)
-  const [cardapio, setCardapio] = useState<Produto[]>([]) // Apenas o cardápio carregado pelo restaurante
   const [selectedItem, setSelectedItem] = useState<
     Produto['cardapio'][0] | null
-  >(null) // Item do modal
+  >(null)
   const listRef = useRef<HTMLDivElement | null>(null)
 
-  // Busca os dados do restaurante com base no ID da rota
+  // 🔹 Busca todos os restaurantes uma única vez
   useEffect(() => {
-    if (id) {
-      fetch(`https://fake-api-tau.vercel.app/api/efood/restaurantes/${id}`)
-        .then((res) => res.json())
-        .then((res) => {
-          setCardapio([res]) // Armazena os dados do restaurante no estado
-        })
-        .catch((err) => console.error('Erro ao buscar os dados:', err))
-    }
-  }, [id])
+    setLoading(true) // Indica que está carregando os dados
+    fetch('https://fake-api-tau.vercel.app/api/efood/restaurantes')
+      .then((res) => res.json())
+      .then((data) => {
+        setRestaurantes(data)
+        setLoading(false) // 🔹 Dados carregados com sucesso
+      })
+      .catch((err) => {
+        console.error('Erro ao buscar os dados:', err)
+        setLoading(false)
+      })
+  }, [])
 
-  // Rola a tela até o topo da lista quando o modal é aberto
+  // 🔹 Atualiza o restaurante quando o ID da URL mudar
+  useEffect(() => {
+    if (id && restaurantes.length > 0) {
+      const encontrado = restaurantes.find((r) => r.id === Number(id))
+      setRestaurante(encontrado || null)
+    }
+  }, [id, restaurantes])
+
+  const handleProductClick = (item: Produto['cardapio'][0]) => {
+    setSelectedItem(item)
+    setModalIsOpen(true)
+  }
+
+  const closeModal = () => {
+    setModalIsOpen(false)
+    setSelectedItem(null)
+  }
+
   useEffect(() => {
     if (modalIsOpen && listRef.current) {
       window.scrollTo({
@@ -37,30 +59,24 @@ const PerfilDetails = () => {
     }
   }, [modalIsOpen])
 
-  // Abre o modal com o item selecionado
-  const openModal = (item: Produto['cardapio'][0]) => {
-    setSelectedItem(item) // Define o prato selecionado
-    setModalIsOpen(true) // Abre o modal
-  }
-
-  // Fecha o modal
-  const closeModal = () => {
-    setModalIsOpen(false) // Fecha o modal
-    setSelectedItem(null) // Remove o item selecionado
-  }
-
   return (
     <>
       <div ref={listRef}>
-        <PerfilList
-          perfils={cardapio} // Passa os dados do restaurante e pratos
-          onProductClick={(_, item) => openModal(item)} // Abre o modal com o prato selecionado
-        />
+        {loading ? (
+          <p>Carregando pratos...</p>
+        ) : restaurante ? (
+          <PerfilList
+            perfils={[restaurante]}
+            restauranteId={Number(id)}
+            onProductClick={(_, item) => handleProductClick(item)}
+          />
+        ) : (
+          <p>Restaurante não encontrado ou sem pratos disponíveis.</p>
+        )}
       </div>
+
       <Modal className={modalIsOpen ? 'visivel' : ''} onClick={closeModal}>
-        <ModalContent
-          onClick={(e) => e.stopPropagation()} // Impede o fechamento ao clicar dentro do modal
-        >
+        <ModalContent onClick={(e) => e.stopPropagation()}>
           <header>
             <img src={fechar_modal} alt="Ícone fechar" onClick={closeModal} />
           </header>

@@ -1,23 +1,29 @@
 import { useEffect, useState } from 'react'
+import { useParams } from 'react-router-dom'
 import PerfilList from '../../components/PerfilList'
 import { Produto } from '../Home'
 
 const Perfil = () => {
-  const [cardapio, setCardapio] = useState<Produto[]>([])
+  const { id } = useParams()
+  const [restaurantes, setRestaurantes] = useState<Produto[]>([])
 
   useEffect(() => {
     fetch('https://fake-api-tau.vercel.app/api/efood/restaurantes')
       .then((res) => res.json())
-      .then((res) => setCardapio(res))
+      .then((res) => setRestaurantes(res))
   }, [])
 
-  // Função para lidar com cliques em produtos
-  const handleProductClick = (produto: Produto) => {
-    console.log('Produto clicado:', produto)
-    // Você pode navegar para outra página, abrir um modal ou executar outra ação
+  const handleProductClick = () => {
+    console.log('Produto clicado')
   }
 
-  return <PerfilList perfils={cardapio} onProductClick={handleProductClick} />
+  return (
+    <PerfilList
+      perfils={restaurantes}
+      restauranteId={Number(id)}
+      onProductClick={handleProductClick}
+    />
+  )
 }
 
 export default Perfil
