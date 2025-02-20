@@ -6,12 +6,14 @@ export type PerfilProps = {
   perfils: Produto[]
   restauranteId?: number
   onProductClick: (restaurante: Produto, item: Produto['cardapio'][0]) => void
+  botaoLabel?: string // 🔹 Adicionamos a propriedade opcional
 }
 
 const PerfilList = ({
   perfils,
   restauranteId,
-  onProductClick
+  onProductClick,
+  botaoLabel
 }: PerfilProps) => {
   // Encontra o restaurante específico
   const restaurante = perfils.find(
@@ -39,6 +41,7 @@ const PerfilList = ({
               image={item.foto}
               description={item.descricao}
               onClick={() => onProductClick(restaurante, item)}
+              botaoLabel={botaoLabel} // 🔹 Passamos a label personalizada
             />
           ))}
         </List>
