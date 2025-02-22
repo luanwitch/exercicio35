@@ -1,5 +1,5 @@
 import ProductsList from '../../components/ProductList'
-import { useEffect, useState } from 'react'
+import { useGetRestaurantsProductQuery } from '../../services/api'
 
 export type Produto = {
   id: number
@@ -20,14 +20,14 @@ export type Produto = {
 }
 
 const Home = () => {
-  const [cardapio, setCardapio] = useState<Produto[]>([])
+  const {
+    data: cardapio = [],
+    isLoading,
+    error
+  } = useGetRestaurantsProductQuery()
 
-  useEffect(() => {
-    fetch('https://fake-api-tau.vercel.app/api/efood/restaurantes')
-      .then((res) => res.json())
-      .then((res) => setCardapio(res))
-      .catch((error) => console.error('Erro ao buscar dados:', error))
-  }, [])
+  if (isLoading) return <p>Carregando restaurantes...</p>
+  if (error) return <p>Erro ao carregar os restaurantes.</p>
 
   return (
     <>

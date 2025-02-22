@@ -1,121 +1,93 @@
-import { useEffect, useState, useRef } from 'react'
+import { useEffect, useState } from 'react'
 import { useParams, useSearchParams } from 'react-router-dom'
 import PerfilList from '../../components/PerfilList'
 import fechar_modal from '../../assets/image/fechar-modal.png'
 import { Modal, ModalContent } from './styles'
 import { Produto } from '../Home'
-
+import { useGetRestaurantByIdQuery } from './../../services/api'
 const PerfilDetails = () => {
   const { id } = useParams()
   const [searchParams] = useSearchParams()
-  const pratoId = searchParams.get('prato') // Captura o ID do prato da URL
+  const pratoId = searchParams.get('prato')
 
-  const [restaurantes, setRestaurantes] = useState<Produto[]>([])
-  const [restaurante, setRestaurante] = useState<Produto | null>(null)
-  const [modalIsOpen, setModalIsOpen] = useState(false)
-  const [selectedItem, setSelectedItem] = useState<
+  // Converter o id para número
+  const restauranteId = id ? Number(id) : 0
+
+  // Usar os hooks do RTK Query
+
+  const { data: restaurante } = useGetRestaurantByIdQuery(restauranteId, {
+    skip: !restauranteId
+  })
+
+  const [selectedDish, setSelectedDish] = useState<
     Produto['cardapio'][0] | null
   >(null)
-  const listRef = useRef<HTMLDivElement | null>(null)
-  const modalRef = useRef<HTMLDivElement | null>(null)
+  const [modalIsOpen, setModalIsOpen] = useState(false)
 
   useEffect(() => {
-    fetch('https://fake-api-tau.vercel.app/api/efood/restaurantes')
-      .then((res) => res.json())
-      .then((data) => setRestaurantes(data))
-      .catch((err) => console.error('Erro ao buscar os dados:', err))
-  }, [])
+    if (restaurante && pratoId) {
+      const pratoSelecionado = restaurante.cardapio.find(
+        (p) => p.id === Number(pratoId)
+      )
 
-  // Função para calcular a posição ideal de scroll
-  const scrollToPosition = () => {
-    // Posição mais baixa (450px do topo)
-    const offsetFromTop = 450
+      if (pratoSelecionado) {
+        setSelectedDish(pratoSelecionado)
+        setModalIsOpen(true)
 
-    window.scrollTo({
-      top: offsetFromTop,
-      behavior: 'smooth'
-    })
-  }
-
-  useEffect(() => {
-    if (id && restaurantes.length > 0) {
-      const encontrado = restaurantes.find((r) => r.id === Number(id))
-      setRestaurante(encontrado || null)
-
-      // Se o prato foi passado na URL, abre o modal automaticamente
-      if (encontrado && pratoId) {
-        const pratoSelecionado = encontrado.cardapio.find(
-          (p) => p.id === Number(pratoId)
-        )
-        if (pratoSelecionado) {
-          setSelectedItem(pratoSelecionado)
-          setModalIsOpen(true)
-
-          // Scroll para posição ajustada com delay maior
-          setTimeout(() => {
-            scrollToPosition()
-          }, 200)
-        }
+        setTimeout(() => {
+          window.scrollTo({ top: 450, behavior: 'smooth' })
+        }, 200)
       }
     }
-  }, [id, restaurantes, pratoId])
+  }, [restaurante, pratoId])
 
   const handleProductClick = (item: Produto['cardapio'][0]) => {
-    setSelectedItem(item)
+    setSelectedDish(item)
     setModalIsOpen(true)
 
-    // Scroll para posição mais baixa com delay adequado
     setTimeout(() => {
-      scrollToPosition()
+      window.scrollTo({ top: 450, behavior: 'smooth' })
     }, 200)
   }
 
   const closeModal = () => {
     setModalIsOpen(false)
-    setSelectedItem(null)
+    setSelectedDish(null)
+  }
+
+  // Mostrar estado de carregamento
+  if (!restaurante) {
+    return <p>Carregando restaurante...</p>
   }
 
   return (
     <>
-      <div ref={listRef}>
-        {restaurante ? (
-          <PerfilList
-            perfils={[restaurante]}
-            restauranteId={Number(id)}
-            onProductClick={(_, item) => handleProductClick(item)}
-            botaoLabel="Mais detalhes"
-          />
-        ) : (
-          <p>Restaurante não encontrado ou sem pratos disponíveis.</p>
-        )}
-      </div>
+      <PerfilList
+        perfils={[restaurante]}
+        restauranteId={restauranteId}
+        onProductClick={(_, item) => handleProductClick(item)}
+        botaoLabel="Mais detalhes"
+      />
 
-      <Modal
-        className={modalIsOpen ? 'visivel' : ''}
-        onClick={closeModal}
-        ref={modalRef}
-      >
-        <ModalContent onClick={(e) => e.stopPropagation()}>
-          <header>
-            <img src={fechar_modal} alt="Ícone fechar" onClick={closeModal} />
-          </header>
-          {selectedItem ? (
-            <>
-              <img src={selectedItem.foto} alt={selectedItem.nome} />
-              <div>
-                <h4>{selectedItem.nome}</h4>
-                <p>{selectedItem.descricao}</p>
-                <p>Porção: {selectedItem.porcao}</p>
-                <button>
-                  Adicionar ao carrinho - R$ {selectedItem.preco.toFixed(2)}
-                </button>
-              </div>
-            </>
-          ) : (
-            <p>Carregando...</p>
-          )}
-        </ModalContent>
-      </Modal>
+      {/* Modal */}
+      {modalIsOpen && selectedDish && (
+        <Modal className="visivel" onClick={closeModal}>
+          <ModalContent onClick={(e) => e.stopPropagation()}>
+            <header>
+              <img src={fechar_modal} alt="Ícone fechar" onClick={closeModal} />
+            </header>
+            <img src={selectedDish.foto} alt={selectedDish.nome} />
+            <div>
+              <h4>{selectedDish.nome}</h4>
+              <p>{selectedDish.descricao}</p>
+              <p>Porção: {selectedDish.porcao}</p>
+              <button>
+                Adicionar ao carrinho - R$ {selectedDish.preco.toFixed(2)}
+              </button>
+            </div>
+          </ModalContent>
+        </Modal>
+      )}
     </>
   )
 }
