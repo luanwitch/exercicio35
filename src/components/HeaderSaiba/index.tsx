@@ -5,7 +5,6 @@ import {
   Links,
   LinksItem,
   LogoSaibaMais,
-  StyledContainer,
   TituloCategorySaiba,
   TituloRodizioSaiba,
   TituloSaiba
@@ -14,10 +13,18 @@ import logo from '../../assets/image/logo.png'
 import { Link, useParams } from 'react-router-dom'
 import { useGetRestaurantsProductQuery } from '../../services/api'
 import { Produto } from '../../pages/Home'
+import { open } from '../../store/reducers/cart'
+import { useDispatch, useSelector } from 'react-redux'
+import { RootReducer } from '../../store'
 
 const HeaderSaiba = () => {
   const { id } = useParams()
   const { data, isLoading, error } = useGetRestaurantsProductQuery()
+  const { items } = useSelector((state: RootReducer) => state.cart)
+  const dispatch = useDispatch()
+  const openCart = () => {
+    dispatch(open())
+  }
 
   // Encontra o restaurante com o ID correspondente
   const produto = data
@@ -39,7 +46,9 @@ const HeaderSaiba = () => {
               <LogoSaibaMais src={logo} alt="e-food" />
             </li>
             <LinksItem>
-              <LinkCar href="#">0 produto(s) no carrinho</LinkCar>
+              <LinkCar onClick={openCart}>
+                {items.length} produto(s) no carrinho
+              </LinkCar>
             </LinksItem>
           </Links>
         </nav>
@@ -51,10 +60,8 @@ const HeaderSaiba = () => {
       {/* Renderiza somente se o produto existir */}
       {produto && (
         <ImageFundoSaiba style={{ backgroundImage: `url(${produto.capa})` }}>
-          <StyledContainer>
-            <TituloCategorySaiba>{produto.tipo}</TituloCategorySaiba>
-            <TituloRodizioSaiba>{produto.titulo}</TituloRodizioSaiba>
-          </StyledContainer>
+          <TituloCategorySaiba>{produto.tipo}</TituloCategorySaiba>
+          <TituloRodizioSaiba>{produto.titulo}</TituloRodizioSaiba>
         </ImageFundoSaiba>
       )}
     </>

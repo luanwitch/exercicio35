@@ -11,66 +11,66 @@ import {
   Quantity,
   Sidebar
 } from './styles'
-import pizza from '../../assets/image/1-marguerita.png'
+import { useDispatch, useSelector } from 'react-redux'
+import { RootReducer } from '../../store'
+import { close } from '../../store/reducers/cart'
 
-const Cart = () => (
-  <CartContainer>
-    <Overlay />
-    <Sidebar>
-      <ul>
-        <CartItem>
-          <img src={pizza} alt="pizza" />
+const Cart = () => {
+  const { isOpen, items } = useSelector((state: RootReducer) => state.cart)
+
+  const dispatch = useDispatch()
+  const closeCart = () => {
+    dispatch(close())
+  }
+
+  return (
+    <CartContainer className={isOpen ? 'is-open' : ''}>
+      <Overlay onClick={closeCart} />{' '}
+      {/* Fecha o carrinho ao clicar no overlay */}
+      <Sidebar>
+        <ul>
+          {items.map((item) => (
+            <CartItem key={item.id}>
+              <img src={item.foto} alt={item.nome} />
+              <div>
+                <h3>{item.nome}</h3>
+                <Prices>R$ {item.preco.toFixed(2)}</Prices>
+              </div>
+              <div>
+                <ButtonClose type="button" />
+              </div>
+            </CartItem>
+          ))}
+        </ul>
+        <Quantity>{items.length} item(s) no carrinho</Quantity>
+        <AlinPrices>
+          <PricesT>Valor total</PricesT>
+          <PricesT>
+            R$ {items.reduce((total, item) => total + item.preco, 0).toFixed(2)}
+          </PricesT>
+        </AlinPrices>
+        <ButtonContainer>
           <div>
-            <h3>Nome do prato</h3>
-            <Prices>R$ 60,00</Prices>
+            <ButtonCart
+              onClick={closeCart}
+              title="Clique aqui para continuar comprando"
+              type="button"
+            >
+              Continuar comprando
+            </ButtonCart>
           </div>
           <div>
-            <ButtonClose type="button" />
+            <ButtonCart
+              title="Clique aqui para continuar com a entrega"
+              type="button"
+            >
+              Continuar com a entrega
+            </ButtonCart>
           </div>
-        </CartItem>
-        <CartItem>
-          <img src={pizza} alt="pizza" />
-          <div>
-            <h3>Nome do prato</h3>
-            <Prices>R$ 60,00</Prices>
-          </div>
-          <div>
-            <ButtonClose type="button" />
-          </div>
-        </CartItem>
-        <CartItem>
-          <img src={pizza} alt="pizza" />
-          <div>
-            <h3>Nome do prato</h3>
-            <Prices>R$ 60,00</Prices>
-          </div>
-          <div>
-            <ButtonClose type="button" />
-          </div>
-        </CartItem>
-      </ul>
-      <Quantity>2 item(s) no carrinho</Quantity>
-      <AlinPrices>
-        <PricesT>Valor total</PricesT>
-        <PricesT>R$ 200,00</PricesT>
-      </AlinPrices>
-      <ButtonContainer>
-        <div>
-          <ButtonCart title="Clique aqui para continua a comprar" type="button">
-            Continuar comprando
-          </ButtonCart>
-        </div>
-        <div>
-          <ButtonCart
-            title="Clique aqui para continuar com a entrega"
-            type="button"
-          >
-            Continuar com a entrega
-          </ButtonCart>
-        </div>
-      </ButtonContainer>
-    </Sidebar>
-  </CartContainer>
-)
+        </ButtonContainer>
+      </Sidebar>
+    </CartContainer>
+  )
+}
 
 export default Cart

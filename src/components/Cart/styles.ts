@@ -3,13 +3,14 @@ import { cores } from '../../styles'
 import imgclose from '../../assets/image/lixeira-de-reciclagem 1.png'
 
 export const Overlay = styled.div`
-  position: absolute;
+  position: fixed;
   top: 0;
   left: 0;
   width: 100%;
   height: 100%;
   background-color: #000;
   opacity: 0.7;
+  z-index: 1;
 `
 
 export const CartContainer = styled.div`
@@ -18,44 +19,48 @@ export const CartContainer = styled.div`
   left: 0;
   width: 100%;
   height: 100%;
-  display: flex;
+  display: none;
   justify-content: flex-end;
+  z-index: 2;
+
+  &.is-open {
+    display: flex;
+  }
 `
 
 export const Sidebar = styled.aside`
   max-width: 360px;
   width: 100%;
+  height: 100%; /* Altura total da tela */
+  max-height: 100vh; /* Altura máxima da viewport */
   padding: 16px;
   background-color: ${cores.corVermelha};
-  z-index: 2;
-
-  ul {
-    padding: 0;
-    margin: 0;
-    list-style: none;
-  }
+  z-index: 3;
+  display: flex;
+  flex-direction: column;
+  overflow-y: auto; /* Ativa o scroll vertical quando necessário */
 `
 
 export const CartItem = styled.li`
   display: flex;
-  align-items: flex-start; /* Alinha os itens no topo */
-  gap: 16px; /* Adiciona espaçamento entre os elementos */
-  padding: 16px; /* Adiciona um padding interno */
-  background-color: ${cores.corClara}; /* Cor de fundo */
-  margin-bottom: 16px; /* Espaçamento entre os itens */
-  position: relative; /* Permite posicionar a imagem da lixeira absolutamente */
+  align-items: flex-start;
+  gap: 16px;
+  padding: 16px;
+  background-color: ${cores.corClara};
+  margin-bottom: 16px;
+  position: relative;
 
   > img {
     height: 80px;
     width: 80px;
-    object-fit: cover; /* Mantém a proporção da imagem */
+    object-fit: cover;
   }
 
   h3 {
     color: ${cores.corVermelha};
     font-weight: bold;
     font-size: 18px;
-    margin-bottom: 8px; /* Ajuste o espaçamento */
+    margin-bottom: 8px;
   }
 
   p {
@@ -64,52 +69,53 @@ export const CartItem = styled.li`
   }
 
   > div:last-child {
-    position: absolute; /* Posiciona a imagem da lixeira absolutamente */
-    bottom: 16px; /* Distância do fundo */
-    right: 16px; /* Distância da direita */
+    position: absolute;
+    bottom: 16px;
+    right: 16px;
   }
 `
 
 export const ImgDel = styled.img`
-  width: 16px; /* Tamanho fixo */
-  height: 16px; /* Tamanho fixo */
-  cursor: pointer; /* Adiciona um cursor pointer para indicar que é clicável */
+  width: 16px;
+  height: 16px;
+  cursor: pointer;
 `
 
 export const Prices = styled.p`
   font-size: 14px;
   color: ${cores.corVermelha};
-  margin-bottom: 8px; /* Ajuste o espaçamento */
+  margin-bottom: 8px;
 `
 
 export const PricesT = styled.p`
   font-weight: bold;
   font-size: 14px;
   color: ${cores.corClara};
-  margin-bottom: 16px; /* Ajuste o espaçamento */
+  margin-bottom: 16px;
 `
 
 export const AlinPrices = styled.div`
   display: flex;
   justify-content: space-between;
-  margin-bottom: 16px; /* Espaçamento abaixo do total */
+  margin-bottom: 16px;
 `
 
 export const Quantity = styled.p`
   font-weight: bold;
   font-size: 14px;
   color: ${cores.corClara};
-  margin-top: 16px; /* Espaçamento acima da quantidade */
-  margin-bottom: 16px; /* Espaçamento abaixo da quantidade */
+  margin-top: 16px;
+  margin-bottom: 16px;
 `
 
 export const ButtonContainer = styled.div`
   display: block;
   max-width: 100%;
   width: 100%;
+  margin-top: auto; /* Empurra os botões para o final do sidebar */
 
   div {
-    padding-bottom: 8px; /* Espaçamento entre os botões */
+    padding-bottom: 8px;
   }
 `
 
@@ -120,15 +126,16 @@ export const ButtonCart = styled.button`
   width: 100%;
   color: ${cores.corVermelha};
   border: none;
-  padding: 8px; /* Espaçamento interno */
-  cursor: pointer; /* Adiciona um cursor pointer para indicar que é clicável */
-  transition: background-color 0.3s ease; /* Transição suave */
+  padding: 8px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
 
   &:hover {
     background-color: ${cores.corVermelha};
     color: ${cores.corClara};
   }
 `
+
 export const ButtonClose = styled.button`
   background-image: url(${imgclose});
   width: 16px;

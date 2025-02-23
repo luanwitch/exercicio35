@@ -4,7 +4,10 @@ import PerfilList from '../../components/PerfilList'
 import fechar_modal from '../../assets/image/fechar-modal.png'
 import { Modal, ModalContent } from './styles'
 import { Produto } from '../Home'
-import { useGetRestaurantByIdQuery } from './../../services/api'
+import { useGetRestaurantByIdQuery } from '../../services/api'
+import { useDispatch } from 'react-redux'
+import { add, open } from '../../store/reducers/cart' // Importe a ação `add`
+
 const PerfilDetails = () => {
   const { id } = useParams()
   const [searchParams] = useSearchParams()
@@ -14,7 +17,6 @@ const PerfilDetails = () => {
   const restauranteId = id ? Number(id) : 0
 
   // Usar os hooks do RTK Query
-
   const { data: restaurante } = useGetRestaurantByIdQuery(restauranteId, {
     skip: !restauranteId
   })
@@ -23,6 +25,9 @@ const PerfilDetails = () => {
     Produto['cardapio'][0] | null
   >(null)
   const [modalIsOpen, setModalIsOpen] = useState(false)
+
+  // Hook para disparar ações do Redux
+  const dispatch = useDispatch()
 
   useEffect(() => {
     if (restaurante && pratoId) {
@@ -55,6 +60,15 @@ const PerfilDetails = () => {
     setSelectedDish(null)
   }
 
+  // Função para adicionar o prato ao carrinho
+  const handleAddToCart = () => {
+    if (selectedDish) {
+      dispatch(add(selectedDish)) // Dispara a ação `add` com o prato selecionado
+      dispatch(open())
+      closeModal() // Fecha o modal após adicionar ao carrinho
+    }
+  }
+
   // Mostrar estado de carregamento
   if (!restaurante) {
     return <p>Carregando restaurante...</p>
@@ -81,7 +95,7 @@ const PerfilDetails = () => {
               <h4>{selectedDish.nome}</h4>
               <p>{selectedDish.descricao}</p>
               <p>Porção: {selectedDish.porcao}</p>
-              <button>
+              <button onClick={handleAddToCart}>
                 Adicionar ao carrinho - R$ {selectedDish.preco.toFixed(2)}
               </button>
             </div>

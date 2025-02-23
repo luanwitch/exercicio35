@@ -37,22 +37,41 @@ export const LinksItem = styled.li`
   }
 `
 
-export const TituloSaiba = styled.h1`
-  font-size: 24px;
+export const TituloSaiba = styled.h2`
+  font-size: 18px;
   font-weight: 900;
-  text-align: center;
-
-  @media (max-width: 768px) {
-    font-size: 18px;
-  }
+  color: ${cores.corVermelha};
 `
 
 export const LogoSaibaMais = styled.img`
-  width: 180px;
+  width: 125px;
+  height: 57px;
+`
 
-  @media (max-width: 768px) {
-    width: 80px;
-  }
+export const ImageFundoSaiba = styled.div`
+  width: 100%;
+  height: 280px;
+  background-size: cover;
+  background-position: center;
+  position: relative; /* Permite posicionamento absoluto dos elementos internos */
+`
+
+export const TituloCategorySaiba = styled.h3`
+  font-size: 32px;
+  font-weight: 100;
+  color: ${cores.corBranca};
+  position: absolute;
+  top: 24px; /* Posiciona no canto superior */
+  left: 24px; /* Posiciona no canto esquerdo */
+`
+
+export const TituloRodizioSaiba = styled.h2`
+  font-size: 32px;
+  font-weight: 900;
+  color: ${cores.corBranca};
+  position: absolute;
+  bottom: 24px; /* Posiciona no canto inferior */
+  left: 24px; /* Posiciona no canto esquerdo */
 `
 
 export const LinkCar = styled.a`
@@ -60,93 +79,5 @@ export const LinkCar = styled.a`
   font-weight: 900;
   color: ${cores.corVermelha};
   text-decoration: none;
-
-  @media (max-width: 768px) {
-    font-size: 14px;
-    margin-top: 10px;
-  }
-`
-
-export const ImageFundoSaiba = styled.div`
-  background-repeat: no-repeat;
-  background-size: cover; /* Garante que a imagem preencha a área sem distorcer */
-  background-position: center; /* Centraliza a imagem */
-  position: relative;
-  width: 100%;
-  max-width: 1366px;
-  height: 280px;
-  margin: 0 auto;
-  padding: 0 20px;
-
-  /* Melhorar a qualidade de renderização */
-  image-rendering: auto;
-
-  /* Camada de escurecimento */
-  &::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: rgba(0, 0, 0, 0.5); /* Camada preta com 50% de opacidade */
-    z-index: 1;
-  }
-
-  /* Garantir que o conteúdo fique acima do escurecimento */
-  & > * {
-    position: relative;
-    z-index: 2;
-  }
-
-  @media (max-width: 768px) {
-    height: 200px;
-  }
-`
-
-export const StyledContainer = styled.div`
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  align-items: flex-start;
-  width: 100%;
-  max-width: 994px;
-  padding: 0 20px;
-  box-sizing: border-box;
-  margin: 0 auto;
-  height: 100%;
-
-  @media (max-width: 768px) {
-    max-width: 100%;
-    padding: 0 10px;
-  }
-`
-
-export const TituloCategorySaiba = styled.h1`
-  padding-top: 10px;
-  font-size: 32px;
-  font-weight: 100;
-  color: ${cores.corBranca};
-  opacity: 0.6;
-  text-align: left;
-  margin-bottom: auto;
-
-  @media (max-width: 768px) {
-    font-size: 24px;
-    text-align: center;
-  }
-`
-
-export const TituloRodizioSaiba = styled.h1`
-  font-size: 32px;
-  font-weight: 900;
-  color: ${cores.corBranca};
-  text-align: left;
-  margin-top: auto;
-  padding-bottom: 10px;
-
-  @media (max-width: 768px) {
-    font-size: 24px;
-    text-align: center;
-  }
+  cursor: pointer;
 `
