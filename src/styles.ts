@@ -2,7 +2,7 @@ import styled, { createGlobalStyle } from 'styled-components'
 
 export const cores = {
   corVermelha: '#E66767',
-  corClara: '#FBF5EF',
+  corClara: '#FFEBD9',
   corBranca: '#FFFFFF',
   corFooter: '#FFEBD9'
 }
