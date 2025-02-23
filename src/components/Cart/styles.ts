@@ -39,6 +39,11 @@ export const Sidebar = styled.aside`
   display: flex;
   flex-direction: column;
   overflow-y: auto; /* Ativa o scroll vertical quando necessário */
+
+  @media (max-width: 768px) {
+    max-width: 100%; /* Ocupa toda a largura em telas menores */
+    padding: 8px; /* Reduz o padding para telas menores */
+  }
 `
 
 export const CartItem = styled.li`
@@ -54,6 +59,11 @@ export const CartItem = styled.li`
     height: 80px;
     width: 80px;
     object-fit: cover;
+
+    @media (max-width: 768px) {
+      height: 60px; /* Reduz o tamanho da imagem em telas menores */
+      width: 60px;
+    }
   }
 
   h3 {
@@ -61,11 +71,19 @@ export const CartItem = styled.li`
     font-weight: bold;
     font-size: 18px;
     margin-bottom: 8px;
+
+    @media (max-width: 768px) {
+      font-size: 16px; /* Reduz o tamanho da fonte em telas menores */
+    }
   }
 
   p {
     color: ${cores.corVermelha};
     font-size: 14px;
+
+    @media (max-width: 768px) {
+      font-size: 12px; /* Reduz o tamanho da fonte em telas menores */
+    }
   }
 
   > div:last-child {
@@ -85,6 +103,10 @@ export const Prices = styled.p`
   font-size: 14px;
   color: ${cores.corVermelha};
   margin-bottom: 8px;
+
+  @media (max-width: 768px) {
+    font-size: 12px; /* Reduz o tamanho da fonte em telas menores */
+  }
 `
 
 export const PricesT = styled.p`
@@ -92,6 +114,10 @@ export const PricesT = styled.p`
   font-size: 14px;
   color: ${cores.corClara};
   margin-bottom: 16px;
+
+  @media (max-width: 768px) {
+    font-size: 12px; /* Reduz o tamanho da fonte em telas menores */
+  }
 `
 
 export const AlinPrices = styled.div`
@@ -106,6 +132,10 @@ export const Quantity = styled.p`
   color: ${cores.corClara};
   margin-top: 16px;
   margin-bottom: 16px;
+
+  @media (max-width: 768px) {
+    font-size: 12px; /* Reduz o tamanho da fonte em telas menores */
+  }
 `
 
 export const ButtonContainer = styled.div`
@@ -133,6 +163,11 @@ export const ButtonCart = styled.button`
   &:hover {
     background-color: ${cores.corVermelha};
     color: ${cores.corClara};
+  }
+
+  @media (max-width: 768px) {
+    font-size: 12px; /* Reduz o tamanho da fonte em telas menores */
+    padding: 6px; /* Reduz o padding em telas menores */
   }
 `
 
