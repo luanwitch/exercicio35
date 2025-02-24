@@ -92,13 +92,6 @@ export const CartItem = styled.li`
     right: 16px;
   }
 `
-
-export const ImgDel = styled.img`
-  width: 16px;
-  height: 16px;
-  cursor: pointer;
-`
-
 export const Prices = styled.p`
   font-size: 14px;
   color: ${cores.corVermelha};

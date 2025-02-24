@@ -13,7 +13,7 @@ import {
 } from './styles'
 import { useDispatch, useSelector } from 'react-redux'
 import { RootReducer } from '../../store'
-import { close } from '../../store/reducers/cart'
+import { close, remove } from '../../store/reducers/cart'
 
 const Cart = () => {
   const { isOpen, items } = useSelector((state: RootReducer) => state.cart)
@@ -23,6 +23,9 @@ const Cart = () => {
     dispatch(close())
   }
 
+  const removeItem = (id: number) => {
+    dispatch(remove(id))
+  }
   return (
     <CartContainer className={isOpen ? 'is-open' : ''}>
       <Overlay onClick={closeCart} />{' '}
@@ -34,10 +37,18 @@ const Cart = () => {
               <img src={item.foto} alt={item.nome} />
               <div>
                 <h3>{item.nome}</h3>
-                <Prices>R$ {item.preco.toFixed(2)}</Prices>
+                <Prices>
+                  R${' '}
+                  {item.preco.toLocaleString('pt-BR', {
+                    minimumFractionDigits: 2
+                  })}
+                </Prices>
               </div>
               <div>
-                <ButtonClose type="button" />
+                <ButtonClose
+                  onClick={() => removeItem(item.id)}
+                  type="button"
+                />
               </div>
             </CartItem>
           ))}
@@ -46,7 +57,10 @@ const Cart = () => {
         <AlinPrices>
           <PricesT>Valor total</PricesT>
           <PricesT>
-            R$ {items.reduce((total, item) => total + item.preco, 0).toFixed(2)}
+            R${' '}
+            {items
+              .reduce((total, item) => total + item.preco, 0)
+              .toLocaleString('pt-BR', { minimumFractionDigits: 2 })}
           </PricesT>
         </AlinPrices>
         <ButtonContainer>
