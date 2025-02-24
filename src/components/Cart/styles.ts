@@ -1,5 +1,5 @@
 import styled from 'styled-components'
-import { cores } from '../../styles'
+import { breakpoints, cores } from '../../styles'
 import imgclose from '../../assets/image/lixeira-de-reciclagem 1.png'
 
 export const Overlay = styled.div`
@@ -40,8 +40,8 @@ export const Sidebar = styled.aside`
   flex-direction: column;
   overflow-y: auto; /* Ativa o scroll vertical quando necessário */
 
-  @media (max-width: 768px) {
-    max-width: 100%; /* Ocupa toda a largura em telas menores */
+  @media (max-width: ${breakpoints.tablet}) {
+    max-width: 80%; /* Ocupa toda a largura em telas menores */
     padding: 8px; /* Reduz o padding para telas menores */
   }
 `
@@ -52,6 +52,7 @@ export const CartItem = styled.li`
   gap: 16px;
   padding: 16px;
   background-color: ${cores.corClara};
+  margin-top: 16px;
   margin-bottom: 16px;
   position: relative;
 
@@ -60,7 +61,7 @@ export const CartItem = styled.li`
     width: 80px;
     object-fit: cover;
 
-    @media (max-width: 768px) {
+    @media (max-width: ${breakpoints.tablet}) {
       height: 60px; /* Reduz o tamanho da imagem em telas menores */
       width: 60px;
     }
@@ -72,7 +73,7 @@ export const CartItem = styled.li`
     font-size: 18px;
     margin-bottom: 8px;
 
-    @media (max-width: 768px) {
+    @media (max-width: ${breakpoints.tablet}) {
       font-size: 16px; /* Reduz o tamanho da fonte em telas menores */
     }
   }
@@ -81,7 +82,7 @@ export const CartItem = styled.li`
     color: ${cores.corVermelha};
     font-size: 14px;
 
-    @media (max-width: 768px) {
+    @media (max-width: ${breakpoints.tablet}) {
       font-size: 12px; /* Reduz o tamanho da fonte em telas menores */
     }
   }
@@ -97,7 +98,7 @@ export const Prices = styled.p`
   color: ${cores.corVermelha};
   margin-bottom: 8px;
 
-  @media (max-width: 768px) {
+  @media (max-width: ${breakpoints.tablet}) {
     font-size: 12px; /* Reduz o tamanho da fonte em telas menores */
   }
 `
@@ -108,7 +109,7 @@ export const PricesT = styled.p`
   color: ${cores.corClara};
   margin-bottom: 16px;
 
-  @media (max-width: 768px) {
+  @media (max-width: ${breakpoints.tablet}) {
     font-size: 12px; /* Reduz o tamanho da fonte em telas menores */
   }
 `
@@ -126,7 +127,7 @@ export const Quantity = styled.p`
   margin-top: 16px;
   margin-bottom: 16px;
 
-  @media (max-width: 768px) {
+  @media (max-width: ${breakpoints.tablet}) {
     font-size: 12px; /* Reduz o tamanho da fonte em telas menores */
   }
 `
@@ -158,7 +159,7 @@ export const ButtonCart = styled.button`
     color: ${cores.corClara};
   }
 
-  @media (max-width: 768px) {
+  @media (max-width: ${breakpoints.tablet}) {
     font-size: 12px; /* Reduz o tamanho da fonte em telas menores */
     padding: 6px; /* Reduz o padding em telas menores */
   }

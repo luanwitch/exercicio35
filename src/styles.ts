@@ -7,6 +7,11 @@ export const cores = {
   corFooter: '#FFEBD9'
 }
 
+export const breakpoints = {
+  desktop: '1024px',
+  tablet: '768px'
+}
+
 export const GlobalCss = createGlobalStyle`
 
 * {
@@ -28,7 +33,7 @@ img {
   display: block; /* Evitar espaçamento indesejado abaixo da imagem */
 }
 
-@media (max-width: 768px) {
+@media (max-width: ${breakpoints.tablet}) {
   body {
     font-size: 14px; /* Ajustar o tamanho da fonte em telas menores */
   }
@@ -36,7 +41,7 @@ img {
 `
 
 export const Container = styled.div`
-  max-width: 1024px;
+  max-width: ${breakpoints.desktop};
   width: 100%;
   margin: 0 auto;
 `

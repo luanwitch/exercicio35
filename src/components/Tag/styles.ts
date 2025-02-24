@@ -1,5 +1,5 @@
 import styled from 'styled-components'
-import { cores } from '../../styles'
+import { breakpoints, cores } from '../../styles'
 import { Props } from '.'
 
 export const TagContainer = styled.div<Props>`
@@ -12,7 +12,7 @@ export const TagContainer = styled.div<Props>`
   margin: 5px;
   cursor: pointer;
 
-  @media (max-width: 768px) {
+  @media (max-width: ${breakpoints.tablet}) {
     font-size: 10px;
     padding: 3px;
   }

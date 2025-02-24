@@ -1,5 +1,6 @@
 import styled from 'styled-components'
 import HeaderBackImage from '../../assets/image/header_fundo.png'
+import { breakpoints } from '../../styles'
 
 export const HeaderBar = styled.header`
   background-image: url(${HeaderBackImage});
@@ -10,7 +11,7 @@ export const HeaderBar = styled.header`
   display: block;
   padding-top: 40px;
 
-  @media (max-width: 768px) {
+  @media (max-width: ${breakpoints.tablet}) {
     padding-top: 20px; /* Reduz o padding superior */
   }
 `
@@ -20,7 +21,7 @@ export const HeaderTitulo = styled.h1`
   font-size: 36px;
   font-weight: 900;
 
-  @media (max-width: 768px) {
+  @media (max-width: ${breakpoints.tablet}) {
     font-size: 28px; /* Reduz o tamanho da fonte para telas menores */
   }
 `

@@ -1,5 +1,5 @@
 import styled from 'styled-components'
-import { cores } from '../../styles'
+import { breakpoints, cores } from '../../styles'
 
 export const Modal = styled.div`
   position: absolute;
@@ -16,7 +16,7 @@ export const Modal = styled.div`
     display: flex;
   }
 
-  @media (max-width: 768px) {
+  @media (max-width: ${breakpoints.tablet}) {
     top: 515px;
     left: 9px;
     width: 95%;
@@ -28,7 +28,7 @@ export const ModalContent = styled.div`
   display: flex;
   flex-direction: row; /* Layout padrão */
   background-color: ${cores.corVermelha};
-  max-width: 1024px;
+  max-width: ${breakpoints.desktop};
   width: 90%;
   padding: 28px;
   position: relative;
@@ -43,7 +43,7 @@ export const ModalContent = styled.div`
       height: 16px;
       cursor: pointer;
 
-      @media (max-width: 768px) {
+      @media (max-width: ${breakpoints.tablet}) {
         display: block;
         width: 15px;
         height: 15px;
@@ -57,7 +57,7 @@ export const ModalContent = styled.div`
     height: 340px;
     margin-right: 20px;
 
-    @media (max-width: 768px) {
+    @media (max-width: ${breakpoints.tablet}) {
       padding-top: 20px;
       width: 100%;
       height: auto;
@@ -85,7 +85,7 @@ export const ModalContent = styled.div`
       margin-bottom: 20px;
       text-align: justify;
 
-      @media (max-width: 768px) {
+      @media (max-width: ${breakpoints.tablet}) {
         font-size: 12px;
         line-height: 18px;
       }
@@ -101,14 +101,14 @@ export const ModalContent = styled.div`
       border: none;
       cursor: pointer;
 
-      @media (max-width: 768px) {
+      @media (max-width: ${breakpoints.tablet}) {
         width: 100%;
         font-size: 12px;
       }
     }
   }
 
-  @media (max-width: 768px) {
+  @media (max-width: ${breakpoints.tablet}) {
     flex-direction: column; /* Alinha os elementos em coluna */
     padding: 10px;
 

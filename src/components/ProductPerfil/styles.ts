@@ -1,5 +1,5 @@
 import styled from 'styled-components'
-import { cores } from '../../styles'
+import { breakpoints, cores } from '../../styles'
 
 export const Card = styled.div`
   max-width: 318px;
@@ -17,7 +17,7 @@ export const Card = styled.div`
     padding: 10px;
   }
 
-  @media (max-width: 768px) {
+  @media (max-width: ${breakpoints.tablet}) {
     max-width: 90%; // Ajustar largura dos cards em dispositivos móveis
     margin: 20px auto; // Centralizar os cards e ajustar margens
   }
@@ -29,7 +29,7 @@ export const Titulo = styled.h3`
   line-height: 19px;
   color: ${cores.corFooter};
 
-  @media (max-width: 768px) {
+  @media (max-width: ${breakpoints.tablet}) {
     font-size: 14px; // Ajustar tamanho da fonte em dispositivos móveis
   }
 `
@@ -51,7 +51,7 @@ export const Descricao = styled.p`
   flex-grow: 1; /* Faz a descrição crescer para ocupar espaço disponível */
   color: ${cores.corFooter};
 
-  @media (max-width: 768px) {
+  @media (max-width: ${breakpoints.tablet}) {
     font-size: 12px; // Ajustar tamanho da fonte em dispositivos móveis
   }
 `

@@ -1,5 +1,5 @@
 import styled from 'styled-components'
-import { cores } from '../../styles'
+import { breakpoints, cores } from '../../styles'
 
 export const Card = styled.div`
   max-width: 472px;
@@ -58,7 +58,7 @@ export const Categoria = styled.div`
   top: 16px;
   right: 16px;
 
-  @media (max-width: 768px) {
+  @media (max-width: ${breakpoints.tablet}) {
     margin-top: 10px; /* Espaço superior para categorias em telas menores */
   }
 `

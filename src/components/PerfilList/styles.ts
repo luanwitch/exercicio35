@@ -1,5 +1,5 @@
 import styled from 'styled-components'
-import { cores } from '../../styles'
+import { breakpoints, cores } from '../../styles'
 
 export const SectionContainer = styled.div`
   max-width: 100%;
@@ -14,11 +14,11 @@ export const List = styled.div`
   gap: 20px;
   justify-items: center;
 
-  @media (max-width: 1024px) {
+  @media (max-width: ${breakpoints.desktop}) {
     grid-template-columns: repeat(2, 1fr); // Duas colunas para tablets
   }
 
-  @media (max-width: 768px) {
+  @media (max-width: ${breakpoints.tablet}) {
     grid-template-columns: repeat(1, 1fr); // Uma coluna para smartphones
   }
 `

@@ -1,6 +1,6 @@
 import styled from 'styled-components'
 import HeaderBackImage from '../../assets/image/header_fundo.png'
-import { cores } from '../../styles'
+import { breakpoints, cores } from '../../styles'
 
 export const HeaderBarSaiba = styled.header`
   background-image: url(${HeaderBackImage});
@@ -21,7 +21,7 @@ export const Links = styled.ul`
   width: 100%;
   max-width: 1200px;
 
-  @media (max-width: 768px) {
+  @media (max-width: ${breakpoints.tablet}) {
     gap: 25px;
     flex-direction: column;
     align-items: center;
