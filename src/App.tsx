@@ -5,6 +5,8 @@ import ScrollToTop from './components/ScrollToTop' // Importe o componente
 import Rotas from './routes'
 import { store } from './store'
 import Cart from './components/Cart'
+import Delivery from './components/Delivery'
+import FinalDelivery from './components/FinalDelivery'
 
 function App() {
   return (
@@ -14,6 +16,8 @@ function App() {
         <ScrollToTop />
         <Rotas />
         <Cart />
+        <Delivery />
+        <FinalDelivery />
       </BrowserRouter>
     </Provider>
   )

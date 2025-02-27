@@ -13,7 +13,7 @@ import {
 } from './styles'
 import { useDispatch, useSelector } from 'react-redux'
 import { RootReducer } from '../../store'
-import { close, remove } from '../../store/reducers/cart'
+import { close, remove, openDelivery } from '../../store/reducers/cart'
 
 const Cart = () => {
   const { isOpen, items } = useSelector((state: RootReducer) => state.cart)
@@ -26,6 +26,11 @@ const Cart = () => {
   const removeItem = (id: number) => {
     dispatch(remove(id))
   }
+
+  const cartDelivery = () => {
+    dispatch(openDelivery())
+  }
+
   return (
     <CartContainer className={isOpen ? 'is-open' : ''}>
       <Overlay onClick={closeCart} />{' '}
@@ -75,6 +80,7 @@ const Cart = () => {
           </div>
           <div>
             <ButtonCart
+              onClick={cartDelivery}
               title="Clique aqui para continuar com a entrega"
               type="button"
             >
