@@ -7,8 +7,6 @@ export const Overlay = styled.div`
   left: 0;
   width: 100%;
   height: 100%;
-  background-color: #000;
-  opacity: 0.7;
   z-index: 1;
 `
 
@@ -65,6 +63,7 @@ export const InputGroup = styled.div`
   input {
     width: 100%;
     border: none;
+    background-color: ${cores.corClara};
   }
 `
 export const NuCepContainer = styled.div`

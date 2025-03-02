@@ -3,26 +3,41 @@ import {
   ButtonContainer,
   DeliContainer,
   InputGroup,
-  NuCepContainer,
   Overlay,
   Row,
-  Sidebar
+  Sidebar,
+  CartContainer
 } from './styles'
 import { useDispatch, useSelector } from 'react-redux'
 import { RootReducer } from '../../store'
-import { closeDeliveryEnd } from '../../store/reducers/cart'
+import {
+  closeDeliveryEnd,
+  openFinalProject,
+  closeDelivery,
+  close // Importando close para fechar o Cart também
+} from '../../store/reducers/cart'
 
-const DeliveryEnd = () => {
+const FinalDelivery = () => {
   const { isOpenDeliveryEnd } = useSelector((state: RootReducer) => state.cart)
 
   const dispatch = useDispatch()
   const closeCartDeliveryEnd = () => {
-    dispatch(closeDeliveryEnd())
+    dispatch(closeDeliveryEnd()) // Fecha o FinalDelivery
   }
+  const openFinalProjectPage = () => {
+    // Fechar todos os outros componentes e abrir apenas o ProjectFinal
+    dispatch(close()) // Fecha o Cart
+    dispatch(closeDelivery()) // Fecha o Delivery
+    dispatch(closeDeliveryEnd()) // Fecha o FinalDelivery
+
+    // Como último passo, abrir o ProjectFinal
+    dispatch(openFinalProject()) // Abre o ProjectFinal
+  }
+
   return (
     <DeliContainer className={isOpenDeliveryEnd ? 'is-open' : ''}>
       <Overlay onClick={closeCartDeliveryEnd} />{' '}
-      {/* Fecha o carrinho ao clicar no overlay */}
+      {/* Fecha o FinalDelivery ao clicar no overlay */}
       <Sidebar>
         <h3>Pagamento - Valor a pagar R$ 200,00</h3>
         <Row>
@@ -30,7 +45,7 @@ const DeliveryEnd = () => {
             <label htmlFor="fullName">Nome no cartão</label>
             <input id="fullName" type="text" />
           </InputGroup>
-          <NuCepContainer>
+          <CartContainer>
             <InputGroup>
               <label htmlFor="nucart">Número do cartão</label>
               <input id="nucart" type="text" />
@@ -40,8 +55,8 @@ const DeliveryEnd = () => {
               <label htmlFor="nuseg">CVV</label>
               <input id="nuseg" type="text" />
             </InputGroup>
-          </NuCepContainer>
-          <NuCepContainer>
+          </CartContainer>
+          <CartContainer>
             <InputGroup>
               <label htmlFor="vectomonth">Mês de vencimento</label>
               <input id="vectomonth" type="text" />
@@ -51,11 +66,12 @@ const DeliveryEnd = () => {
               <label htmlFor="vectoyear">Ano de vencimento</label>
               <input id="vectoyear" type="text" />
             </InputGroup>
-          </NuCepContainer>
+          </CartContainer>
         </Row>
         <ButtonContainer>
           <div>
             <ButtonCart
+              onClick={openFinalProjectPage} // Método modificado para garantir o fluxo correto
               title="Clique aqui para finalizar o pagamento"
               type="button"
             >
@@ -64,8 +80,8 @@ const DeliveryEnd = () => {
           </div>
           <div>
             <ButtonCart
-              onClick={closeCartDeliveryEnd}
-              title="Clique aqui para voltar para a edição de endereço "
+              onClick={closeCartDeliveryEnd} // Fecha o FinalDelivery e volta ao Delivery
+              title="Clique aqui para voltar para a edição de endereço"
               type="button"
             >
               Voltar para a edição de endereço
@@ -77,4 +93,4 @@ const DeliveryEnd = () => {
   )
 }
 
-export default DeliveryEnd
+export default FinalDelivery

@@ -1,12 +1,9 @@
 import { Provider } from 'react-redux'
 import { BrowserRouter } from 'react-router-dom'
 import { GlobalCss } from './styles'
-import ScrollToTop from './components/ScrollToTop' // Importe o componente
-import Rotas from './routes'
+import ScrollToTop from './components/ScrollToTop'
 import { store } from './store'
-import Cart from './components/Cart'
-import Delivery from './components/Delivery'
-import FinalDelivery from './components/FinalDelivery'
+import Main from './components/Main'
 
 function App() {
   return (
@@ -14,10 +11,7 @@ function App() {
       <BrowserRouter>
         <GlobalCss />
         <ScrollToTop />
-        <Rotas />
-        <Cart />
-        <Delivery />
-        <FinalDelivery />
+        <Main /> {/* Use o componente Main aqui */}
       </BrowserRouter>
     </Provider>
   )

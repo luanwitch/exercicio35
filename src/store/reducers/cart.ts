@@ -6,13 +6,15 @@ type CartState = {
   isOpen: boolean // Estado do carrinho (aberto/fechado)
   isOpenDelivery: boolean
   isOpenDeliveryEnd: boolean
+  isFinalProjectOpen: boolean // Novo estado para controlar a exibição do FinalProject
 }
 
 const initialState: CartState = {
   items: [],
   isOpen: false,
   isOpenDelivery: false,
-  isOpenDeliveryEnd: false
+  isOpenDeliveryEnd: false,
+  isFinalProjectOpen: false // Inicialmente fechado
 }
 
 const cartSlice = createSlice({
@@ -49,6 +51,12 @@ const cartSlice = createSlice({
     },
     closeDeliveryEnd: (state) => {
       state.isOpenDeliveryEnd = false
+    },
+    openFinalProject: (state) => {
+      state.isFinalProjectOpen = true // Abre o FinalProject
+    },
+    closeFinalProject: (state) => {
+      state.isFinalProjectOpen = false // Fecha o FinalProject
     }
   }
 })
@@ -61,6 +69,8 @@ export const {
   openDelivery,
   closeDelivery,
   openDeliveryEnd,
-  closeDeliveryEnd
+  closeDeliveryEnd,
+  openFinalProject,
+  closeFinalProject
 } = cartSlice.actions
 export default cartSlice.reducer

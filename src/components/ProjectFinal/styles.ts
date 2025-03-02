@@ -7,10 +7,12 @@ export const Overlay = styled.div`
   left: 0;
   width: 100%;
   height: 100%;
+  background-color: #000;
+  opacity: 0.7;
   z-index: 1;
 `
 
-export const DeliContainer = styled.div`
+export const FaseEnd = styled.div`
   position: fixed;
   top: 0;
   left: 0;
@@ -49,29 +51,12 @@ export const Sidebar = styled.aside`
     padding: 8px; /* Reduz o padding para telas menores */
   }
 `
-export const Row = styled.div`
-  display: block;
-`
-export const InputGroup = styled.div`
-  label {
-    font-size: 14px;
-    margin-top: 8px;
-    margin-bottom: 8px;
-    display: block;
-  }
-
-  input {
-    width: 100%;
-    border: none;
-    background-color: ${cores.corClara};
-  }
-`
-export const CartContainer = styled.div`
-  width: 100%;
-  gap: 48px;
-  display: flex;
-  margin-top: 8px;
-  margin-bottom: 8px;
+export const TextEnd = styled.p`
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 22px;
+  margin-top: 32px;
+  text-align: justify;
 `
 
 export const ButtonContainer = styled.div`

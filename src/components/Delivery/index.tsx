@@ -17,17 +17,17 @@ const Delivery = () => {
 
   const dispatch = useDispatch()
   const closeCartDelivery = () => {
-    dispatch(closeDelivery())
+    dispatch(closeDelivery()) // Fecha o Delivery
   }
 
-  const OpenCartDeliveryEnd = () => {
-    dispatch(openDeliveryEnd())
+  const openCartDeliveryEnd = () => {
+    dispatch(openDeliveryEnd()) // Abre o FinalDelivery
   }
 
   return (
     <DeliContainer className={isOpenDelivery ? 'is-open' : ''}>
       <Overlay onClick={closeCartDelivery} />{' '}
-      {/* Fecha o carrinho ao clicar no overlay */}
+      {/* Fecha o Delivery ao clicar no overlay */}
       <Sidebar>
         <h3>Entrega</h3>
         <Row>
@@ -62,7 +62,7 @@ const Delivery = () => {
         <ButtonContainer>
           <div>
             <ButtonCart
-              onClick={OpenCartDeliveryEnd}
+              onClick={openCartDeliveryEnd} // Abre o FinalDelivery
               title="Clique aqui para continuar com o pagamento"
               type="button"
             >
@@ -71,7 +71,7 @@ const Delivery = () => {
           </div>
           <div>
             <ButtonCart
-              onClick={closeCartDelivery}
+              onClick={closeCartDelivery} // Fecha o Delivery
               title="Clique aqui para voltar ao carrinho"
               type="button"
             >
