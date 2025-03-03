@@ -62,8 +62,14 @@ export const InputGroup = styled.div`
 
   input {
     width: 100%;
+    height: 32px;
+    font-size: 14px;
+    font-weight: bold;
     border: none;
+    outline: none;
+    box-shadow: none;
     background-color: ${cores.corClara};
+    color: ${cores.corVermelha};
   }
 `
 export const NuCepContainer = styled.div`

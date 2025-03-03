@@ -41,28 +41,28 @@ const FinalDelivery = () => {
       <Sidebar>
         <h3>Pagamento - Valor a pagar R$ 200,00</h3>
         <Row>
-          <InputGroup>
+          <InputGroup maxWidth="326px">
             <label htmlFor="fullName">Nome no cartão</label>
             <input id="fullName" type="text" />
           </InputGroup>
           <CartContainer>
-            <InputGroup>
+            <InputGroup maxWidth="228px">
               <label htmlFor="nucart">Número do cartão</label>
               <input id="nucart" type="text" />
             </InputGroup>
 
-            <InputGroup>
+            <InputGroup maxWidth="88px">
               <label htmlFor="nuseg">CVV</label>
               <input id="nuseg" type="text" />
             </InputGroup>
           </CartContainer>
           <CartContainer>
-            <InputGroup>
+            <InputGroup maxWidth="155px">
               <label htmlFor="vectomonth">Mês de vencimento</label>
               <input id="vectomonth" type="text" />
             </InputGroup>
 
-            <InputGroup>
+            <InputGroup maxWidth="155px">
               <label htmlFor="vectoyear">Ano de vencimento</label>
               <input id="vectoyear" type="text" />
             </InputGroup>

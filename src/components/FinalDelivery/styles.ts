@@ -1,6 +1,10 @@
 import styled from 'styled-components'
 import { breakpoints, cores } from '../../styles'
 
+type InputGroupProps = {
+  maxWidth?: string
+}
+
 export const Overlay = styled.div`
   position: fixed;
   top: 0;
@@ -47,12 +51,13 @@ export const Sidebar = styled.aside`
   @media (max-width: ${breakpoints.tablet}) {
     max-width: 80%; /* Ocupa toda a largura em telas menores */
     padding: 8px; /* Reduz o padding para telas menores */
+    margin-right: 8px;
   }
 `
 export const Row = styled.div`
   display: block;
 `
-export const InputGroup = styled.div`
+export const InputGroup = styled.div<InputGroupProps>`
   label {
     font-size: 14px;
     margin-top: 8px;
@@ -61,17 +66,27 @@ export const InputGroup = styled.div`
   }
 
   input {
-    width: 100%;
+    max-width: ${(props) => props.maxWidth || '100%'};
+    width: ${(props) => props.maxWidth || '100%'};
+    height: 32px;
+    font-size: 14px;
+    font-weight: bold;
+    color: ${cores.corVermelha};
+    padding: 0;
+    margin: 0;
     border: none;
+    outline: none;
+    box-shadow: none;
     background-color: ${cores.corClara};
   }
 `
 export const CartContainer = styled.div`
   width: 100%;
-  gap: 48px;
+  gap: 8px;
   display: flex;
   margin-top: 8px;
   margin-bottom: 8px;
+  justify-content: space-between;
 `
 
 export const ButtonContainer = styled.div`
