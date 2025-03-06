@@ -51,6 +51,7 @@ export const Sidebar = styled.aside`
 `
 export const Row = styled.div`
   display: block;
+  margin-bottom: 56px;
 `
 export const InputGroup = styled.div`
   label {
@@ -98,6 +99,7 @@ export const ButtonCart = styled.button`
   width: 100%;
   color: ${cores.corVermelha};
   border: none;
+  margin-bottom: 16px;
   padding: 8px;
   cursor: pointer;
   transition: background-color 0.3s ease;
