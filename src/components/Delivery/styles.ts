@@ -79,6 +79,7 @@ export const NuCepContainer = styled.div`
   display: flex;
   margin-top: 8px;
   margin-bottom: 8px;
+  justify-content: space-between;
 `
 
 export const ButtonContainer = styled.div`

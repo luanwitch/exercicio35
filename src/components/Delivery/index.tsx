@@ -10,9 +10,14 @@ import {
 } from './styles'
 import { useDispatch, useSelector } from 'react-redux'
 import { RootReducer } from '../../store'
-import { closeDelivery, openDeliveryEnd } from '../../store/reducers/cart'
+import {
+  closeDelivery,
+  openDeliveryEnd,
+  setDeliveryData
+} from '../../store/reducers/cart'
 import { useFormik } from 'formik'
 import * as Yup from 'yup'
+import { usePurchaseMutation } from '../../services/api'
 
 const Delivery = () => {
   const { isOpenDelivery } = useSelector((state: RootReducer) => state.cart)
@@ -25,6 +30,8 @@ const Delivery = () => {
   const openCartDeliveryEnd = () => {
     dispatch(openDeliveryEnd()) // Abre o FinalDelivery
   }
+
+  const [purchase, { isLoading, isError, data }] = usePurchaseMutation()
 
   const form = useFormik({
     initialValues: {
@@ -46,10 +53,48 @@ const Delivery = () => {
       numero: Yup.string().required('preenchimento obrigatório')
     }),
 
-    onSubmit: (values) => {
-      console.log(values)
+    onSubmit: async (values) => {
+      // Atualizando os dados no Redux
+      dispatch(setDeliveryData(values))
+
+      try {
+        const response = await purchase({
+          delivery: {
+            receiver: values.fullName,
+            address: {
+              description: values.end,
+              city: values.city,
+              zipCode: values.cep.replace('-', ''), // Remove traço do CEP
+              number: Number(values.numero),
+              complement: values.complement || 'N/A'
+            }
+          },
+          products: [
+            {
+              id: 1,
+              price: 0
+            }
+          ],
+          payment: {
+            card: {
+              name: 'Teste',
+              number: '1111222233334444',
+              code: 123,
+              expires: {
+                month: 12,
+                year: 2030
+              }
+            }
+          }
+        }).unwrap()
+
+        console.log('Resposta da API:', response) // Verifique o que a API retorna
+      } catch (error) {
+        console.error('Erro na API:', error) // Captura o erro detalhado
+      }
     }
   })
+
   const getErrorMessage = (fildName: string, message?: string) => {
     const isTouched = fildName in form.touched
     const isInvalid = fildName in form.errors
@@ -57,6 +102,7 @@ const Delivery = () => {
     if (isTouched && isInvalid) return message
     return ''
   }
+  console.log('Formik em Delivery:', form)
 
   return (
     <DeliContainer className={isOpenDelivery ? 'is-open' : ''}>
@@ -155,7 +201,7 @@ const Delivery = () => {
               <ButtonCart
                 onClick={closeCartDelivery} // Fecha o Delivery
                 title="Clique aqui para voltar ao carrinho"
-                type="submit"
+                type="button"
               >
                 Voltar ao carrinho
               </ButtonCart>

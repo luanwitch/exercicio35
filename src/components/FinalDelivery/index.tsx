@@ -18,11 +18,14 @@ import {
 } from '../../store/reducers/cart'
 import { useFormik } from 'formik'
 import * as Yup from 'yup'
+import { usePurchaseMutation } from '../../services/api'
 
 const FinalDelivery = () => {
   const { isOpenDeliveryEnd } = useSelector((state: RootReducer) => state.cart)
-
   const dispatch = useDispatch()
+
+  const [purchase, { isLoading, isError, data }] = usePurchaseMutation()
+
   const closeCartDeliveryEnd = () => {
     dispatch(closeDeliveryEnd()) // Fecha o FinalDelivery
   }
@@ -54,10 +57,52 @@ const FinalDelivery = () => {
         .max(4, 'máximo 4 caracteres')
         .required('preenchimento obrigatório')
     }),
-    onSubmit: (values) => {
-      console.log(values) // Isso será executado
+    onSubmit: async (values) => {
+      try {
+        // Obtém os valores do pagamento
+        const payment = {
+          card: {
+            name: values.cardFullName,
+            number: values.cardNumber,
+            code: Number(values.segNumber),
+            expires: {
+              month: Number(values.vectoMonth),
+              year: Number(values.vectoYear)
+            }
+          }
+        }
+
+        // Obtém os valores de entrega
+        const delivery = {
+          receiver: 'Nome do Recebedor', // Exemplo, você precisa pegar os valores do formulário anterior
+          address: {
+            description: 'Endereço completo',
+            city: 'Cidade',
+            zipCode: 'CEP',
+            number: 123,
+            complement: 'Complemento'
+          }
+        }
+
+        // Chama a API para realizar a compra
+        const response = await purchase({
+          products: [
+            {
+              id: 1,
+              price: 0
+            }
+          ],
+          delivery,
+          payment
+        }).unwrap()
+
+        console.log('Resposta da API:', response) // Verifique a resposta da API
+      } catch (error) {
+        console.error('Erro na API:', error) // Verifique o erro
+      }
     }
   })
+
   const getErrorMessage = (fildName: string, message?: string) => {
     const isTouched = fildName in form.touched
     const isInvalid = fildName in form.errors
@@ -66,19 +111,15 @@ const FinalDelivery = () => {
     return ''
   }
 
-  // Função modificada para capturar os valores do formulário
+  // Função para abrir a página final do projeto
   const openFinalProjectPage = () => {
-    // Capturar e logar os valores do formulário
-    const formValues = form.values
-    console.log(formValues)
+    form.submitForm() // Submete o formulário para chamar o onSubmit
 
-    // Continuar com o fluxo normal
     dispatch(close()) // Fecha o Cart
     dispatch(closeDelivery()) // Fecha o Delivery
     dispatch(closeDeliveryEnd()) // Fecha o FinalDelivery
     dispatch(openFinalProject()) // Abre o ProjectFinal
   }
-  console.log(form)
 
   return (
     <DeliContainer className={isOpenDeliveryEnd ? 'is-open' : ''}>
@@ -101,6 +142,7 @@ const FinalDelivery = () => {
                 {getErrorMessage('cardFullName', form.errors.cardFullName)}
               </small>
             </InputGroup>
+
             <CartContainer>
               <InputGroup maxWidth="228px">
                 <label htmlFor="cardNumber">Número do cartão</label>
@@ -132,6 +174,7 @@ const FinalDelivery = () => {
                 </small>
               </InputGroup>
             </CartContainer>
+
             <CartContainer>
               <InputGroup maxWidth="155px">
                 <label htmlFor="vectoMonth">Mês de vencimento</label>
@@ -164,12 +207,13 @@ const FinalDelivery = () => {
               </InputGroup>
             </CartContainer>
           </Row>
+
           <ButtonContainer>
             <div>
               <ButtonCart
-                onClick={openFinalProjectPage} // Mantém o onClick
+                onClick={openFinalProjectPage} // Chama a função de envio
                 title="Clique aqui para finalizar o pagamento"
-                type="button" // Alterado para button para evitar dupla submissão
+                type="button"
               >
                 Finalizar pagamento
               </ButtonCart>
