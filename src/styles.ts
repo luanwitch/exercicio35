@@ -4,7 +4,9 @@ export const cores = {
   corVermelha: '#E66767',
   corClara: '#FFEBD9',
   corBranca: '#FFFFFF',
-  corFooter: '#FFEBD9'
+  corFooter: '#FFEBD9',
+  corYellow: '#FFFF00',
+  corRed2: '#FF0000'
 }
 
 export const breakpoints = {

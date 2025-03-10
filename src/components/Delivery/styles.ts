@@ -71,6 +71,10 @@ export const InputGroup = styled.div`
     box-shadow: none;
     background-color: ${cores.corClara};
     color: ${cores.corVermelha};
+
+    &.error {
+      border: 2px solid ${cores.corRed2};
+    }
   }
 `
 export const NuCepContainer = styled.div`

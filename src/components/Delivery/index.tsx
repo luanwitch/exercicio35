@@ -1,3 +1,7 @@
+import { useDispatch, useSelector } from 'react-redux'
+import { useFormik } from 'formik'
+import * as Yup from 'yup'
+import { useEffect } from 'react'
 import {
   ButtonCart,
   ButtonContainer,
@@ -8,27 +12,29 @@ import {
   Row,
   Sidebar
 } from './styles'
-import { useDispatch, useSelector } from 'react-redux'
 import { RootReducer } from '../../store'
 import {
   closeDelivery,
   openDeliveryEnd,
-  setDeliveryData
+  setDeliveryData,
+  close
 } from '../../store/reducers/cart'
-import { useFormik } from 'formik'
-import * as Yup from 'yup'
 import { usePurchaseMutation } from '../../services/api'
+import { useNavigate } from 'react-router-dom'
 
 const Delivery = () => {
-  const { isOpenDelivery } = useSelector((state: RootReducer) => state.cart)
-
+  const { isOpenDelivery, items } = useSelector(
+    (state: RootReducer) => state.cart
+  )
   const dispatch = useDispatch()
+  const navigate = useNavigate()
+
   const closeCartDelivery = () => {
-    dispatch(closeDelivery()) // Fecha o Delivery
+    dispatch(closeDelivery())
   }
 
   const openCartDeliveryEnd = () => {
-    dispatch(openDeliveryEnd()) // Abre o FinalDelivery
+    dispatch(openDeliveryEnd())
   }
 
   const [purchase, { isLoading, isError, data }] = usePurchaseMutation()
@@ -54,7 +60,6 @@ const Delivery = () => {
     }),
 
     onSubmit: async (values) => {
-      // Atualizando os dados no Redux
       dispatch(setDeliveryData(values))
 
       try {
@@ -64,7 +69,7 @@ const Delivery = () => {
             address: {
               description: values.end,
               city: values.city,
-              zipCode: values.cep.replace('-', ''), // Remove traço do CEP
+              zipCode: values.cep.replace('-', ''),
               number: Number(values.numero),
               complement: values.complement || 'N/A'
             }
@@ -88,26 +93,54 @@ const Delivery = () => {
           }
         }).unwrap()
 
-        console.log('Resposta da API:', response) // Verifique o que a API retorna
+        console.log('Resposta da API:', response)
+        openCartDeliveryEnd()
       } catch (error) {
-        console.error('Erro na API:', error) // Captura o erro detalhado
+        console.error('Erro na API:', error)
       }
     }
   })
 
-  const getErrorMessage = (fildName: string, message?: string) => {
-    const isTouched = fildName in form.touched
-    const isInvalid = fildName in form.errors
+  // Função que verifica se um campo tem erro, considerando também a tentativa de submissão
+  const checkInputHasError = (fieldName: string) => {
+    const isTouched = fieldName in form.touched
+    const isInvalid = fieldName in form.errors
+    const hasError =
+      (isTouched && isInvalid) || (form.submitCount > 0 && isInvalid)
 
-    if (isTouched && isInvalid) return message
-    return ''
+    return hasError
   }
-  console.log('Formik em Delivery:', form)
+
+  // Função para lidar com o clique no botão de continuar
+  const handleContinueClick = () => {
+    // Marca todos os campos como tocados para exibir os erros
+    const touchedFields = Object.keys(form.values).reduce((acc, field) => {
+      acc[field] = true
+      return acc
+    }, {} as Record<string, boolean>)
+
+    form.setTouched(touchedFields)
+
+    // Valida o formulário manualmente
+    form.validateForm().then((errors) => {
+      // Se não houver erros, submete o formulário
+      if (Object.keys(errors).length === 0) {
+        form.handleSubmit()
+      }
+    })
+  }
+
+  useEffect(() => {
+    if (items.length === 0) {
+      dispatch(close())
+      dispatch(closeDelivery())
+      navigate('/')
+    }
+  }, [items, dispatch, navigate])
 
   return (
     <DeliContainer className={isOpenDelivery ? 'is-open' : ''}>
-      <Overlay onClick={closeCartDelivery} />{' '}
-      {/* Fecha o Delivery ao clicar no overlay */}
+      <Overlay onClick={closeCartDelivery} />
       <Sidebar>
         <h3>Entrega</h3>
         <form onSubmit={form.handleSubmit}>
@@ -121,8 +154,8 @@ const Delivery = () => {
                 value={form.values.fullName}
                 onChange={form.handleChange}
                 onBlur={form.handleBlur}
+                className={checkInputHasError('fullName') ? 'error' : ''}
               />
-              <small>{getErrorMessage('fullName', form.errors.fullName)}</small>
             </InputGroup>
             <InputGroup>
               <label htmlFor="end">Endereço</label>
@@ -133,8 +166,8 @@ const Delivery = () => {
                 value={form.values.end}
                 onChange={form.handleChange}
                 onBlur={form.handleBlur}
+                className={checkInputHasError('end') ? 'error' : ''}
               />
-              <small>{getErrorMessage('end', form.errors.end)}</small>
             </InputGroup>
             <InputGroup>
               <label htmlFor="city">Cidade</label>
@@ -145,8 +178,8 @@ const Delivery = () => {
                 value={form.values.city}
                 onChange={form.handleChange}
                 onBlur={form.handleBlur}
+                className={checkInputHasError('city') ? 'error' : ''}
               />
-              <small>{getErrorMessage('city', form.errors.city)}</small>
             </InputGroup>
             <NuCepContainer>
               <InputGroup>
@@ -158,8 +191,8 @@ const Delivery = () => {
                   value={form.values.cep}
                   onChange={form.handleChange}
                   onBlur={form.handleBlur}
+                  className={checkInputHasError('cep') ? 'error' : ''}
                 />
-                <small>{getErrorMessage('cep', form.errors.cep)}</small>
               </InputGroup>
 
               <InputGroup>
@@ -171,8 +204,8 @@ const Delivery = () => {
                   value={form.values.numero}
                   onChange={form.handleChange}
                   onBlur={form.handleBlur}
+                  className={checkInputHasError('numero') ? 'error' : ''}
                 />
-                <small>{getErrorMessage('numero', form.errors.numero)}</small>
               </InputGroup>
             </NuCepContainer>
             <InputGroup>
@@ -190,16 +223,16 @@ const Delivery = () => {
           <ButtonContainer>
             <div>
               <ButtonCart
-                onClick={openCartDeliveryEnd} // Abre o FinalDelivery
+                onClick={handleContinueClick}
                 title="Clique aqui para continuar com o pagamento"
-                type="submit"
+                type="button"
               >
                 Continuar com o pagamento
               </ButtonCart>
             </div>
             <div>
               <ButtonCart
-                onClick={closeCartDelivery} // Fecha o Delivery
+                onClick={closeCartDelivery}
                 title="Clique aqui para voltar ao carrinho"
                 type="button"
               >
