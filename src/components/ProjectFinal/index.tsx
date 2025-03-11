@@ -9,7 +9,7 @@ import {
 
 import { useDispatch, useSelector } from 'react-redux'
 import { RootReducer } from '../../store'
-import { closeFinalProject } from '../../store/reducers/cart'
+import { clearItems, closeFinalProject } from '../../store/reducers/cart'
 import { usePurchaseMutation } from '../../services/api'
 import { useState, useEffect } from 'react'
 
@@ -78,8 +78,9 @@ const ProjectFinal = () => {
         delivery: data.delivery || null
       })
       setOrderPlaced(true)
+      dispatch(clearItems())
     }
-  }, [data])
+  }, [data, dispatch])
 
   // Função para enviar o pedido
   const handleSubmit = async () => {

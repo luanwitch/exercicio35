@@ -36,58 +36,67 @@ const Cart = () => {
       <Overlay onClick={closeCart} />{' '}
       {/* Fecha o carrinho ao clicar no overlay */}
       <Sidebar>
-        <ul>
-          {items.map((item) => (
-            <CartItem key={item.id}>
-              <img src={item.foto} alt={item.nome} />
+        {items.length > 0 ? (
+          <>
+            <ul>
+              {items.map((item) => (
+                <CartItem key={item.id}>
+                  <img src={item.foto} alt={item.nome} />
+                  <div>
+                    <h3>{item.nome}</h3>
+                    <Prices>
+                      R${' '}
+                      {item.preco.toLocaleString('pt-BR', {
+                        minimumFractionDigits: 2
+                      })}
+                    </Prices>
+                  </div>
+                  <div>
+                    <ButtonClose
+                      onClick={() => removeItem(item.id)}
+                      type="button"
+                    />
+                  </div>
+                </CartItem>
+              ))}
+            </ul>
+            <Quantity>{items.length} item(s) no carrinho</Quantity>
+            <AlinPrices>
+              <PricesT>Valor total</PricesT>
+              <PricesT>
+                R${' '}
+                {items
+                  .reduce((total, item) => total + item.preco, 0)
+                  .toLocaleString('pt-BR', { minimumFractionDigits: 2 })}
+              </PricesT>
+            </AlinPrices>
+            <ButtonContainer>
               <div>
-                <h3>{item.nome}</h3>
-                <Prices>
-                  R${' '}
-                  {item.preco.toLocaleString('pt-BR', {
-                    minimumFractionDigits: 2
-                  })}
-                </Prices>
-              </div>
-              <div>
-                <ButtonClose
-                  onClick={() => removeItem(item.id)}
+                <ButtonCart
+                  onClick={closeCart}
+                  title="Clique aqui para continuar comprando"
                   type="button"
-                />
+                >
+                  Continuar comprando
+                </ButtonCart>
               </div>
-            </CartItem>
-          ))}
-        </ul>
-        <Quantity>{items.length} item(s) no carrinho</Quantity>
-        <AlinPrices>
-          <PricesT>Valor total</PricesT>
-          <PricesT>
-            R${' '}
-            {items
-              .reduce((total, item) => total + item.preco, 0)
-              .toLocaleString('pt-BR', { minimumFractionDigits: 2 })}
-          </PricesT>
-        </AlinPrices>
-        <ButtonContainer>
-          <div>
-            <ButtonCart
-              onClick={closeCart}
-              title="Clique aqui para continuar comprando"
-              type="button"
-            >
-              Continuar comprando
-            </ButtonCart>
-          </div>
-          <div>
-            <ButtonCart
-              onClick={cartDelivery}
-              title="Clique aqui para continuar com a entrega"
-              type="button"
-            >
-              Continuar com a entrega
-            </ButtonCart>
-          </div>
-        </ButtonContainer>
+              <div>
+                <ButtonCart
+                  onClick={cartDelivery}
+                  title="Clique aqui para continuar com a entrega"
+                  type="button"
+                >
+                  Continuar com a entrega
+                </ButtonCart>
+              </div>
+            </ButtonContainer>
+          </>
+        ) : (
+          <p className="empty-text">
+            O carrinho está vazio, adicione pelo menos um item para continuar
+            com a compra.
+          </p>
+        )}
       </Sidebar>
     </CartContainer>
   )

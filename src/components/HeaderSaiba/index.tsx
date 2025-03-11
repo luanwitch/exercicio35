@@ -46,7 +46,7 @@ const HeaderSaiba = () => {
               <LogoSaibaMais src={logo} alt="e-food" />
             </li>
             <LinksItem>
-              <LinkCar onClick={openCart}>
+              <LinkCar role="button" onClick={openCart}>
                 {items.length} produto(s) no carrinho
               </LinkCar>
             </LinksItem>

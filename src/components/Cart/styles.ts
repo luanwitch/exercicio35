@@ -40,6 +40,14 @@ export const Sidebar = styled.aside`
   flex-direction: column;
   overflow-y: auto; /* Ativa o scroll vertical quando necessário */
 
+  .empty-text {
+    color: ${cores.corClara};
+    font-size: 14px;
+    font-weight: bold;
+    line-height: 22px;
+    text-align: center;
+  }
+
   @media (max-width: ${breakpoints.tablet}) {
     max-width: 80%; /* Ocupa toda a largura em telas menores */
     padding: 8px; /* Reduz o padding para telas menores */
