@@ -109,6 +109,10 @@ const cartSlice = createSlice({
     },
     setProducts: (state, action: PayloadAction<CartState['products']>) => {
       state.products = action.payload // Atualiza os produtos para a API
+    },
+    clearItems: (state) => {
+      state.items = []
+      state.products = []
     }
   }
 })
@@ -126,7 +130,8 @@ export const {
   closeFinalProject,
   setDeliveryData, // Ação para atualizar deliveryData
   setPaymentData, // Nova ação para atualizar paymentData
-  setProducts // Nova ação para atualizar products
+  setProducts, // Nova ação para atualizar products
+  clearItems
 } = cartSlice.actions
 
 export default cartSlice.reducer

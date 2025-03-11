@@ -14,17 +14,40 @@ import {
   closeDeliveryEnd,
   openFinalProject,
   closeDelivery,
-  close
+  close,
+  clearItems
 } from '../../store/reducers/cart'
 import { useFormik } from 'formik'
 import * as Yup from 'yup'
 import { usePurchaseMutation } from '../../services/api'
+import { useEffect } from 'react'
 
 const FinalDelivery = () => {
-  const { isOpenDeliveryEnd } = useSelector((state: RootReducer) => state.cart)
+  const { isOpenDeliveryEnd, items } = useSelector(
+    (state: RootReducer) => state.cart
+  )
   const dispatch = useDispatch()
 
   const [purchase, { isLoading, isError, data }] = usePurchaseMutation()
+
+  // Monitorar a resposta da API de compra
+  useEffect(() => {
+    if (data) {
+      console.log('Compra realizada com sucesso:', data)
+      // Limpar os itens do carrinho após compra bem-sucedida
+      dispatch(clearItems())
+    }
+  }, [data, dispatch])
+
+  // Monitorar quando o carrinho fica vazio para abrir o ProjectFinal
+  useEffect(() => {
+    if (items.length === 0) {
+      dispatch(close()) // Fecha o Cart
+      dispatch(closeDelivery()) // Fecha o Delivery
+      dispatch(closeDeliveryEnd()) // Fecha o FinalDelivery
+      dispatch(openFinalProject()) // Abre o ProjectFinal
+    }
+  }, [items, dispatch])
 
   const closeCartDeliveryEnd = () => {
     dispatch(closeDeliveryEnd()) // Fecha o FinalDelivery
@@ -103,22 +126,39 @@ const FinalDelivery = () => {
     }
   })
 
-  const getErrorMessage = (fildName: string, message?: string) => {
+  const getErrorMessage = (fildName: string) => {
     const isTouched = fildName in form.touched
     const isInvalid = fildName in form.errors
 
-    if (isTouched && isInvalid) return message
-    return ''
+    const hasError =
+      (isTouched && isInvalid) || (form.submitCount > 0 && isInvalid)
+    return hasError
   }
 
   // Função para abrir a página final do projeto
   const openFinalProjectPage = () => {
-    form.submitForm() // Submete o formulário para chamar o onSubmit
+    // Marca todos os campos como tocados para exibir os erros
+    const touchedFields = Object.keys(form.values).reduce((acc, field) => {
+      acc[field] = true
+      return acc
+    }, {} as Record<string, boolean>)
 
-    dispatch(close()) // Fecha o Cart
-    dispatch(closeDelivery()) // Fecha o Delivery
-    dispatch(closeDeliveryEnd()) // Fecha o FinalDelivery
-    dispatch(openFinalProject()) // Abre o ProjectFinal
+    form.setTouched(touchedFields)
+
+    // Valida o formulário manualmente
+    form.validateForm().then((errors) => {
+      // Se não houver erros, submete o formulário e abre o ProjectFinal
+      if (Object.keys(errors).length === 0) {
+        form.handleSubmit()
+
+        // Se preferir não esperar pela resposta da API, você pode navegar diretamente
+        // O clearItems será chamado quando a API responder com sucesso através do useEffect
+        dispatch(openFinalProject())
+        dispatch(closeDeliveryEnd())
+        dispatch(closeDelivery())
+        dispatch(close())
+      }
+    })
   }
 
   return (
@@ -137,10 +177,8 @@ const FinalDelivery = () => {
                 value={form.values.cardFullName}
                 onChange={form.handleChange}
                 onBlur={form.handleBlur}
+                className={getErrorMessage('cardFullName') ? 'error' : ''}
               />
-              <small>
-                {getErrorMessage('cardFullName', form.errors.cardFullName)}
-              </small>
             </InputGroup>
 
             <CartContainer>
@@ -153,10 +191,8 @@ const FinalDelivery = () => {
                   value={form.values.cardNumber}
                   onChange={form.handleChange}
                   onBlur={form.handleBlur}
+                  className={getErrorMessage('cardNumber') ? 'error' : ''}
                 />
-                <small>
-                  {getErrorMessage('cardNumber', form.errors.cardNumber)}
-                </small>
               </InputGroup>
 
               <InputGroup maxWidth="88px">
@@ -168,10 +204,8 @@ const FinalDelivery = () => {
                   value={form.values.segNumber}
                   onChange={form.handleChange}
                   onBlur={form.handleBlur}
+                  className={getErrorMessage('segNumber') ? 'error' : ''}
                 />
-                <small>
-                  {getErrorMessage('segNumber', form.errors.segNumber)}
-                </small>
               </InputGroup>
             </CartContainer>
 
@@ -185,10 +219,8 @@ const FinalDelivery = () => {
                   value={form.values.vectoMonth}
                   onChange={form.handleChange}
                   onBlur={form.handleBlur}
+                  className={getErrorMessage('vectoMonth') ? 'error' : ''}
                 />
-                <small>
-                  {getErrorMessage('vectoMonth', form.errors.vectoMonth)}
-                </small>
               </InputGroup>
 
               <InputGroup maxWidth="155px">
@@ -200,10 +232,8 @@ const FinalDelivery = () => {
                   value={form.values.vectoYear}
                   onChange={form.handleChange}
                   onBlur={form.handleBlur}
+                  className={getErrorMessage('vectoYear') ? 'error' : ''}
                 />
-                <small>
-                  {getErrorMessage('vectoYear', form.errors.vectoYear)}
-                </small>
               </InputGroup>
             </CartContainer>
           </Row>

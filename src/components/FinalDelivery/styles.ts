@@ -79,6 +79,10 @@ export const InputGroup = styled.div<InputGroupProps>`
     outline: none;
     box-shadow: none;
     background-color: ${cores.corClara};
+
+    &.error {
+      border: 2px solid ${cores.corRed2};
+    }
   }
 `
 export const CartContainer = styled.div`
