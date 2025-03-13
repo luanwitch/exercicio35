@@ -81,7 +81,7 @@ export const InputGroup = styled.div<InputGroupProps>`
     background-color: ${cores.corClara};
 
     &.error {
-      border: 2px solid ${cores.corRed2};
+      border: 4px solid ${cores.corRed2};
     }
   }
 `

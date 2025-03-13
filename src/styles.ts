@@ -6,7 +6,7 @@ export const cores = {
   corBranca: '#FFFFFF',
   corFooter: '#FFEBD9',
   corYellow: '#FFFF00',
-  corRed2: '#FF0000'
+  corRed2: '#8A0808'
 }
 
 export const breakpoints = {

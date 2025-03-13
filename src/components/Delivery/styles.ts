@@ -73,7 +73,7 @@ export const InputGroup = styled.div`
     color: ${cores.corVermelha};
 
     &.error {
-      border: 2px solid ${cores.corRed2};
+      border: 4px solid ${cores.corRed2};
     }
   }
 `

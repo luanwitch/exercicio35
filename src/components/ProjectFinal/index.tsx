@@ -164,8 +164,12 @@ const ProjectFinal = () => {
       <Overlay onClick={closeFinalProjectPage} />
       <Sidebar>
         <h3>
-          Pedido realizado -{' '}
-          <Content>{orderId || 'Aguardando confirmação'}</Content>
+          Pedido realizado - <br />
+          <br />
+          <Content>{orderId || 'AGUARDANDO CONFIRMAÇÃO'}</Content>
+          <br />
+          <br />
+          <Content>Ganhou frete grátis</Content>
         </h3>
 
         {/* Mostrar detalhes de entrega se disponíveis */}

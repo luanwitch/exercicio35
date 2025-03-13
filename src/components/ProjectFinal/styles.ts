@@ -62,6 +62,7 @@ export const Sidebar = styled.aside`
   h3,
   h4 {
     margin-bottom: 24px;
+    white-space: nowrap; // Impede a quebra de linha
   }
 
   @media (max-width: ${breakpoints.tablet}) {
@@ -114,6 +115,7 @@ export const ButtonCart = styled.button`
 export const Completed = styled.strong`
   font-size: 14px;
   font-weight: bold;
+  white-space: nowrap; // Impede a quebra de linha
 `
 
 export const Content = styled.span`
@@ -121,4 +123,5 @@ export const Content = styled.span`
   font-weight: bold;
   color: ${cores.corYellow};
   animation: ${blink} 1s infinite; // Aplica a animação de piscar
+  white-space: nowrap; // Impede a quebra de linha
 `
