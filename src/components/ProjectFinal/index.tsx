@@ -4,7 +4,9 @@ import {
   FaseEnd,
   TextEnd,
   Sidebar,
-  Overlay
+  Overlay,
+  Completed,
+  Content
 } from './styles'
 
 import { useDispatch, useSelector } from 'react-redux'
@@ -161,7 +163,10 @@ const ProjectFinal = () => {
     <FaseEnd className={isFinalProjectOpen ? 'is-open' : ''}>
       <Overlay onClick={closeFinalProjectPage} />
       <Sidebar>
-        <h3>Pedido realizado - {orderId || 'Aguardando confirmação'}</h3>
+        <h3>
+          Pedido realizado -{' '}
+          <Content>{orderId || 'Aguardando confirmação'}</Content>
+        </h3>
 
         {/* Mostrar detalhes de entrega se disponíveis */}
         {deliveryData && (
@@ -169,22 +174,28 @@ const ProjectFinal = () => {
             <h4>Detalhes da Entrega:</h4>
             <ul>
               <li>
-                <strong>Nome do Recebedor:</strong> {deliveryData.fullName}
+                <Completed>Nome do Recebedor:</Completed>{' '}
+                <Content>{deliveryData.fullName}</Content>
               </li>
               <li>
-                <strong>Endereço:</strong> {deliveryData.end}
+                <Completed>Endereço:</Completed>{' '}
+                <Content>{deliveryData.end}</Content>
               </li>
               <li>
-                <strong>Cidade:</strong> {deliveryData.city}
+                <Completed>Cidade:</Completed>{' '}
+                <Content>{deliveryData.city}</Content>
               </li>
               <li>
-                <strong>CEP:</strong> {deliveryData.cep}
+                <Completed>CEP:</Completed>{' '}
+                <Content>{deliveryData.cep}</Content>
               </li>
               <li>
-                <strong>Número:</strong> {deliveryData.numero}
+                <Completed>Número:</Completed>{' '}
+                <Content>{deliveryData.numero}</Content>
               </li>
               <li>
-                <strong>Complemento:</strong> {deliveryData.complement || 'N/A'}
+                <Completed>Complemento:</Completed>{' '}
+                <Content>{deliveryData.complement || 'N/A'}</Content>
               </li>
             </ul>
           </div>

@@ -21,6 +21,7 @@ import { useFormik } from 'formik'
 import * as Yup from 'yup'
 import { usePurchaseMutation } from '../../services/api'
 import { useEffect } from 'react'
+import { PricesT } from '../Cart/styles'
 
 const FinalDelivery = () => {
   const { isOpenDeliveryEnd, items } = useSelector(
@@ -165,7 +166,12 @@ const FinalDelivery = () => {
     <DeliContainer className={isOpenDeliveryEnd ? 'is-open' : ''}>
       <Overlay onClick={closeCartDeliveryEnd} />
       <Sidebar>
-        <h3>Pagamento - Valor a pagar R$ 200,00</h3>
+        <PricesT>
+          Pagamento - Valor a pagar R${' '}
+          {items
+            .reduce((total, item) => total + item.preco, 0)
+            .toLocaleString('pt-BR', { minimumFractionDigits: 2 })}
+        </PricesT>
         <form onSubmit={form.handleSubmit}>
           <Row>
             <InputGroup maxWidth="326px">

@@ -1,7 +1,19 @@
-import styled from 'styled-components'
+import styled, { keyframes } from 'styled-components'
 import { breakpoints, cores } from '../../styles'
 import imgclose from '../../assets/image/lixeira-de-reciclagem 1.png'
 
+// Animação de piscar
+const blink = keyframes`
+  0% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+`
 export const Overlay = styled.div`
   position: fixed;
   top: 0;
@@ -41,11 +53,12 @@ export const Sidebar = styled.aside`
   overflow-y: auto; /* Ativa o scroll vertical quando necessário */
 
   .empty-text {
-    color: ${cores.corClara};
-    font-size: 14px;
+    color: ${cores.corYellow};
+    font-size: 18px;
     font-weight: bold;
     line-height: 22px;
     text-align: center;
+    animation: ${blink} 1s infinite; // Aplica a animação de piscar
   }
 
   @media (max-width: ${breakpoints.tablet}) {
