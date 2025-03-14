@@ -7,6 +7,7 @@ import { Produto } from '../Home'
 import { useGetRestaurantByIdQuery } from '../../services/api'
 import { useDispatch } from 'react-redux'
 import { add, open } from '../../store/reducers/cart' // Importe a ação `add`
+import Loader from '../../components/Loader'
 
 const PerfilDetails = () => {
   const { id } = useParams()
@@ -71,7 +72,7 @@ const PerfilDetails = () => {
 
   // Mostrar estado de carregamento
   if (!restaurante) {
-    return <p>Carregando restaurante...</p>
+    return <Loader />
   }
 
   return (

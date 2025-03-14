@@ -1,6 +1,7 @@
 import { useParams } from 'react-router-dom'
 import PerfilList from '../../components/PerfilList'
 import { useGetRestaurantsProductQuery } from '../../services/api' // Importe o hook da API
+import Loader from '../../components/Loader'
 
 const Perfil = () => {
   const { id } = useParams()
@@ -17,7 +18,7 @@ const Perfil = () => {
   }
 
   // Exibir loading ou erro
-  if (isLoading) return <p>Carregando...</p>
+  if (isLoading) return <Loader />
   if (isError) return <p>Erro ao carregar os restaurantes.</p>
 
   return (

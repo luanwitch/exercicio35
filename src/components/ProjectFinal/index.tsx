@@ -57,7 +57,7 @@ const ProjectFinal = () => {
   const [orderPlaced, setOrderPlaced] = useState(false)
   const [orderId, setOrderId] = useState<string | null>(null)
 
-  const [orderDetails, setOrderDetails] = useState<{
+  const [, setOrderDetails] = useState<{
     orderId: string | null
     delivery: {
       receiver: string

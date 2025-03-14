@@ -1,4 +1,6 @@
 import { useDispatch, useSelector } from 'react-redux'
+import { useState, useEffect } from 'react'
+import { PacmanLoader } from 'react-spinners'
 import {
   AlinPrices,
   ButtonCart,
@@ -14,29 +16,66 @@ import {
 } from './styles'
 import { RootReducer } from '../../store'
 import { close, remove, openDelivery } from '../../store/reducers/cart'
+import { cores } from '../../styles'
 
 const Cart = () => {
   const { isOpen, items } = useSelector((state: RootReducer) => state.cart)
+  const [isLoading, setIsLoading] = useState(false)
 
   const dispatch = useDispatch()
+
   const closeCart = () => {
     dispatch(close())
   }
 
   const removeItem = (id: number) => {
+    setIsLoading(true)
     dispatch(remove(id))
+
+    // Define o tempo de 3 segundos para o loader
+    setTimeout(() => {
+      setIsLoading(false)
+    }, 3000)
   }
 
   const cartDelivery = () => {
+    setIsLoading(true)
     dispatch(openDelivery())
+
+    // Define o tempo de 3 segundos para o loader
+    setTimeout(() => {
+      setIsLoading(false)
+    }, 3000)
   }
+
+  // Efeito para mostrar o loader quando o carrinho é aberto
+  useEffect(() => {
+    if (isOpen) {
+      setIsLoading(true)
+      const timer = setTimeout(() => {
+        setIsLoading(false)
+      }, 1000)
+
+      return () => clearTimeout(timer)
+    }
+  }, [isOpen])
 
   return (
     <CartContainer className={isOpen ? 'is-open' : ''}>
-      <Overlay onClick={closeCart} />{' '}
-      {/* Fecha o carrinho ao clicar no overlay */}
+      <Overlay onClick={closeCart} />
       <Sidebar>
-        {items.length > 0 ? (
+        {isLoading ? (
+          <div
+            style={{
+              display: 'flex',
+              justifyContent: 'center',
+              alignItems: 'center',
+              height: '100%'
+            }}
+          >
+            <PacmanLoader color={cores.corClara} />
+          </div>
+        ) : items.length > 0 ? (
           <>
             <ul>
               {items.map((item) => (

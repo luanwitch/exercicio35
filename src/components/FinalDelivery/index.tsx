@@ -29,7 +29,7 @@ const FinalDelivery = () => {
   )
   const dispatch = useDispatch()
 
-  const [purchase, { isLoading, isError, data }] = usePurchaseMutation()
+  const [purchase, { data }] = usePurchaseMutation()
 
   // Monitorar a resposta da API de compra
   useEffect(() => {
