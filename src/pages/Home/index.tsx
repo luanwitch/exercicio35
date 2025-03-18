@@ -1,6 +1,7 @@
+import { useGetRestaurantsProductQuery } from '../../services/api'
+
 import Loader from '../../components/Loader'
 import ProductsList from '../../components/ProductList'
-import { useGetRestaurantsProductQuery } from '../../services/api'
 
 export type Produto = {
   id: number

@@ -1,16 +1,18 @@
 import styled from 'styled-components'
-import { breakpoints, cores } from '../../styles'
+
+import { breakpoints, colors } from '../../styles'
 
 export const Card = styled.div`
   max-width: 318px;
-  background-color: ${cores.corVermelha};
+  background-color: ${colors.red};
   margin-top: 50px;
   margin-bottom: 50px;
-  color: ${cores.corClara};
+  color: ${colors.lightRed};
   display: flex;
   flex-direction: column; /* Garantir que os elementos internos sejam empilhados */
   align-items: stretch; /* Esticar os elementos para ocupar a largura total */
   padding: 0; /* Remover padding para evitar espaçamento extra */
+  cursor: pointer;
 
   img {
     max-height: 190px;
@@ -23,18 +25,18 @@ export const Card = styled.div`
   }
 `
 
-export const Titulo = styled.h3`
+export const Title = styled.h3`
   font-weight: 900;
   font-size: 16px;
   line-height: 19px;
-  color: ${cores.corFooter};
+  color: ${colors.lightRed};
 
   @media (max-width: ${breakpoints.tablet}) {
     font-size: 14px; // Ajustar tamanho da fonte em dispositivos móveis
   }
 `
 
-export const EnLinha = styled.div`
+export const OnLine = styled.div`
   width: 100%; /* Garantir que o EnLinha ocupe toda a largura do Card */
   display: flex;
   justify-content: space-between; /* Espaçamento entre os itens */
@@ -42,14 +44,14 @@ export const EnLinha = styled.div`
   padding: 0 10px; /* Espaçamento horizontal interno */
 `
 
-export const Descricao = styled.p`
+export const Description = styled.p`
   font-size: 14px;
   font-weight: 400;
   line-height: 22px;
   margin: 10px; /* Espaçamento ao redor da descrição */
   text-align: justify;
   flex-grow: 1; /* Faz a descrição crescer para ocupar espaço disponível */
-  color: ${cores.corFooter};
+  color: ${colors.lightRed};
 
   @media (max-width: ${breakpoints.tablet}) {
     font-size: 12px; // Ajustar tamanho da fonte em dispositivos móveis

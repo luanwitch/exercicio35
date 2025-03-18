@@ -1,3 +1,8 @@
+import { useDispatch, useSelector } from 'react-redux'
+import { useFormik } from 'formik'
+import * as Yup from 'yup'
+import { useEffect } from 'react'
+
 import {
   ButtonCart,
   ButtonContainer,
@@ -8,7 +13,8 @@ import {
   Sidebar,
   CartContainer
 } from './styles'
-import { useDispatch, useSelector } from 'react-redux'
+import { PricesT } from '../Cart/styles'
+
 import { RootReducer } from '../../store'
 import {
   closeDeliveryEnd,
@@ -17,11 +23,7 @@ import {
   close,
   clearItems
 } from '../../store/reducers/cart'
-import { useFormik } from 'formik'
-import * as Yup from 'yup'
 import { usePurchaseMutation } from '../../services/api'
-import { useEffect } from 'react'
-import { PricesT } from '../Cart/styles'
 
 const FinalDelivery = () => {
   const { isOpenDeliveryEnd, items } = useSelector(

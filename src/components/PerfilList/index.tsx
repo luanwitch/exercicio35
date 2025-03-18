@@ -1,5 +1,7 @@
-import Perfil from '../ProductPerfil'
 import { List, SectionContainer } from '../ProductList/styles'
+
+import Perfil from '../ProductPerfil'
+
 import { Produto } from '../../pages/Home'
 
 export type PerfilProps = {

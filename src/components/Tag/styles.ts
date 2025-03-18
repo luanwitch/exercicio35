@@ -1,10 +1,12 @@
 import styled from 'styled-components'
-import { breakpoints, cores } from '../../styles'
+
+import { breakpoints, colors } from '../../styles'
+
 import { Props } from '.'
 
 export const TagContainer = styled.div<Props>`
-  background-color: ${cores.corVermelha};
-  color: ${cores.corClara};
+  background-color: ${colors.red};
+  color: ${colors.lightRed};
   padding: 4px;
   font-size: 12px;
   font-weight: bold;

@@ -1,3 +1,6 @@
+import { useDispatch, useSelector } from 'react-redux'
+import { useState, useEffect } from 'react'
+
 import {
   ButtonCart,
   ButtonContainer,
@@ -9,11 +12,9 @@ import {
   Content
 } from './styles'
 
-import { useDispatch, useSelector } from 'react-redux'
 import { RootReducer } from '../../store'
 import { clearItems, closeFinalProject } from '../../store/reducers/cart'
 import { usePurchaseMutation } from '../../services/api'
-import { useState, useEffect } from 'react'
 
 // Definir o tipo para o payload da API de compra
 type PurchasePayload = {

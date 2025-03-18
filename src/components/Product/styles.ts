@@ -1,13 +1,13 @@
 import styled from 'styled-components'
-import { breakpoints, cores } from '../../styles'
+import { breakpoints, colors } from '../../styles'
 
 export const Card = styled.div`
   max-width: 472px;
-  background-color: ${cores.corBranca};
+  background-color: ${colors.white};
   margin-top: 50px;
   margin-bottom: 50px;
   position: relative;
-  border: solid 1px ${cores.corVermelha};
+  border: solid 1px ${colors.red};
   padding-bottom: 10px;
 
   img {
@@ -16,27 +16,27 @@ export const Card = styled.div`
   }
 `
 
-export const Titulo = styled.h3`
+export const Title = styled.h3`
   font-weight: bold;
   font-size: 18px;
-  color: ${cores.corVermelha};
+  color: ${colors.red};
   margin-left: 5px;
 `
 
-export const Nota = styled.h3`
+export const Score = styled.h3`
   font-weight: bold;
   font-size: 18px;
-  color: ${cores.corVermelha};
+  color: ${colors.red};
   margin-left: auto;
   margin-right: 10px;
 `
 
-export const Estrelinha = styled.img`
+export const Star = styled.img`
   max-width: 4%;
   margin-right: 5px;
 `
 
-export const EnLinha = styled.div`
+export const OnLine = styled.div`
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -44,7 +44,7 @@ export const EnLinha = styled.div`
   margin-bottom: 16px;
 `
 
-export const Descricao = styled.p`
+export const Description = styled.p`
   font-size: 14px;
   line-height: 22px;
   display: block;
@@ -53,7 +53,7 @@ export const Descricao = styled.p`
   padding-bottom: 10px;
 `
 
-export const Categoria = styled.div`
+export const Category = styled.div`
   position: absolute;
   top: 16px;
   right: 16px;

@@ -1,5 +1,7 @@
 import styled, { keyframes } from 'styled-components'
-import { breakpoints, cores } from '../../styles'
+
+import { breakpoints, colors } from '../../styles'
+
 import imgclose from '../../assets/image/lixeira-de-reciclagem 1.png'
 
 // Animação de piscar
@@ -46,14 +48,14 @@ export const Sidebar = styled.aside`
   height: 100%; /* Altura total da tela */
   max-height: 100vh; /* Altura máxima da viewport */
   padding: 16px;
-  background-color: ${cores.corVermelha};
+  background-color: ${colors.red};
   z-index: 3;
   display: flex;
   flex-direction: column;
   overflow-y: auto; /* Ativa o scroll vertical quando necessário */
 
   .empty-text {
-    color: ${cores.corYellow};
+    color: ${colors.yellow};
     font-size: 18px;
     font-weight: bold;
     line-height: 22px;
@@ -72,7 +74,7 @@ export const CartItem = styled.li`
   align-items: flex-start;
   gap: 16px;
   padding: 16px;
-  background-color: ${cores.corClara};
+  background-color: ${colors.lightRed};
   margin-top: 16px;
   margin-bottom: 16px;
   position: relative;
@@ -89,7 +91,7 @@ export const CartItem = styled.li`
   }
 
   h3 {
-    color: ${cores.corVermelha};
+    color: ${colors.red};
     font-weight: bold;
     font-size: 18px;
     margin-bottom: 8px;
@@ -100,7 +102,7 @@ export const CartItem = styled.li`
   }
 
   p {
-    color: ${cores.corVermelha};
+    color: ${colors.red};
     font-size: 14px;
 
     @media (max-width: ${breakpoints.tablet}) {
@@ -116,7 +118,7 @@ export const CartItem = styled.li`
 `
 export const Prices = styled.p`
   font-size: 14px;
-  color: ${cores.corVermelha};
+  color: ${colors.red};
   margin-bottom: 8px;
 
   @media (max-width: ${breakpoints.tablet}) {
@@ -127,7 +129,7 @@ export const Prices = styled.p`
 export const PricesT = styled.p`
   font-weight: bold;
   font-size: 14px;
-  color: ${cores.corClara};
+  color: ${colors.lightRed};
   margin-bottom: 16px;
 
   @media (max-width: ${breakpoints.tablet}) {
@@ -144,7 +146,7 @@ export const AlinPrices = styled.div`
 export const Quantity = styled.p`
   font-weight: bold;
   font-size: 14px;
-  color: ${cores.corClara};
+  color: ${colors.lightRed};
   margin-top: 16px;
   margin-bottom: 16px;
 
@@ -165,19 +167,19 @@ export const ButtonContainer = styled.div`
 `
 
 export const ButtonCart = styled.button`
-  background-color: ${cores.corClara};
+  background-color: ${colors.lightRed};
   font-weight: bold;
   font-size: 14px;
   width: 100%;
-  color: ${cores.corVermelha};
+  color: ${colors.red};
   border: none;
   padding: 8px;
   cursor: pointer;
   transition: background-color 0.3s ease;
 
   &:hover {
-    background-color: ${cores.corVermelha};
-    color: ${cores.corClara};
+    background-color: ${colors.red};
+    color: ${colors.lightRed};
   }
 
   @media (max-width: ${breakpoints.tablet}) {

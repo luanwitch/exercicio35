@@ -1,11 +1,14 @@
 import { Routes, Route } from 'react-router-dom'
-import Footer from './components/Footer'
-import Header from './components/Header'
+
 import { Container } from './styles'
+
 import Home from './pages/Home'
-import HeaderSaiba from './components/HeaderSaiba'
 import Perfil from './pages/Perfil'
 import PerfilDetails from './pages/Perfildetails'
+
+import Footer from './components/Footer'
+import Header from './components/Header'
+import HeaderKnow from './components/HeaderKnow'
 
 const Rotas = () => (
   <Routes>
@@ -25,7 +28,7 @@ const Rotas = () => (
       path="/Perfil/:id"
       element={
         <>
-          <HeaderSaiba />
+          <HeaderKnow />
           <Container>
             <Perfil />
           </Container>
@@ -38,7 +41,7 @@ const Rotas = () => (
       path="/PerfilDetails/:id"
       element={
         <>
-          <HeaderSaiba />
+          <HeaderKnow />
           <Container>
             <PerfilDetails />
           </Container>

@@ -3,6 +3,8 @@ import { useFormik } from 'formik'
 import * as Yup from 'yup'
 import { useEffect, useState } from 'react'
 import { PacmanLoader } from 'react-spinners'
+import { useNavigate } from 'react-router-dom'
+
 import {
   ButtonCart,
   ButtonContainer,
@@ -13,6 +15,8 @@ import {
   Row,
   Sidebar
 } from './styles'
+import { colors } from '../../styles'
+
 import { RootReducer } from '../../store'
 import {
   closeDelivery,
@@ -21,8 +25,6 @@ import {
   close
 } from '../../store/reducers/cart'
 import { usePurchaseMutation } from '../../services/api'
-import { useNavigate } from 'react-router-dom'
-import { cores } from '../../styles'
 
 const Delivery = () => {
   const { isOpenDelivery, items } = useSelector(
@@ -173,7 +175,7 @@ const Delivery = () => {
               height: '100%'
             }}
           >
-            <PacmanLoader color={cores.corClara} />
+            <PacmanLoader color={colors.lightRed} />
           </div>
         ) : (
           <>

@@ -1,8 +1,10 @@
 import styled from 'styled-components'
-import HeaderBackImage from '../../assets/image/header_fundo.png'
-import { breakpoints, cores } from '../../styles'
 
-export const HeaderBarSaiba = styled.header`
+import { breakpoints, colors } from '../../styles'
+
+import HeaderBackImage from '../../assets/image/header_fundo.png'
+
+export const HeaderBarKnow = styled.header`
   background-image: url(${HeaderBackImage});
   background-repeat: no-repeat;
   background-size: cover;
@@ -32,23 +34,23 @@ export const LinksItem = styled.li`
   a {
     font-size: 18px;
     font-weight: 900;
-    color: ${cores.corVermelha};
+    color: ${colors.red};
     text-decoration: none;
   }
 `
 
-export const TituloSaiba = styled.h2`
+export const TitleKnow = styled.h2`
   font-size: 18px;
   font-weight: 900;
-  color: ${cores.corVermelha};
+  color: ${colors.red};
 `
 
-export const LogoSaibaMais = styled.img`
+export const LogoLearnMore = styled.img`
   width: 125px;
   height: 57px;
 `
 
-export const ImageFundoSaiba = styled.div`
+export const ImageBottomKnow = styled.div`
   width: 100%;
   height: 280px;
   background-size: cover;
@@ -56,19 +58,19 @@ export const ImageFundoSaiba = styled.div`
   position: relative; /* Permite posicionamento absoluto dos elementos internos */
 `
 
-export const TituloCategorySaiba = styled.h3`
+export const TitleCategoryKnow = styled.h3`
   font-size: 32px;
   font-weight: 100;
-  color: ${cores.corBranca};
+  color: ${colors.white};
   position: absolute;
   top: 24px; /* Posiciona no canto superior */
   left: 24px; /* Posiciona no canto esquerdo */
 `
 
-export const TituloRodizioSaiba = styled.h2`
+export const TitleLearnMore = styled.h2`
   font-size: 32px;
   font-weight: 900;
-  color: ${cores.corBranca};
+  color: ${colors.white};
   position: absolute;
   bottom: 24px; /* Posiciona no canto inferior */
   left: 24px; /* Posiciona no canto esquerdo */
@@ -77,7 +79,7 @@ export const TituloRodizioSaiba = styled.h2`
 export const LinkCar = styled.a`
   font-size: 18px;
   font-weight: 900;
-  color: ${cores.corVermelha};
+  color: ${colors.red};
   text-decoration: none;
   cursor: pointer;
 `

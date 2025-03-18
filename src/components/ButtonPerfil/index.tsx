@@ -1,5 +1,6 @@
 import { Link } from 'react-router-dom'
-import { ButtonCantainer } from './styles'
+
+import { ButtonContainer } from './styles'
 
 type Props = {
   title: string
@@ -13,16 +14,16 @@ const ButtonPerfil = ({ title, to, onClick, children }: Props) => {
     // Se `to` estiver definido, renderiza um Link para navegação
     return (
       <Link to={to} title={title}>
-        <ButtonCantainer>{children}</ButtonCantainer>
+        <ButtonContainer>{children}</ButtonContainer>
       </Link>
     )
   }
 
   // Caso contrário, renderiza como um botão normal
   return (
-    <ButtonCantainer type="button" title={title} onClick={onClick}>
+    <ButtonContainer type="button" title={title} onClick={onClick}>
       {children}
-    </ButtonCantainer>
+    </ButtonContainer>
   )
 }
 

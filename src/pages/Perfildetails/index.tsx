@@ -1,13 +1,17 @@
 import { useEffect, useState } from 'react'
 import { useParams, useSearchParams } from 'react-router-dom'
-import PerfilList from '../../components/PerfilList'
-import fechar_modal from '../../assets/image/fechar-modal.png'
+import { useDispatch } from 'react-redux'
+
 import { Modal, ModalContent } from './styles'
+
+import PerfilList from '../../components/PerfilList'
+import Loader from '../../components/Loader'
+
+import fechar_modal from '../../assets/image/fechar-modal.png'
+
 import { Produto } from '../Home'
 import { useGetRestaurantByIdQuery } from '../../services/api'
-import { useDispatch } from 'react-redux'
 import { add, open } from '../../store/reducers/cart' // Importe a ação `add`
-import Loader from '../../components/Loader'
 
 const PerfilDetails = () => {
   const { id } = useParams()
@@ -96,7 +100,10 @@ const PerfilDetails = () => {
               <h4>{selectedDish.nome}</h4>
               <p>{selectedDish.descricao}</p>
               <p>Porção: {selectedDish.porcao}</p>
-              <button onClick={handleAddToCart}>
+              <button
+                title={`Adicionar ao carrinho - ${selectedDish.nome}`}
+                onClick={handleAddToCart}
+              >
                 Adicionar ao carrinho - R$ {selectedDish.preco.toFixed(2)}
               </button>
             </div>

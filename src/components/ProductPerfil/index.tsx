@@ -1,6 +1,8 @@
-import { Card, Descricao, EnLinha, Titulo } from './styles'
-import ButtonPerfil from '../ButtonPerfil'
 import { useNavigate } from 'react-router-dom'
+
+import { Card, Description, OnLine, Title } from './styles'
+
+import ButtonPerfil from '../ButtonPerfil'
 
 type Props = {
   restauranteId: number
@@ -32,7 +34,7 @@ const ProductPerfil = ({
   }
 
   return (
-    <Card>
+    <Card title={`Clique no botão para mais detalhes - ${title}`}>
       <div>
         <img
           src={image}
@@ -40,13 +42,13 @@ const ProductPerfil = ({
           style={{ width: '100%', height: 'auto' }}
         />
       </div>
-      <EnLinha>
-        <Titulo>{title}</Titulo>
-      </EnLinha>
-      <Descricao>{description}</Descricao>
+      <OnLine>
+        <Title>{title}</Title>
+      </OnLine>
+      <Description>{description}</Description>
       <div style={{ padding: '10px' }}>
         <ButtonPerfil
-          title={botaoLabel || 'Adicionar ao carrinho'}
+          title={botaoLabel || `Adicionar ao carrinho - ${title}`}
           onClick={handleAddToCart}
         >
           {botaoLabel || 'Adicionar ao carrinho'}

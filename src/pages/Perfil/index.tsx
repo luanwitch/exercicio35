@@ -1,6 +1,8 @@
 import { useParams } from 'react-router-dom'
-import PerfilList from '../../components/PerfilList'
+
 import { useGetRestaurantsProductQuery } from '../../services/api' // Importe o hook da API
+
+import PerfilList from '../../components/PerfilList'
 import Loader from '../../components/Loader'
 
 const Perfil = () => {

@@ -1,16 +1,19 @@
-import Tag from '../Tag'
 import {
   Card,
-  Categoria,
-  Descricao,
-  EnLinha,
-  Estrelinha,
-  Nota,
-  Titulo
+  Category,
+  Description,
+  OnLine,
+  Score,
+  Star,
+  Title
 } from './styles'
-import Estrela from '../../assets/image/estrela.png'
+
+import Tag from '../Tag'
 import Button from '../Button'
+
 import { Produto } from '../../pages/Home' // Importe o tipo Produto
+
+import Estrela from '../../assets/image/estrela.png'
 
 const Product = ({
   id,
@@ -25,18 +28,22 @@ const Product = ({
     <div>
       <img src={capa} alt={titulo} />
     </div>
-    <Categoria>
+    <Category>
       {/* Renderiza a tag apenas se destacado for true */}
       {destacado && <Tag>Destaque da semana</Tag>}
       <Tag>{tipo}</Tag>
-    </Categoria>
-    <EnLinha>
-      <Titulo>{titulo}</Titulo>
-      <Nota>{avaliacao}</Nota>
-      <Estrelinha src={Estrela} alt="estrela" />
-    </EnLinha>
-    <Descricao>{descricao}</Descricao>
-    <Button type="link" to={`/Perfil/${id}`} title="Saiba mais">
+    </Category>
+    <OnLine>
+      <Title>{titulo}</Title>
+      <Score>{avaliacao}</Score>
+      <Star src={Estrela} alt="estrela" />
+    </OnLine>
+    <Description>{descricao}</Description>
+    <Button
+      type="link"
+      to={`/Perfil/${id}`}
+      title="Clique aqui para saber mais sobre os produtos"
+    >
       Saiba mais
     </Button>
   </Card>

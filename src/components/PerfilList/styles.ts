@@ -1,11 +1,12 @@
 import styled from 'styled-components'
-import { breakpoints, cores } from '../../styles'
+
+import { breakpoints, colors } from '../../styles'
 
 export const SectionContainer = styled.div`
   max-width: 100%;
   padding: 0 15px;
   box-sizing: border-box;
-  background-color: ${cores.corClara};
+  background-color: ${colors.lightRed};
 `
 
 export const List = styled.div`

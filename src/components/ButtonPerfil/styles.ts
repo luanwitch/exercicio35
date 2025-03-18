@@ -1,9 +1,10 @@
 import styled from 'styled-components'
-import { cores } from '../../styles'
 
-export const ButtonCantainer = styled.button`
-  background-color: ${cores.corFooter};
-  color: ${cores.corVermelha};
+import { colors } from '../../styles'
+
+export const ButtonContainer = styled.button`
+  background-color: ${colors.lightRed};
+  color: ${colors.red};
   width: 100%;
   font-size: 14px;
   font-weight: bold;

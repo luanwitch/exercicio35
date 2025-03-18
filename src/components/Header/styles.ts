@@ -1,6 +1,8 @@
 import styled from 'styled-components'
-import HeaderBackImage from '../../assets/image/header_fundo.png'
+
 import { breakpoints } from '../../styles'
+
+import HeaderBackImage from '../../assets/image/header_fundo.png'
 
 export const HeaderBar = styled.header`
   background-image: url(${HeaderBackImage});
@@ -16,7 +18,7 @@ export const HeaderBar = styled.header`
   }
 `
 
-export const HeaderTitulo = styled.h1`
+export const HeaderTitle = styled.h1`
   padding-top: 56px;
   font-size: 36px;
   font-weight: 900;
@@ -25,7 +27,7 @@ export const HeaderTitulo = styled.h1`
     font-size: 28px; /* Reduz o tamanho da fonte para telas menores */
   }
 `
-export const LogoImagem = styled.img`
+export const LogoImage = styled.img`
   max-width: 100%; /* Garante que a imagem não exceda o contêiner */
   height: auto;
   display: block; /* Remove espaçamentos extras */

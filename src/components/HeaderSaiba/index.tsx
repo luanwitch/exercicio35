@@ -1,23 +1,27 @@
+import { useDispatch, useSelector } from 'react-redux'
+import { Link, useParams } from 'react-router-dom'
+
 import {
-  HeaderBarSaiba,
-  ImageFundoSaiba,
+  HeaderBarKnow,
+  ImageBottomKnow,
   LinkCar,
   Links,
   LinksItem,
-  LogoSaibaMais,
-  TituloCategorySaiba,
-  TituloRodizioSaiba,
-  TituloSaiba
+  LogoLearnMore,
+  TitleCategoryKnow,
+  TitleKnow,
+  TitleLearnMore
 } from './styles'
-import logo from '../../assets/image/logo.png'
-import { Link, useParams } from 'react-router-dom'
-import { useGetRestaurantsProductQuery } from '../../services/api'
-import { Produto } from '../../pages/Home'
-import { open } from '../../store/reducers/cart'
-import { useDispatch, useSelector } from 'react-redux'
-import { RootReducer } from '../../store'
 
-const HeaderSaiba = () => {
+import { Produto } from '../../pages/Home'
+
+import { open } from '../../store/reducers/cart'
+import { RootReducer } from '../../store'
+import { useGetRestaurantsProductQuery } from '../../services/api'
+
+import logo from '../../assets/image/logo.png'
+
+const HeaderKnow = () => {
   const { id } = useParams()
   const { data, isLoading, error } = useGetRestaurantsProductQuery()
   const { items } = useSelector((state: RootReducer) => state.cart)
@@ -33,39 +37,45 @@ const HeaderSaiba = () => {
 
   return (
     <>
-      <HeaderBarSaiba>
+      <HeaderBarKnow>
         <nav>
           <Links>
             <li>
-              <TituloSaiba>Restaurantes</TituloSaiba>
+              <TitleKnow>Restaurantes</TitleKnow>
             </li>
             <LinksItem>
-              <Link to="/">Home</Link>
+              <Link title="Clique aqui para voltar a Home" to="/">
+                Home
+              </Link>
             </LinksItem>
             <li>
-              <LogoSaibaMais src={logo} alt="e-food" />
+              <LogoLearnMore src={logo} alt="e-food" />
             </li>
             <LinksItem>
-              <LinkCar role="button" onClick={openCart}>
+              <LinkCar
+                title="Clique aqui para abrir o carrinho"
+                role="button"
+                onClick={openCart}
+              >
                 {items.length} produto(s) no carrinho
               </LinkCar>
             </LinksItem>
           </Links>
         </nav>
-      </HeaderBarSaiba>
+      </HeaderBarKnow>
 
       {isLoading && <p>Carregando...</p>}
       {error && <p>Erro ao carregar dados</p>}
 
       {/* Renderiza somente se o produto existir */}
       {produto && (
-        <ImageFundoSaiba style={{ backgroundImage: `url(${produto.capa})` }}>
-          <TituloCategorySaiba>{produto.tipo}</TituloCategorySaiba>
-          <TituloRodizioSaiba>{produto.titulo}</TituloRodizioSaiba>
-        </ImageFundoSaiba>
+        <ImageBottomKnow style={{ backgroundImage: `url(${produto.capa})` }}>
+          <TitleCategoryKnow>{produto.tipo}</TitleCategoryKnow>
+          <TitleLearnMore>{produto.titulo}</TitleLearnMore>
+        </ImageBottomKnow>
       )}
     </>
   )
 }
 
-export default HeaderSaiba
+export default HeaderKnow

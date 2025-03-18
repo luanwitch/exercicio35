@@ -1,5 +1,6 @@
 import styled, { keyframes } from 'styled-components'
-import { breakpoints, cores } from '../../styles'
+
+import { breakpoints, colors } from '../../styles'
 
 // Animação de piscar
 const blink = keyframes`
@@ -34,7 +35,7 @@ export const FaseEnd = styled.div`
   display: none;
   justify-content: flex-end;
   z-index: 2;
-  color: ${cores.corClara};
+  color: ${colors.lightRed};
 
   h3 {
     font-size: 16px;
@@ -53,7 +54,7 @@ export const Sidebar = styled.aside`
   height: 100%; /* Altura total da tela */
   max-height: 100vh; /* Altura máxima da viewport */
   padding: 16px;
-  background-color: ${cores.corVermelha};
+  background-color: ${colors.red};
   z-index: 3;
   display: flex;
   flex-direction: column;
@@ -91,19 +92,19 @@ export const ButtonContainer = styled.div`
 `
 
 export const ButtonCart = styled.button`
-  background-color: ${cores.corClara};
+  background-color: ${colors.lightRed};
   font-weight: bold;
   font-size: 14px;
   width: 100%;
-  color: ${cores.corVermelha};
+  color: ${colors.red};
   border: none;
   padding: 8px;
   cursor: pointer;
   transition: background-color 0.3s ease;
 
   &:hover {
-    background-color: ${cores.corVermelha};
-    color: ${cores.corClara};
+    background-color: ${colors.red};
+    color: ${colors.lightRed};
   }
 
   @media (max-width: ${breakpoints.tablet}) {
@@ -121,7 +122,7 @@ export const Completed = styled.strong`
 export const Content = styled.span`
   font-size: 14px;
   font-weight: bold;
-  color: ${cores.corYellow};
+  color: ${colors.yellow};
   animation: ${blink} 1s infinite; // Aplica a animação de piscar
   white-space: nowrap; // Impede a quebra de linha
 `

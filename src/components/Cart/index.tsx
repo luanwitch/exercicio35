@@ -1,6 +1,7 @@
 import { useDispatch, useSelector } from 'react-redux'
 import { useState, useEffect } from 'react'
 import { PacmanLoader } from 'react-spinners'
+
 import {
   AlinPrices,
   ButtonCart,
@@ -14,9 +15,10 @@ import {
   Quantity,
   Sidebar
 } from './styles'
+
+import { colors } from '../../styles'
 import { RootReducer } from '../../store'
 import { close, remove, openDelivery } from '../../store/reducers/cart'
-import { cores } from '../../styles'
 
 const Cart = () => {
   const { isOpen, items } = useSelector((state: RootReducer) => state.cart)
@@ -73,7 +75,7 @@ const Cart = () => {
               height: '100%'
             }}
           >
-            <PacmanLoader color={cores.corClara} />
+            <PacmanLoader color={colors.lightRed} />
           </div>
         ) : items.length > 0 ? (
           <>

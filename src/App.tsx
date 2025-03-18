@@ -1,9 +1,12 @@
 import { Provider } from 'react-redux'
 import { BrowserRouter } from 'react-router-dom'
+
 import { GlobalCss } from './styles'
+
 import ScrollToTop from './components/ScrollToTop'
-import { store } from './store'
 import Main from './components/Main'
+
+import { store } from './store'
 
 function App() {
   return (

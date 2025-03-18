@@ -1,12 +1,12 @@
 import styled, { createGlobalStyle } from 'styled-components'
 
-export const cores = {
-  corVermelha: '#E66767',
-  corClara: '#FFEBD9',
-  corBranca: '#FFFFFF',
-  corFooter: '#FFEBD9',
-  corYellow: '#FFFF00',
-  corRed2: '#8A0808'
+export const colors = {
+  red: '#E66767',
+  lightRed: '#FFEBD9',
+  white: '#FFFFFF',
+  backgroudBody: '#FFF8F2',
+  yellow: '#FFFF00',
+  red2: '#8A0808'
 }
 
 export const breakpoints = {
@@ -25,8 +25,8 @@ export const GlobalCss = createGlobalStyle`
 }
 
 body {
-  background-color: ${cores.corClara};
-  color: ${cores.corVermelha};
+  background-color: ${colors.backgroudBody};
+  color: ${colors.red};
 }
 
 img {

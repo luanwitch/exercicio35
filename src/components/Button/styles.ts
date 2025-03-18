@@ -1,10 +1,11 @@
 import styled from 'styled-components'
 import { Link } from 'react-router-dom'
-import { cores } from '../../styles'
 
-export const ButtonCantainer = styled.button`
-  background-color: ${cores.corVermelha};
-  color: ${cores.corClara};
+import { colors } from '../../styles'
+
+export const ButtonContainer = styled.button`
+  background-color: ${colors.red};
+  color: ${colors.lightRed};
   padding: 4px;
   font-size: 14px;
   font-weight: bold;
@@ -13,8 +14,8 @@ export const ButtonCantainer = styled.button`
 `
 
 export const ButtonLink = styled(Link)`
-  background-color: ${cores.corVermelha};
-  color: ${cores.corClara};
+  background-color: ${colors.red};
+  color: ${colors.lightRed};
   padding: 4px;
   font-size: 14px;
   font-weight: bold;

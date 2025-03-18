@@ -1,5 +1,6 @@
 import styled from 'styled-components'
-import { breakpoints, cores } from '../../styles'
+
+import { breakpoints, colors } from '../../styles'
 
 type InputGroupProps = {
   maxWidth?: string
@@ -23,7 +24,7 @@ export const DeliContainer = styled.div`
   display: none;
   justify-content: flex-end;
   z-index: 2;
-  color: ${cores.corClara};
+  color: ${colors.lightRed};
 
   h3 {
     font-size: 16px;
@@ -42,7 +43,7 @@ export const Sidebar = styled.aside`
   height: 100%; /* Altura total da tela */
   max-height: 100vh; /* Altura máxima da viewport */
   padding: 16px;
-  background-color: ${cores.corVermelha};
+  background-color: ${colors.red};
   z-index: 3;
   display: flex;
   flex-direction: column;
@@ -72,16 +73,16 @@ export const InputGroup = styled.div<InputGroupProps>`
     height: 32px;
     font-size: 14px;
     font-weight: bold;
-    color: ${cores.corVermelha};
+    color: ${colors.red};
     padding: 0;
     margin: 0;
     border: none;
     outline: none;
     box-shadow: none;
-    background-color: ${cores.corClara};
+    background-color: ${colors.lightRed};
 
     &.error {
-      border: 4px solid ${cores.corRed2};
+      border: 4px solid ${colors.red2};
     }
   }
 `
@@ -106,11 +107,11 @@ export const ButtonContainer = styled.div`
 `
 
 export const ButtonCart = styled.button`
-  background-color: ${cores.corClara};
+  background-color: ${colors.lightRed};
   font-weight: bold;
   font-size: 14px;
   width: 100%;
-  color: ${cores.corVermelha};
+  color: ${colors.red};
   border: none;
   margin-bottom: 16px;
   padding: 8px;
@@ -118,8 +119,8 @@ export const ButtonCart = styled.button`
   transition: background-color 0.3s ease;
 
   &:hover {
-    background-color: ${cores.corVermelha};
-    color: ${cores.corClara};
+    background-color: ${colors.red};
+    color: ${colors.lightRed};
   }
 
   @media (max-width: ${breakpoints.tablet}) {

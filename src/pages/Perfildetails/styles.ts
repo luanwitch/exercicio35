@@ -1,5 +1,6 @@
 import styled from 'styled-components'
-import { breakpoints, cores } from '../../styles'
+
+import { breakpoints, colors } from '../../styles'
 
 export const Modal = styled.div`
   position: absolute;
@@ -27,7 +28,7 @@ export const Modal = styled.div`
 export const ModalContent = styled.div`
   display: flex;
   flex-direction: row; /* Layout padrão */
-  background-color: ${cores.corVermelha};
+  background-color: ${colors.red};
   max-width: ${breakpoints.desktop};
   width: 90%;
   padding: 28px;
@@ -74,14 +75,14 @@ export const ModalContent = styled.div`
     h4 {
       font-size: 18px;
       font-weight: bold;
-      color: ${cores.corBranca};
+      color: ${colors.white};
       margin-bottom: 10px;
     }
 
     p {
       font-size: 14px;
       line-height: 22px;
-      color: ${cores.corBranca};
+      color: ${colors.white};
       margin-bottom: 20px;
       text-align: justify;
 
@@ -94,8 +95,8 @@ export const ModalContent = styled.div`
     button {
       width: 218px;
       height: 40px;
-      background-color: ${cores.corClara};
-      color: ${cores.corVermelha};
+      background-color: ${colors.lightRed};
+      color: ${colors.red};
       font-size: 14px;
       font-weight: bold;
       border: none;

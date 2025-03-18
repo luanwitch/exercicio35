@@ -1,6 +1,8 @@
 import { useSelector } from 'react-redux'
+
 import { RootReducer } from '../../store'
 import Rotas from '../../routes'
+
 import Cart from '../../components/Cart'
 import Delivery from '../../components/Delivery'
 import FinalDelivery from '../../components/FinalDelivery'
