@@ -8,7 +8,7 @@ import PerfilDetails from './pages/Perfildetails'
 
 import Footer from './components/Footer'
 import Header from './components/Header'
-import HeaderKnow from './components/HeaderKnow'
+import HeaderKnow from './components/HeaderSaiba'
 
 const Rotas = () => (
   <Routes>
