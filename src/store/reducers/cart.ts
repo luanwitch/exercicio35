@@ -1,24 +1,45 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
-
 import { Produto } from '../../pages/Home'
 
+// Tipo para os produtos enviados à API
+type ProductAPI = {
+  id: number
+  price: number
+}
+
+// Tipo para os dados de pagamento
+type PaymentData = {
+  card: {
+    name: string
+    number: string
+    code: number
+    expires: {
+      month: number
+      year: number
+    }
+  }
+}
+
+// Tipo para os dados de entrega
+type DeliveryData = {
+  fullName: string
+  end: string
+  city: string
+  cep: string
+  numero: string
+  complement: string
+} | null
+
+// Estado do carrinho
 type CartState = {
   items: Produto['cardapio'][0][] // Itens do carrinho (pratos)
-  isOpen: boolean // Estado do carrinho (aberto/fechado)
+  isOpen: boolean
   isOpenDelivery: boolean
   isOpenDeliveryEnd: boolean
-  isFinalProjectOpen: boolean // Novo estado para controlar a exibição do FinalProject
-  deliveryData: {
-    // Adicionando o deliveryData no estado
-    fullName: string
-    end: string
-    city: string
-    cep: string
-    numero: string
-    complement: string
-  } | null // Pode ser null inicialmente
-  products: any[] // Array de produtos para a API
-  paymentData: any // Dados de pagamento para a API
+  isFinalProjectOpen: boolean
+  deliveryData: DeliveryData
+  products: ProductAPI[]
+  paymentData: PaymentData
 }
 
 const initialState: CartState = {
@@ -26,11 +47,10 @@ const initialState: CartState = {
   isOpen: false,
   isOpenDelivery: false,
   isOpenDeliveryEnd: false,
-  isFinalProjectOpen: false, // Inicialmente fechado
-  deliveryData: null, // Inicializa deliveryData como null
-  products: [], // Inicializa products como array vazio
+  isFinalProjectOpen: false,
+  deliveryData: null,
+  products: [],
   paymentData: {
-    // Dados padrão de pagamento
     card: {
       name: 'Teste',
       number: '1111222233334444',
@@ -52,31 +72,27 @@ const cartSlice = createSlice({
       const pratoJaExiste = state.items.find((item) => item.id === prato.id)
 
       if (!pratoJaExiste) {
-        state.items.push(prato) // Adiciona o prato ao carrinho
-
-        // Atualiza products para a API quando adiciona um item
+        state.items.push(prato)
         state.products = state.items.map((item) => ({
           id: item.id,
           price: item.preco
         }))
       } else {
-        alert('Este prato já está no carrinho.') // Evita duplicação
+        alert('Este prato já está no carrinho.')
       }
     },
     remove: (state, action: PayloadAction<number>) => {
       state.items = state.items.filter((item) => item.id !== action.payload)
-
-      // Atualiza products para a API quando remove um item
       state.products = state.items.map((item) => ({
         id: item.id,
         price: item.preco
       }))
     },
     open: (state) => {
-      state.isOpen = true // Abre o carrinho
+      state.isOpen = true
     },
     close: (state) => {
-      state.isOpen = false // Fecha o carrinho
+      state.isOpen = false
     },
     openDelivery: (state) => {
       state.isOpenDelivery = true
@@ -91,25 +107,19 @@ const cartSlice = createSlice({
       state.isOpenDeliveryEnd = false
     },
     openFinalProject: (state) => {
-      state.isFinalProjectOpen = true // Abre o FinalProject
+      state.isFinalProjectOpen = true
     },
     closeFinalProject: (state) => {
-      state.isFinalProjectOpen = false // Fecha o FinalProject
+      state.isFinalProjectOpen = false
     },
-    setDeliveryData: (
-      state,
-      action: PayloadAction<CartState['deliveryData']>
-    ) => {
-      state.deliveryData = action.payload // Atualiza os dados de entrega
+    setDeliveryData: (state, action: PayloadAction<DeliveryData>) => {
+      state.deliveryData = action.payload
     },
-    setPaymentData: (
-      state,
-      action: PayloadAction<CartState['paymentData']>
-    ) => {
-      state.paymentData = action.payload // Atualiza os dados de pagamento
+    setPaymentData: (state, action: PayloadAction<PaymentData>) => {
+      state.paymentData = action.payload
     },
-    setProducts: (state, action: PayloadAction<CartState['products']>) => {
-      state.products = action.payload // Atualiza os produtos para a API
+    setProducts: (state, action: PayloadAction<ProductAPI[]>) => {
+      state.products = action.payload
     },
     clearItems: (state) => {
       state.items = []
@@ -129,9 +139,9 @@ export const {
   closeDeliveryEnd,
   openFinalProject,
   closeFinalProject,
-  setDeliveryData, // Ação para atualizar deliveryData
-  setPaymentData, // Nova ação para atualizar paymentData
-  setProducts, // Nova ação para atualizar products
+  setDeliveryData,
+  setPaymentData,
+  setProducts,
   clearItems
 } = cartSlice.actions
 

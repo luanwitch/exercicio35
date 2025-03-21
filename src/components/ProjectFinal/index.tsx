@@ -16,35 +16,6 @@ import { RootReducer } from '../../store'
 import { clearItems, closeFinalProject } from '../../store/reducers/cart'
 import { usePurchaseMutation } from '../../services/api'
 
-// Definir o tipo para o payload da API de compra
-type PurchasePayload = {
-  delivery: {
-    receiver: string
-    address: {
-      description: string
-      city: string
-      zipCode: string
-      number: number
-      complement: string
-    }
-  }
-  products: Array<{
-    id: number
-    price: number
-  }>
-  payment: {
-    card: {
-      name: string
-      number: string
-      code: number
-      expires: {
-        month: number
-        year: number
-      }
-    }
-  }
-}
-
 const ProjectFinal = () => {
   const { isFinalProjectOpen, deliveryData, products, paymentData, items } =
     useSelector((state: RootReducer) => state.cart)
@@ -58,49 +29,26 @@ const ProjectFinal = () => {
   const [orderPlaced, setOrderPlaced] = useState(false)
   const [orderId, setOrderId] = useState<string | null>(null)
 
-  const [, setOrderDetails] = useState<{
-    orderId: string | null
-    delivery: {
-      receiver: string
-      address: {
-        description: string
-        city: string
-        zipCode: string
-        number: number
-        complement: string
-      }
-    } | null
-  } | null>(null)
-
-  // Este efeito é executado quando o componente monta e os dados estão disponíveis
   useEffect(() => {
     if (data && data.orderId) {
       setOrderId(data.orderId)
-      setOrderDetails({
-        orderId: data.orderId,
-        delivery: data.delivery || null
-      })
       setOrderPlaced(true)
       dispatch(clearItems())
     }
   }, [data, dispatch])
 
-  // Função para enviar o pedido
   const handleSubmit = async () => {
     if (orderPlaced) {
-      // Pedido já foi realizado, apenas feche a janela
       closeFinalProjectPage()
       return
     }
 
-    // Verifica se temos dados de entrega
     if (!deliveryData) {
       console.error('Dados de entrega ausentes')
       return
     }
 
-    // Formatando os dados para a API
-    const formData: PurchasePayload = {
+    const formData = {
       delivery: {
         receiver: deliveryData.fullName,
         address: {
@@ -111,7 +59,6 @@ const ProjectFinal = () => {
           complement: deliveryData.complement || 'N/A'
         }
       },
-      // Use os produtos do estado ou crie a partir dos itens
       products:
         products.length > 0
           ? products
@@ -119,32 +66,13 @@ const ProjectFinal = () => {
               id: item.id,
               price: item.preco
             })),
-      // Use os dados de pagamento do estado ou o padrão
-      payment: paymentData || {
-        card: {
-          name: 'Teste',
-          number: '1111222233334444',
-          code: 123,
-          expires: {
-            month: 12,
-            year: 2030
-          }
-        }
-      }
+      payment: paymentData
     }
 
     try {
-      // Chame a mutação de compra
       const result = await purchase(formData).unwrap()
-      console.log('Compra realizada com sucesso:', result)
-
-      // Armazene o ID do pedido e os detalhes
       if (result && result.orderId) {
         setOrderId(result.orderId)
-        setOrderDetails({
-          orderId: result.orderId,
-          delivery: result.delivery || formData.delivery
-        })
         setOrderPlaced(true)
       }
     } catch (error) {
@@ -173,7 +101,6 @@ const ProjectFinal = () => {
           <Content>Ganhou frete grátis</Content>
         </h3>
 
-        {/* Mostrar detalhes de entrega se disponíveis */}
         {deliveryData && (
           <div>
             <h4>Detalhes da Entrega:</h4>
