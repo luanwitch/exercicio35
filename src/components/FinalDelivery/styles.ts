@@ -80,6 +80,7 @@ export const InputGroup = styled.div<InputGroupProps>`
     outline: none;
     box-shadow: none;
     background-color: ${colors.lightRed};
+    text-align: center;
 
     &.error {
       border: 4px solid ${colors.red2};
