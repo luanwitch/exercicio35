@@ -1,16 +1,7 @@
 import { useDispatch, useSelector } from 'react-redux'
 import { useState, useEffect } from 'react'
 
-import {
-  ButtonCart,
-  ButtonContainer,
-  FaseEnd,
-  TextEnd,
-  Sidebar,
-  Overlay,
-  Completed,
-  Content
-} from './styles'
+import * as S from './styles'
 
 import { RootReducer } from '../../store'
 import { clearItems, closeFinalProject } from '../../store/reducers/cart'
@@ -89,16 +80,16 @@ const ProjectFinal = () => {
   }
 
   return (
-    <FaseEnd className={isFinalProjectOpen ? 'is-open' : ''}>
-      <Overlay onClick={closeFinalProjectPage} />
-      <Sidebar>
+    <S.FaseEnd className={isFinalProjectOpen ? 'is-open' : ''}>
+      <S.Overlay onClick={closeFinalProjectPage} />
+      <S.Sidebar>
         <h3>
           Pedido realizado - <br />
           <br />
-          <Content>{orderId || 'AGUARDANDO CONFIRMAÇÃO'}</Content>
+          <S.Content>{orderId || 'AGUARDANDO CONFIRMAÇÃO'}</S.Content>
           <br />
           <br />
-          <Content>Ganhou frete grátis</Content>
+          <S.Content>Ganhou frete grátis</S.Content>
         </h3>
 
         {deliveryData && (
@@ -106,56 +97,56 @@ const ProjectFinal = () => {
             <h4>Detalhes da Entrega:</h4>
             <ul>
               <li>
-                <Completed>Nome do Recebedor:</Completed>{' '}
-                <Content>{deliveryData.fullName}</Content>
+                <S.Completed>Nome do Recebedor:</S.Completed>{' '}
+                <S.Content>{deliveryData.fullName}</S.Content>
               </li>
               <li>
-                <Completed>Endereço:</Completed>{' '}
-                <Content>{deliveryData.end}</Content>
+                <S.Completed>Endereço:</S.Completed>{' '}
+                <S.Content>{deliveryData.end}</S.Content>
               </li>
               <li>
-                <Completed>Cidade:</Completed>{' '}
-                <Content>{deliveryData.city}</Content>
+                <S.Completed>Cidade:</S.Completed>{' '}
+                <S.Content>{deliveryData.city}</S.Content>
               </li>
               <li>
-                <Completed>CEP:</Completed>{' '}
-                <Content>{deliveryData.cep}</Content>
+                <S.Completed>CEP:</S.Completed>{' '}
+                <S.Content>{deliveryData.cep}</S.Content>
               </li>
               <li>
-                <Completed>Número:</Completed>{' '}
-                <Content>{deliveryData.numero}</Content>
+                <S.Completed>Número:</S.Completed>{' '}
+                <S.Content>{deliveryData.numero}</S.Content>
               </li>
               <li>
-                <Completed>Complemento:</Completed>{' '}
-                <Content>{deliveryData.complement || 'N/A'}</Content>
+                <S.Completed>Complemento:</S.Completed>{' '}
+                <S.Content>{deliveryData.complement || 'N/A'}</S.Content>
               </li>
             </ul>
           </div>
         )}
 
         <div>
-          <TextEnd>
+          <S.TextEnd>
             Estamos felizes em informar que seu pedido já está em processo de
             preparação e, em breve, será entregue no endereço fornecido.
-          </TextEnd>
-          <TextEnd>
+          </S.TextEnd>
+          <S.TextEnd>
             Gostaríamos de ressaltar que nossos entregadores não estão
             autorizados a realizar cobranças extras.
-          </TextEnd>
-          <TextEnd>
+          </S.TextEnd>
+          <S.TextEnd>
             Lembre-se da importância de higienizar as mãos após o recebimento do
             pedido, garantindo assim sua segurança e bem-estar durante a
             refeição.
-          </TextEnd>
-          <TextEnd>
+          </S.TextEnd>
+          <S.TextEnd>
             Esperamos que desfrute de uma deliciosa e agradável experiência
             gastronômica. Bom apetite!
-          </TextEnd>
+          </S.TextEnd>
         </div>
 
-        <ButtonContainer>
+        <S.ButtonContainer>
           <div>
-            <ButtonCart
+            <S.ButtonCart
               onClick={handleSubmit}
               title={orderPlaced ? 'Fechar' : 'Clique aqui para concluir'}
               type="button"
@@ -163,11 +154,11 @@ const ProjectFinal = () => {
               {orderPlaced
                 ? 'Obrigado !! clique aqui para encerrar'
                 : 'Concluir'}
-            </ButtonCart>
+            </S.ButtonCart>
           </div>
-        </ButtonContainer>
-      </Sidebar>
-    </FaseEnd>
+        </S.ButtonContainer>
+      </S.Sidebar>
+    </S.FaseEnd>
   )
 }
 

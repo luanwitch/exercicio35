@@ -1,19 +1,18 @@
-import { Produto } from '../../pages/Home'
 import Product from '../Product'
-import { List, SectionContainer } from './styles'
+import * as S from './styles'
 
 export type Props = {
   produtos: Produto[]
 }
 
 const ProductsList = ({ produtos }: Props) => (
-  <SectionContainer>
-    <List>
+  <S.SectionContainer>
+    <S.List>
       {produtos.map((produto) => (
         <Product key={produto.id} {...produto} />
       ))}
-    </List>
-  </SectionContainer>
+    </S.List>
+  </S.SectionContainer>
 )
 
 export default ProductsList

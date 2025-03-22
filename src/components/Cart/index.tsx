@@ -2,19 +2,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import { useState, useEffect } from 'react'
 import { PacmanLoader } from 'react-spinners'
 
-import {
-  AlinPrices,
-  ButtonCart,
-  ButtonClose,
-  ButtonContainer,
-  CartContainer,
-  CartItem,
-  Overlay,
-  Prices,
-  PricesT,
-  Quantity,
-  Sidebar
-} from './styles'
+import * as S from './styles'
 
 import { colors } from '../../styles'
 import { RootReducer } from '../../store'
@@ -63,9 +51,9 @@ const Cart = () => {
   }, [isOpen])
 
   return (
-    <CartContainer className={isOpen ? 'is-open' : ''}>
-      <Overlay onClick={closeCart} />
-      <Sidebar>
+    <S.CartContainer className={isOpen ? 'is-open' : ''}>
+      <S.Overlay onClick={closeCart} />
+      <S.Sidebar>
         {isLoading ? (
           <div
             style={{
@@ -81,56 +69,56 @@ const Cart = () => {
           <>
             <ul>
               {items.map((item) => (
-                <CartItem key={item.id}>
+                <S.CartItem key={item.id}>
                   <img src={item.foto} alt={item.nome} />
                   <div>
                     <h3>{item.nome}</h3>
-                    <Prices>
+                    <S.Prices>
                       R${' '}
                       {item.preco.toLocaleString('pt-BR', {
                         minimumFractionDigits: 2
                       })}
-                    </Prices>
+                    </S.Prices>
                   </div>
                   <div>
-                    <ButtonClose
+                    <S.ButtonClose
                       onClick={() => removeItem(item.id)}
                       type="button"
                     />
                   </div>
-                </CartItem>
+                </S.CartItem>
               ))}
             </ul>
-            <Quantity>{items.length} item(s) no carrinho</Quantity>
-            <AlinPrices>
-              <PricesT>Valor total</PricesT>
-              <PricesT>
+            <S.Quantity>{items.length} item(s) no carrinho</S.Quantity>
+            <S.AlinPrices>
+              <S.PricesT>Valor total</S.PricesT>
+              <S.PricesT>
                 R${' '}
                 {items
                   .reduce((total, item) => total + item.preco, 0)
                   .toLocaleString('pt-BR', { minimumFractionDigits: 2 })}
-              </PricesT>
-            </AlinPrices>
-            <ButtonContainer>
+              </S.PricesT>
+            </S.AlinPrices>
+            <S.ButtonContainer>
               <div>
-                <ButtonCart
+                <S.ButtonCart
                   onClick={closeCart}
                   title="Clique aqui para continuar comprando"
                   type="button"
                 >
                   Continuar comprando
-                </ButtonCart>
+                </S.ButtonCart>
               </div>
               <div>
-                <ButtonCart
+                <S.ButtonCart
                   onClick={cartDelivery}
                   title="Clique aqui para continuar com a entrega"
                   type="button"
                 >
                   Continuar com a entrega
-                </ButtonCart>
+                </S.ButtonCart>
               </div>
-            </ButtonContainer>
+            </S.ButtonContainer>
           </>
         ) : (
           <p className="empty-text">
@@ -138,8 +126,8 @@ const Cart = () => {
             com a compra.
           </p>
         )}
-      </Sidebar>
-    </CartContainer>
+      </S.Sidebar>
+    </S.CartContainer>
   )
 }
 

@@ -1,17 +1,7 @@
-import {
-  Card,
-  Category,
-  Description,
-  OnLine,
-  Score,
-  Star,
-  Title
-} from './styles'
+import * as S from './styles'
 
 import Tag from '../Tag'
 import Button from '../Button'
-
-import { Produto } from '../../pages/Home' // Importe o tipo Produto
 
 import Estrela from '../../assets/image/estrela.png'
 
@@ -24,21 +14,21 @@ const Product = ({
   descricao,
   capa
 }: Produto) => (
-  <Card>
+  <S.Card>
     <div>
       <img src={capa} alt={titulo} />
     </div>
-    <Category>
+    <S.Category>
       {/* Renderiza a tag apenas se destacado for true */}
       {destacado && <Tag>Destaque da semana</Tag>}
       <Tag>{tipo}</Tag>
-    </Category>
-    <OnLine>
-      <Title>{titulo}</Title>
-      <Score>{avaliacao}</Score>
-      <Star src={Estrela} alt="estrela" />
-    </OnLine>
-    <Description>{descricao}</Description>
+    </S.Category>
+    <S.OnLine>
+      <S.Title>{titulo}</S.Title>
+      <S.Score>{avaliacao}</S.Score>
+      <S.Star src={Estrela} alt="estrela" />
+    </S.OnLine>
+    <S.Description>{descricao}</S.Description>
     <Button
       type="link"
       to={`/Perfil/${id}`}
@@ -46,7 +36,7 @@ const Product = ({
     >
       Saiba mais
     </Button>
-  </Card>
+  </S.Card>
 )
 
 export default Product

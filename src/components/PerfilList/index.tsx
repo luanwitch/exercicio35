@@ -1,8 +1,6 @@
-import { List, SectionContainer } from '../ProductList/styles'
+import * as S from '../ProductList/styles'
 
 import Perfil from '../ProductPerfil'
-
-import { Produto } from '../../pages/Home'
 
 export type PerfilProps = {
   perfils: Produto[]
@@ -24,16 +22,16 @@ const PerfilList = ({
 
   if (restauranteId && !restaurante) {
     return (
-      <SectionContainer>
+      <S.SectionContainer>
         <p>Restaurante não encontrado ou sem pratos disponíveis.</p>
-      </SectionContainer>
+      </S.SectionContainer>
     )
   }
 
   if (restauranteId && restaurante) {
     return (
-      <SectionContainer>
-        <List>
+      <S.SectionContainer>
+        <S.List>
           {restaurante.cardapio.map((item) => (
             <Perfil
               key={`${restaurante.id}-${item.id}`}
@@ -46,15 +44,15 @@ const PerfilList = ({
               botaoLabel={botaoLabel} // 🔹 Passamos a label personalizada
             />
           ))}
-        </List>
-      </SectionContainer>
+        </S.List>
+      </S.SectionContainer>
     )
   }
 
   // Lista de restaurantes
   return (
-    <SectionContainer>
-      <List>
+    <S.SectionContainer>
+      <S.List>
         {perfils.map((perfil) => (
           <Perfil
             key={perfil.id}
@@ -66,8 +64,8 @@ const PerfilList = ({
             onClick={() => onProductClick(perfil, perfil.cardapio[0])}
           />
         ))}
-      </List>
-    </SectionContainer>
+      </S.List>
+    </S.SectionContainer>
   )
 }
 

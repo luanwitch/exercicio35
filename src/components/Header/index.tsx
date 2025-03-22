@@ -1,14 +1,14 @@
-import { HeaderBar, HeaderTitle, LogoImage } from './styles'
+import * as S from './styles'
 
 import logo from '../../assets/image/logo.png'
 
 const Header = () => (
-  <HeaderBar>
-    <LogoImage src={logo} alt="e-food" />
-    <HeaderTitle>
+  <S.HeaderBar>
+    <S.LogoImage src={logo} alt="e-food" />
+    <S.HeaderTitle>
       Viva experiências gastronômicas <br></br>no conforto da sua casa
-    </HeaderTitle>
-  </HeaderBar>
+    </S.HeaderTitle>
+  </S.HeaderBar>
 )
 
 export default Header

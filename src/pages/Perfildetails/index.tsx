@@ -2,14 +2,13 @@ import { useEffect, useState } from 'react'
 import { useParams, useSearchParams } from 'react-router-dom'
 import { useDispatch } from 'react-redux'
 
-import { Modal, ModalContent } from './styles'
+import * as S from './styles'
 
 import PerfilList from '../../components/PerfilList'
 import Loader from '../../components/Loader'
 
 import fechar_modal from '../../assets/image/fechar-modal.png'
 
-import { Produto } from '../Home'
 import { useGetRestaurantByIdQuery } from '../../services/api'
 import { add, open } from '../../store/reducers/cart' // Importe a ação `add`
 
@@ -90,8 +89,8 @@ const PerfilDetails = () => {
 
       {/* Modal */}
       {modalIsOpen && selectedDish && (
-        <Modal className="visivel" onClick={closeModal}>
-          <ModalContent onClick={(e) => e.stopPropagation()}>
+        <S.Modal className="visivel" onClick={closeModal}>
+          <S.ModalContent onClick={(e) => e.stopPropagation()}>
             <header>
               <img src={fechar_modal} alt="Ícone fechar" onClick={closeModal} />
             </header>
@@ -107,8 +106,8 @@ const PerfilDetails = () => {
                 Adicionar ao carrinho - R$ {selectedDish.preco.toFixed(2)}
               </button>
             </div>
-          </ModalContent>
-        </Modal>
+          </S.ModalContent>
+        </S.Modal>
       )}
     </>
   )

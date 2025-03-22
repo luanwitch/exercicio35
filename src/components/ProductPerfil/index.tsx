@@ -1,6 +1,6 @@
 import { useNavigate } from 'react-router-dom'
 
-import { Card, Description, OnLine, Title } from './styles'
+import * as S from './styles'
 
 import ButtonPerfil from '../ButtonPerfil'
 
@@ -34,7 +34,7 @@ const ProductPerfil = ({
   }
 
   return (
-    <Card title={`Clique no botão para mais detalhes - ${title}`}>
+    <S.Card title={`Clique no botão para mais detalhes - ${title}`}>
       <div>
         <img
           src={image}
@@ -42,10 +42,10 @@ const ProductPerfil = ({
           style={{ width: '100%', height: 'auto' }}
         />
       </div>
-      <OnLine>
-        <Title>{title}</Title>
-      </OnLine>
-      <Description>{description}</Description>
+      <S.OnLine>
+        <S.Title>{title}</S.Title>
+      </S.OnLine>
+      <S.Description>{description}</S.Description>
       <div style={{ padding: '10px' }}>
         <ButtonPerfil
           title={botaoLabel || `Adicionar ao carrinho - ${title}`}
@@ -54,7 +54,7 @@ const ProductPerfil = ({
           {botaoLabel || 'Adicionar ao carrinho'}
         </ButtonPerfil>
       </div>
-    </Card>
+    </S.Card>
   )
 }
 

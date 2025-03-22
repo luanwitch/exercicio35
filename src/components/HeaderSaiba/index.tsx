@@ -1,19 +1,7 @@
 import { useDispatch, useSelector } from 'react-redux'
 import { Link, useParams } from 'react-router-dom'
 
-import {
-  HeaderBarKnow,
-  ImageBottomKnow,
-  LinkCar,
-  Links,
-  LinksItem,
-  LogoLearnMore,
-  TitleCategoryKnow,
-  TitleKnow,
-  TitleLearnMore
-} from './styles'
-
-import { Produto } from '../../pages/Home'
+import * as S from './styles'
 
 import { open } from '../../store/reducers/cart'
 import { RootReducer } from '../../store'
@@ -37,42 +25,42 @@ const HeaderKnow = () => {
 
   return (
     <>
-      <HeaderBarKnow>
+      <S.HeaderBarKnow>
         <nav>
-          <Links>
+          <S.Links>
             <li>
-              <TitleKnow>Restaurantes</TitleKnow>
+              <S.TitleKnow>Restaurantes</S.TitleKnow>
             </li>
-            <LinksItem>
+            <S.LinksItem>
               <Link title="Clique aqui para voltar a Home" to="/">
                 Home
               </Link>
-            </LinksItem>
+            </S.LinksItem>
             <li>
-              <LogoLearnMore src={logo} alt="e-food" />
+              <S.LogoLearnMore src={logo} alt="e-food" />
             </li>
-            <LinksItem>
-              <LinkCar
+            <S.LinksItem>
+              <S.LinkCar
                 title="Clique aqui para abrir o carrinho"
                 role="button"
                 onClick={openCart}
               >
                 {items.length} produto(s) no carrinho
-              </LinkCar>
-            </LinksItem>
-          </Links>
+              </S.LinkCar>
+            </S.LinksItem>
+          </S.Links>
         </nav>
-      </HeaderBarKnow>
+      </S.HeaderBarKnow>
 
       {isLoading && <p>Carregando...</p>}
       {error && <p>Erro ao carregar dados</p>}
 
       {/* Renderiza somente se o produto existir */}
       {produto && (
-        <ImageBottomKnow style={{ backgroundImage: `url(${produto.capa})` }}>
-          <TitleCategoryKnow>{produto.tipo}</TitleCategoryKnow>
-          <TitleLearnMore>{produto.titulo}</TitleLearnMore>
-        </ImageBottomKnow>
+        <S.ImageBottomKnow style={{ backgroundImage: `url(${produto.capa})` }}>
+          <S.TitleCategoryKnow>{produto.tipo}</S.TitleCategoryKnow>
+          <S.TitleLearnMore>{produto.titulo}</S.TitleLearnMore>
+        </S.ImageBottomKnow>
       )}
     </>
   )

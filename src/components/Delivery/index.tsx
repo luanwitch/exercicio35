@@ -6,16 +6,7 @@ import { PacmanLoader } from 'react-spinners'
 import { useNavigate } from 'react-router-dom'
 import InputMask from 'react-input-mask'
 
-import {
-  ButtonCart,
-  ButtonContainer,
-  DeliContainer,
-  InputGroup,
-  NuCepContainer,
-  Overlay,
-  Row,
-  Sidebar
-} from './styles'
+import * as S from './styles'
 import { colors } from '../../styles'
 
 import { RootReducer } from '../../store'
@@ -81,20 +72,18 @@ const Delivery = () => {
               complement: values.complement || 'N/A'
             }
           },
-          products: [
-            {
-              id: 1,
-              price: 0
-            }
-          ],
+          products: items.map((item) => ({
+            id: item.id,
+            price: item.preco
+          })),
           payment: {
             card: {
-              name: 'Teste',
-              number: '1111222233334444',
-              code: 123,
+              name: '',
+              number: '',
+              code: 0,
               expires: {
-                month: 12,
-                year: 2030
+                month: 0,
+                year: 0
               }
             }
           }
@@ -164,9 +153,9 @@ const Delivery = () => {
   }, [items, dispatch, navigate])
 
   return (
-    <DeliContainer className={isOpenDelivery ? 'is-open' : ''}>
-      <Overlay onClick={closeCartDelivery} />
-      <Sidebar>
+    <S.DeliContainer className={isOpenDelivery ? 'is-open' : ''}>
+      <S.Overlay onClick={closeCartDelivery} />
+      <S.Sidebar>
         {isLoading ? (
           <div
             style={{
@@ -182,8 +171,8 @@ const Delivery = () => {
           <>
             <h3>Entrega</h3>
             <form onSubmit={form.handleSubmit}>
-              <Row>
-                <InputGroup>
+              <S.Row>
+                <S.InputGroup>
                   <label htmlFor="fullName">Quem irá receber</label>
                   <input
                     id="fullName"
@@ -194,8 +183,8 @@ const Delivery = () => {
                     onBlur={form.handleBlur}
                     className={checkInputHasError('fullName') ? 'error' : ''}
                   />
-                </InputGroup>
-                <InputGroup>
+                </S.InputGroup>
+                <S.InputGroup>
                   <label htmlFor="end">Endereço</label>
                   <input
                     id="end"
@@ -206,8 +195,8 @@ const Delivery = () => {
                     onBlur={form.handleBlur}
                     className={checkInputHasError('end') ? 'error' : ''}
                   />
-                </InputGroup>
-                <InputGroup>
+                </S.InputGroup>
+                <S.InputGroup>
                   <label htmlFor="city">Cidade</label>
                   <input
                     id="city"
@@ -218,9 +207,9 @@ const Delivery = () => {
                     onBlur={form.handleBlur}
                     className={checkInputHasError('city') ? 'error' : ''}
                   />
-                </InputGroup>
-                <NuCepContainer>
-                  <InputGroup>
+                </S.InputGroup>
+                <S.NuCepContainer>
+                  <S.InputGroup>
                     <label htmlFor="cep">CEP</label>
                     <InputMask
                       id="cep"
@@ -236,9 +225,9 @@ const Delivery = () => {
                       className={checkInputHasError('cep') ? 'error' : ''}
                       placeholder="00000-000"
                     />
-                  </InputGroup>
+                  </S.InputGroup>
 
-                  <InputGroup>
+                  <S.InputGroup>
                     <label htmlFor="numero">Número</label>
                     <input
                       id="numero"
@@ -249,9 +238,9 @@ const Delivery = () => {
                       onBlur={form.handleBlur}
                       className={checkInputHasError('numero') ? 'error' : ''}
                     />
-                  </InputGroup>
-                </NuCepContainer>
-                <InputGroup>
+                  </S.InputGroup>
+                </S.NuCepContainer>
+                <S.InputGroup>
                   <label htmlFor="complement">Complemento (opcional)</label>
                   <input
                     id="complement"
@@ -261,33 +250,33 @@ const Delivery = () => {
                     onChange={form.handleChange}
                     onBlur={form.handleBlur}
                   />
-                </InputGroup>
-              </Row>
-              <ButtonContainer>
+                </S.InputGroup>
+              </S.Row>
+              <S.ButtonContainer>
                 <div>
-                  <ButtonCart
+                  <S.ButtonCart
                     onClick={handleContinueClick}
                     title="Clique aqui para continuar com o pagamento"
                     type="button"
                   >
                     Continuar com o pagamento
-                  </ButtonCart>
+                  </S.ButtonCart>
                 </div>
                 <div>
-                  <ButtonCart
+                  <S.ButtonCart
                     onClick={closeCartDelivery}
                     title="Clique aqui para voltar ao carrinho"
                     type="button"
                   >
                     Voltar ao carrinho
-                  </ButtonCart>
+                  </S.ButtonCart>
                 </div>
-              </ButtonContainer>
+              </S.ButtonContainer>
             </form>
           </>
         )}
-      </Sidebar>
-    </DeliContainer>
+      </S.Sidebar>
+    </S.DeliContainer>
   )
 }
 

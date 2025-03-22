@@ -4,16 +4,7 @@ import * as Yup from 'yup'
 import { useEffect } from 'react'
 import InputMask from 'react-input-mask'
 
-import {
-  ButtonCart,
-  ButtonContainer,
-  DeliContainer,
-  InputGroup,
-  Overlay,
-  Row,
-  Sidebar,
-  CartContainer
-} from './styles'
+import * as S from './styles'
 import { PricesT } from '../Cart/styles'
 
 import { RootReducer } from '../../store'
@@ -132,24 +123,22 @@ const FinalDelivery = () => {
 
         // Obtém os valores de entrega
         const delivery = {
-          receiver: 'Nome do Recebedor', // Exemplo, você precisa pegar os valores do formulário anterior
+          receiver: '', // Exemplo, você precisa pegar os valores do formulário anterior
           address: {
-            description: 'Endereço completo',
-            city: 'Cidade',
-            zipCode: 'CEP',
-            number: 123,
-            complement: 'Complemento'
+            description: '',
+            city: '',
+            zipCode: '',
+            number: 0,
+            complement: ''
           }
         }
 
         // Chama a API para realizar a compra
         const response = await purchase({
-          products: [
-            {
-              id: 1,
-              price: 0
-            }
-          ],
+          products: items.map((item) => ({
+            id: item.id,
+            price: item.preco
+          })),
           delivery,
           payment
         }).unwrap()
@@ -248,9 +237,9 @@ const FinalDelivery = () => {
   }
 
   return (
-    <DeliContainer className={isOpenDeliveryEnd ? 'is-open' : ''}>
-      <Overlay onClick={closeCartDeliveryEnd} />
-      <Sidebar>
+    <S.DeliContainer className={isOpenDeliveryEnd ? 'is-open' : ''}>
+      <S.Overlay onClick={closeCartDeliveryEnd} />
+      <S.Sidebar>
         <PricesT>
           Pagamento - Valor a pagar R${' '}
           {items
@@ -258,8 +247,8 @@ const FinalDelivery = () => {
             .toLocaleString('pt-BR', { minimumFractionDigits: 2 })}
         </PricesT>
         <form onSubmit={form.handleSubmit}>
-          <Row>
-            <InputGroup maxWidth="326px">
+          <S.Row>
+            <S.InputGroup maxWidth="326px">
               <label htmlFor="cardFullName">Nome no cartão</label>
               <input
                 id="cardFullName"
@@ -270,10 +259,10 @@ const FinalDelivery = () => {
                 onBlur={form.handleBlur}
                 className={getErrorMessage('cardFullName') ? 'error' : ''}
               />
-            </InputGroup>
+            </S.InputGroup>
 
-            <CartContainer>
-              <InputGroup maxWidth="228px">
+            <S.CartContainer>
+              <S.InputGroup maxWidth="228px">
                 <label htmlFor="cardNumber">Número do cartão</label>
                 <InputMask
                   id="cardNumber"
@@ -287,9 +276,9 @@ const FinalDelivery = () => {
                   maskChar={null}
                   placeholder="0000 0000 0000 0000"
                 />
-              </InputGroup>
+              </S.InputGroup>
 
-              <InputGroup maxWidth="88px">
+              <S.InputGroup maxWidth="88px">
                 <label htmlFor="segNumber">CVV</label>
                 <InputMask
                   id="segNumber"
@@ -303,11 +292,11 @@ const FinalDelivery = () => {
                   maskChar={null}
                   placeholder="CVV"
                 />
-              </InputGroup>
-            </CartContainer>
+              </S.InputGroup>
+            </S.CartContainer>
 
-            <CartContainer>
-              <InputGroup maxWidth="155px">
+            <S.CartContainer>
+              <S.InputGroup maxWidth="155px">
                 <label htmlFor="vectoMonth">Mês de vencimento</label>
                 <InputMask
                   id="vectoMonth"
@@ -321,9 +310,9 @@ const FinalDelivery = () => {
                   maskChar={null}
                   placeholder="MM"
                 />
-              </InputGroup>
+              </S.InputGroup>
 
-              <InputGroup maxWidth="155px">
+              <S.InputGroup maxWidth="155px">
                 <label htmlFor="vectoYear">Ano de vencimento</label>
                 <InputMask
                   id="vectoYear"
@@ -337,33 +326,33 @@ const FinalDelivery = () => {
                   maskChar={null}
                   placeholder="AAAA"
                 />
-              </InputGroup>
-            </CartContainer>
-          </Row>
+              </S.InputGroup>
+            </S.CartContainer>
+          </S.Row>
 
-          <ButtonContainer>
+          <S.ButtonContainer>
             <div>
-              <ButtonCart
+              <S.ButtonCart
                 onClick={openFinalProjectPage} // Chama a função de envio
                 title="Clique aqui para finalizar o pagamento"
                 type="button"
               >
                 Finalizar pagamento
-              </ButtonCart>
+              </S.ButtonCart>
             </div>
             <div>
-              <ButtonCart
+              <S.ButtonCart
                 onClick={closeCartDeliveryEnd}
                 title="Clique aqui para voltar para a edição de endereço"
                 type="button"
               >
                 Voltar para a edição de endereço
-              </ButtonCart>
+              </S.ButtonCart>
             </div>
-          </ButtonContainer>
+          </S.ButtonContainer>
         </form>
-      </Sidebar>
-    </DeliContainer>
+      </S.Sidebar>
+    </S.DeliContainer>
   )
 }
 

@@ -1,5 +1,4 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
-import { Produto } from '../../pages/Home'
 
 // Tipo para os produtos enviados à API
 type ProductAPI = {
