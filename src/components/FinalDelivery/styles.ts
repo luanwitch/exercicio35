@@ -82,6 +82,10 @@ export const InputGroup = styled.div<InputGroupProps>`
     background-color: ${colors.lightRed};
     text-align: center;
 
+    &::placeholder {
+      opacity: 0.3;
+    }
+
     &.error {
       border: 4px solid ${colors.red2};
     }

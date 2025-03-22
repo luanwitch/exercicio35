@@ -76,6 +76,10 @@ export const InputGroup = styled.div`
     &.error {
       border: 4px solid ${colors.red2};
     }
+
+    &::placeholder {
+      opacity: 0.3;
+    }
   }
 `
 export const NuCepContainer = styled.div`

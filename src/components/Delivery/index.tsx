@@ -4,6 +4,7 @@ import * as Yup from 'yup'
 import { useEffect, useState } from 'react'
 import { PacmanLoader } from 'react-spinners'
 import { useNavigate } from 'react-router-dom'
+import InputMask from 'react-input-mask'
 
 import {
   ButtonCart,
@@ -221,14 +222,19 @@ const Delivery = () => {
                 <NuCepContainer>
                   <InputGroup>
                     <label htmlFor="cep">CEP</label>
-                    <input
+                    <InputMask
                       id="cep"
                       type="text"
                       name="cep"
+                      mask="99999-999"
+                      maskChar={null}
                       value={form.values.cep}
-                      onChange={form.handleChange}
+                      onChange={(e) =>
+                        form.setFieldValue('cep', e.target.value)
+                      }
                       onBlur={form.handleBlur}
                       className={checkInputHasError('cep') ? 'error' : ''}
+                      placeholder="00000-000"
                     />
                   </InputGroup>
 

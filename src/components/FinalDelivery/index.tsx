@@ -285,6 +285,7 @@ const FinalDelivery = () => {
                   className={getErrorMessage('cardNumber') ? 'error' : ''}
                   mask="9999 9999 9999 9999"
                   maskChar={null}
+                  placeholder="0000 0000 0000 0000"
                 />
               </InputGroup>
 
@@ -300,6 +301,7 @@ const FinalDelivery = () => {
                   className={getErrorMessage('segNumber') ? 'error' : ''}
                   mask="999"
                   maskChar={null}
+                  placeholder="CVV"
                 />
               </InputGroup>
             </CartContainer>
@@ -317,6 +319,7 @@ const FinalDelivery = () => {
                   className={getErrorMessage('vectoMonth') ? 'error' : ''}
                   mask="99"
                   maskChar={null}
+                  placeholder="MM"
                 />
               </InputGroup>
 
@@ -332,6 +335,7 @@ const FinalDelivery = () => {
                   className={getErrorMessage('vectoYear') ? 'error' : ''}
                   mask="9999"
                   maskChar={null}
+                  placeholder="AAAA"
                 />
               </InputGroup>
             </CartContainer>
