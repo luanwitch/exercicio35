@@ -1,46 +1,5 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 
-// Tipo para os produtos enviados à API
-type ProductAPI = {
-  id: number
-  price: number
-}
-
-// Tipo para os dados de pagamento
-type PaymentData = {
-  card: {
-    name: string
-    number: string
-    code: number
-    expires: {
-      month: number
-      year: number
-    }
-  }
-}
-
-// Tipo para os dados de entrega
-type DeliveryData = {
-  fullName: string
-  end: string
-  city: string
-  cep: string
-  numero: string
-  complement: string
-} | null
-
-// Estado do carrinho
-type CartState = {
-  items: Produto['cardapio'][0][] // Itens do carrinho (pratos)
-  isOpen: boolean
-  isOpenDelivery: boolean
-  isOpenDeliveryEnd: boolean
-  isFinalProjectOpen: boolean
-  deliveryData: DeliveryData
-  products: ProductAPI[]
-  paymentData: PaymentData
-}
-
 const initialState: CartState = {
   items: [],
   isOpen: false,
@@ -51,12 +10,12 @@ const initialState: CartState = {
   products: [],
   paymentData: {
     card: {
-      name: 'Teste',
-      number: '1111222233334444',
-      code: 123,
+      name: '',
+      number: '',
+      code: 0,
       expires: {
-        month: 12,
-        year: 2030
+        month: 0,
+        year: 0
       }
     }
   }

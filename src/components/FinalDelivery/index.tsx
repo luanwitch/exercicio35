@@ -17,16 +17,6 @@ import {
 } from '../../store/reducers/cart'
 import { usePurchaseMutation } from '../../services/api'
 
-// Definindo tipos para o formulário
-interface FormValues {
-  cardFullName: string
-  cardNumber: string
-  segNumber: string
-  vectoMonth: string
-  vectoYear: string
-  [key: string]: string // Índice de assinatura para permitir acesso dinâmico aos campos
-}
-
 const FinalDelivery = () => {
   const { isOpenDeliveryEnd, items } = useSelector(
     (state: RootReducer) => state.cart

@@ -2,10 +2,6 @@ import styled from 'styled-components'
 
 import { breakpoints, colors } from '../../styles'
 
-type InputGroupProps = {
-  maxWidth?: string
-}
-
 export const Overlay = styled.div`
   position: fixed;
   top: 0;
@@ -74,20 +70,23 @@ export const InputGroup = styled.div<InputGroupProps>`
     font-size: 14px;
     font-weight: bold;
     color: ${colors.red};
-    padding: 0;
+    padding: 0 8px;
     margin: 0;
     border: none;
     outline: none;
     box-shadow: none;
     background-color: ${colors.lightRed};
-    text-align: center;
+    box-sizing: border-box;
 
     &::placeholder {
-      opacity: 0.3;
+      opacity: 0.5;
     }
 
     &.error {
       border: 4px solid ${colors.red2};
+    }
+    @media (max-width: ${breakpoints.tablet}) {
+      width: calc(${(props) => props.maxWidth || '100%'} - 24px);
     }
   }
 `

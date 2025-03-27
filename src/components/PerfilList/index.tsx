@@ -2,13 +2,6 @@ import * as S from '../ProductList/styles'
 
 import Perfil from '../ProductPerfil'
 
-export type PerfilProps = {
-  perfils: Produto[]
-  restauranteId?: number
-  onProductClick: (restaurante: Produto, item: Produto['cardapio'][0]) => void
-  botaoLabel?: string // 🔹 Adicionamos a propriedade opcional
-}
-
 const PerfilList = ({
   perfils,
   restauranteId,
