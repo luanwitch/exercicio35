@@ -1,24 +1,30 @@
 import { useDispatch, useSelector } from 'react-redux'
-import { Link, useParams } from 'react-router-dom'
-
+import { Link, useParams, useNavigate } from 'react-router-dom'
 import * as S from './styles'
-
 import { open } from '../../store/reducers/cart'
 import { RootReducer } from '../../store'
 import { useGetRestaurantsProductQuery } from '../../services/api'
-
 import logo from '../../assets/image/logo.png'
+import { Container } from '../../styles'
+
+type Produto = {
+  id: number
+  capa: string
+  tipo: string
+  titulo: string
+}
 
 const HeaderKnow = () => {
   const { id } = useParams()
+  const navigate = useNavigate()
   const { data, isLoading, error } = useGetRestaurantsProductQuery()
   const { items } = useSelector((state: RootReducer) => state.cart)
   const dispatch = useDispatch()
+
   const openCart = () => {
     dispatch(open())
   }
 
-  // Encontra o restaurante com o ID correspondente
   const produto = data
     ? data.find((item: Produto) => item.id === Number(id))
     : null
@@ -26,40 +32,36 @@ const HeaderKnow = () => {
   return (
     <>
       <S.HeaderBarKnow>
-        <nav>
+        <Container>
           <S.Links>
-            <li>
-              <S.TitleKnow>Restaurantes</S.TitleKnow>
-            </li>
             <S.LinksItem>
-              <Link title="Clique aqui para voltar a Home" to="/">
-                Home
-              </Link>
+              <Link to="/">Restaurantes</Link>
             </S.LinksItem>
-            <li>
-              <S.LogoLearnMore src={logo} alt="e-food" />
-            </li>
             <S.LinksItem>
-              <S.LinkCar
-                title="Clique aqui para abrir o carrinho"
-                role="button"
-                onClick={openCart}
-              >
+              <S.LogoLearnMore
+                src={logo}
+                alt="EFOOD"
+                onClick={() => navigate('/')}
+              />
+            </S.LinksItem>
+            <S.LinksItem>
+              <S.LinkCar onClick={openCart}>
                 {items.length} produto(s) no carrinho
               </S.LinkCar>
             </S.LinksItem>
           </S.Links>
-        </nav>
+        </Container>
       </S.HeaderBarKnow>
 
-      {isLoading && <p>Carregando...</p>}
-      {error && <p>Erro ao carregar dados</p>}
+      {isLoading && <h3>Carregando...</h3>}
+      {error && <h3>Erro ao carregar dados</h3>}
 
-      {/* Renderiza somente se o produto existir */}
       {produto && (
         <S.ImageBottomKnow style={{ backgroundImage: `url(${produto.capa})` }}>
-          <S.TitleCategoryKnow>{produto.tipo}</S.TitleCategoryKnow>
-          <S.TitleLearnMore>{produto.titulo}</S.TitleLearnMore>
+          <S.TitleContainer>
+            <S.TitleCategoryKnow>{produto.tipo}</S.TitleCategoryKnow>
+            <S.TitleLearnMore>{produto.titulo}</S.TitleLearnMore>
+          </S.TitleContainer>
         </S.ImageBottomKnow>
       )}
     </>

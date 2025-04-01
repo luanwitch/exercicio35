@@ -4,7 +4,8 @@ import { breakpoints } from '../../styles'
 
 export const SectionContainer = styled.div`
   max-width: 100%;
-  padding: 0 15px; /* Padding horizontal para evitar o overflow */
+  padding: 0; /* Padding horizontal para evitar o overflow */
+  margin: 0;
   box-sizing: border-box;
 
   @media (max-width: ${breakpoints.tablet}) {
@@ -15,6 +16,6 @@ export const SectionContainer = styled.div`
 export const List = styled.div`
   display: flex;
   flex-wrap: wrap;
-  gap: 20px;
+  gap: 32px;
   justify-content: center; /* Centralizar a lista de produtos */
 `

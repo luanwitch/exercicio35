@@ -1,7 +1,5 @@
 import styled from 'styled-components'
-
 import { breakpoints, colors } from '../../styles'
-
 import HeaderBackImage from '../../assets/image/header_fundo.png'
 
 export const HeaderBarKnow = styled.header`
@@ -9,7 +7,7 @@ export const HeaderBarKnow = styled.header`
   background-repeat: no-repeat;
   background-size: cover;
   background-position: center;
-  padding: 56px 20px; /* Padding ajustado */
+  padding: 56px 20px;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -21,7 +19,6 @@ export const Links = styled.ul`
   align-items: center;
   gap: 135px;
   width: 100%;
-  max-width: 1200px;
 
   @media (max-width: ${breakpoints.tablet}) {
     gap: 25px;
@@ -39,15 +36,10 @@ export const LinksItem = styled.li`
   }
 `
 
-export const TitleKnow = styled.h2`
-  font-size: 18px;
-  font-weight: 900;
-  color: ${colors.red};
-`
-
 export const LogoLearnMore = styled.img`
   width: 125px;
   height: 57px;
+  cursor: pointer;
 `
 
 export const ImageBottomKnow = styled.div`
@@ -55,25 +47,35 @@ export const ImageBottomKnow = styled.div`
   height: 280px;
   background-size: cover;
   background-position: center;
-  position: relative; /* Permite posicionamento absoluto dos elementos internos */
+  position: relative;
+`
+
+export const TitleContainer = styled.div`
+  max-width: ${breakpoints.desktop};
+  width: 100%;
+  height: 100%;
+  margin: 0 auto;
+  padding-top: 16px;
+  padding-bottom: 16px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+
+  @media (max-width: ${breakpoints.tablet}) {
+    padding-left: 26px;
+  }
 `
 
 export const TitleCategoryKnow = styled.h3`
   font-size: 32px;
   font-weight: 100;
   color: ${colors.white};
-  position: absolute;
-  top: 24px; /* Posiciona no canto superior */
-  left: 24px; /* Posiciona no canto esquerdo */
 `
 
 export const TitleLearnMore = styled.h2`
   font-size: 32px;
   font-weight: 900;
   color: ${colors.white};
-  position: absolute;
-  bottom: 24px; /* Posiciona no canto inferior */
-  left: 24px; /* Posiciona no canto esquerdo */
 `
 
 export const LinkCar = styled.a`

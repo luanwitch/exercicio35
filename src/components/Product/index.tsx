@@ -15,9 +15,9 @@ const Product = ({
   capa
 }: Produto) => (
   <S.Card>
-    <div>
+    <S.ImageContainer>
       <img src={capa} alt={titulo} />
-    </div>
+    </S.ImageContainer>
     <S.Category>
       {/* Renderiza a tag apenas se destacado for true */}
       {destacado && <Tag>Destaque da semana</Tag>}
