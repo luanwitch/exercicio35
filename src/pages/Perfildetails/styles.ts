@@ -3,24 +3,24 @@ import styled from 'styled-components'
 import { breakpoints, colors } from '../../styles'
 
 export const Modal = styled.div`
-  position: absolute;
-  top: 399px;
-  left: 110px;
+  position: fixed; /* Fixa o modal na tela */
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%); /* Centraliza na tela */
   z-index: 1000;
-  width: 1045px;
-  height: 600px;
+  width: 1024px;
+  height: 344px;
   display: none;
   align-items: center;
   justify-content: center;
+  padding: 20px;
 
   &.visivel {
     display: flex;
   }
 
   @media (max-width: ${breakpoints.tablet}) {
-    top: 515px;
-    left: 9px;
-    width: 95%;
+    width: 100%;
     height: auto;
   }
 `
