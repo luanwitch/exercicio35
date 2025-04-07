@@ -1,62 +1,55 @@
-import { useEffect, useState } from 'react'
+import { useEffect, useState, memo, useRef } from 'react'
 import { useParams, useSearchParams } from 'react-router-dom'
 import { useDispatch } from 'react-redux'
 
 import * as S from './styles'
-
 import PerfilList from '../../components/PerfilList'
 import Loader from '../../components/Loader'
-
 import fechar_modal from '../../assets/image/fechar-modal.png'
-
 import { useGetRestaurantByIdQuery } from '../../services/api'
-import { add, open } from '../../store/reducers/cart' // Importe a ação `add`
+import { add, open } from '../../store/reducers/cart'
+
+const MemoizedPerfilList = memo(PerfilList)
 
 const PerfilDetails = () => {
   const { id } = useParams()
   const [searchParams] = useSearchParams()
   const pratoId = searchParams.get('prato')
-
-  // Converter o id para número
   const restauranteId = id ? Number(id) : 0
-
-  // Usar os hooks do RTK Query
   const { data: restaurante } = useGetRestaurantByIdQuery(restauranteId, {
     skip: !restauranteId
   })
-
   const [selectedDish, setSelectedDish] = useState<
     Produto['cardapio'][0] | null
   >(null)
   const [modalIsOpen, setModalIsOpen] = useState(false)
-
-  // Hook para disparar ações do Redux
   const dispatch = useDispatch()
+  const cardsRef = useRef<HTMLDivElement>(null)
+  const [modalTop, setModalTop] = useState(0)
 
   useEffect(() => {
     if (restaurante && pratoId) {
       const pratoSelecionado = restaurante.cardapio.find(
         (p) => p.id === Number(pratoId)
       )
-
       if (pratoSelecionado) {
         setSelectedDish(pratoSelecionado)
         setModalIsOpen(true)
-
-        setTimeout(() => {
-          window.scrollTo({ top: 450, behavior: 'smooth' })
-        }, 200)
       }
     }
   }, [restaurante, pratoId])
 
+  useEffect(() => {
+    if (modalIsOpen && cardsRef.current) {
+      const cardsPosition =
+        cardsRef.current.getBoundingClientRect().top + window.scrollY
+      setModalTop(cardsPosition)
+    }
+  }, [modalIsOpen])
+
   const handleProductClick = (item: Produto['cardapio'][0]) => {
     setSelectedDish(item)
     setModalIsOpen(true)
-
-    setTimeout(() => {
-      window.scrollTo({ top: 450, behavior: 'smooth' })
-    }, 200)
   }
 
   const closeModal = () => {
@@ -64,50 +57,56 @@ const PerfilDetails = () => {
     setSelectedDish(null)
   }
 
-  // Função para adicionar o prato ao carrinho
   const handleAddToCart = () => {
     if (selectedDish) {
-      dispatch(add(selectedDish)) // Dispara a ação `add` com o prato selecionado
+      dispatch(add(selectedDish))
       dispatch(open())
-      closeModal() // Fecha o modal após adicionar ao carrinho
+      closeModal()
     }
   }
 
-  // Mostrar estado de carregamento
   if (!restaurante) {
     return <Loader />
   }
 
   return (
     <>
-      <PerfilList
-        perfils={[restaurante]}
-        restauranteId={restauranteId}
-        onProductClick={(_, item) => handleProductClick(item)}
-        botaoLabel="Mais detalhes"
-      />
+      <div ref={cardsRef}>
+        <MemoizedPerfilList
+          perfils={[restaurante]}
+          restauranteId={restauranteId}
+          onProductClick={(_, item) => handleProductClick(item)}
+          botaoLabel="Mais detalhes"
+        />
+      </div>
 
-      {/* Modal */}
       {modalIsOpen && selectedDish && (
-        <S.Modal className="visivel" onClick={closeModal}>
-          <S.ModalContent onClick={(e) => e.stopPropagation()}>
-            <header>
-              <img src={fechar_modal} alt="Ícone fechar" onClick={closeModal} />
-            </header>
-            <img src={selectedDish.foto} alt={selectedDish.nome} />
-            <div>
-              <h4>{selectedDish.nome}</h4>
-              <p>{selectedDish.descricao}</p>
-              <p>Porção: {selectedDish.porcao}</p>
-              <button
-                title={`Adicionar ao carrinho - ${selectedDish.nome}`}
-                onClick={handleAddToCart}
-              >
-                Adicionar ao carrinho - R$ {selectedDish.preco.toFixed(2)}
-              </button>
-            </div>
-          </S.ModalContent>
-        </S.Modal>
+        <>
+          <S.Overlay className="visivel" onClick={closeModal} />
+          <S.Modal style={{ top: `${modalTop}px` }}>
+            <S.ModalContent onClick={(e) => e.stopPropagation()}>
+              <header>
+                <img
+                  src={fechar_modal}
+                  alt="Ícone fechar"
+                  onClick={closeModal}
+                />
+              </header>
+              <img src={selectedDish.foto} alt={selectedDish.nome} />
+              <div>
+                <h4>{selectedDish.nome}</h4>
+                <p>{selectedDish.descricao}</p>
+                <p>Porção: {selectedDish.porcao}</p>
+                <button
+                  title={`Adicionar ao carrinho - ${selectedDish.nome}`}
+                  onClick={handleAddToCart}
+                >
+                  Adicionar ao carrinho - R$ {selectedDish.preco.toFixed(2)}
+                </button>
+              </div>
+            </S.ModalContent>
+          </S.Modal>
+        </>
       )}
     </>
   )

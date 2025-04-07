@@ -1,38 +1,46 @@
 import styled from 'styled-components'
-
 import { breakpoints, colors } from '../../styles'
 
-export const Modal = styled.div`
-  position: fixed; /* Fixa o modal na tela */
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%); /* Centraliza na tela */
-  z-index: 1000;
-  width: 1024px;
-  height: 344px;
+export const Overlay = styled.div`
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 999; /* Menor que o modal, mas acima do resto */
   display: none;
-  align-items: center;
-  justify-content: center;
-  padding: 20px;
+  background-color: rgba(
+    0,
+    0,
+    0,
+    0.8
+  ); /* Overlay escuro cobrindo toda a tela */
 
   &.visivel {
-    display: flex;
-  }
-
-  @media (max-width: ${breakpoints.tablet}) {
-    width: 100%;
-    height: auto;
+    display: block;
   }
 `
 
-export const ModalContent = styled.div`
+export const Modal = styled.div`
+  position: absolute; /* Posicionado na altura dos cards */
+  left: 0;
+  width: 100%;
+  z-index: 1000; /* Acima do overlay */
   display: flex;
-  flex-direction: row; /* Layout padrão */
+  align-items: flex-start;
+  justify-content: center;
+  padding: 0 15px;
+  box-sizing: border-box;
+`
+
+export const ModalContent = styled.div`
   background-color: ${colors.red};
+  width: 100%;
   max-width: ${breakpoints.desktop};
-  width: 90%;
   padding: 28px;
   position: relative;
+  display: flex;
+  flex-direction: row;
 
   header {
     position: absolute;
@@ -45,24 +53,23 @@ export const ModalContent = styled.div`
       cursor: pointer;
 
       @media (max-width: ${breakpoints.tablet}) {
-        display: block;
         width: 15px;
         height: 15px;
-        padding: 0;
       }
     }
   }
 
   img {
-    width: 340px;
-    height: 340px;
-    margin-right: 20px;
+    width: 280px;
+    height: 280px;
+    object-fit: cover;
+    margin-right: 24px;
 
     @media (max-width: ${breakpoints.tablet}) {
-      padding-top: 20px;
       width: 100%;
       height: auto;
       margin-right: 0;
+      margin-bottom: 16px;
     }
   }
 
@@ -76,14 +83,14 @@ export const ModalContent = styled.div`
       font-size: 18px;
       font-weight: bold;
       color: ${colors.white};
-      margin-bottom: 10px;
+      margin-bottom: 16px;
     }
 
     p {
       font-size: 14px;
       line-height: 22px;
       color: ${colors.white};
-      margin-bottom: 20px;
+      margin-bottom: 16px;
       text-align: justify;
 
       @media (max-width: ${breakpoints.tablet}) {
@@ -104,17 +111,12 @@ export const ModalContent = styled.div`
 
       @media (max-width: ${breakpoints.tablet}) {
         width: 100%;
-        font-size: 12px;
       }
     }
   }
 
   @media (max-width: ${breakpoints.tablet}) {
-    flex-direction: column; /* Alinha os elementos em coluna */
-    padding: 10px;
-
-    div {
-      margin-top: 20px;
-    }
+    flex-direction: column;
+    padding: 16px;
   }
 `
