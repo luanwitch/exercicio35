@@ -40,10 +40,9 @@ const PerfilDetails = () => {
   }, [restaurante, pratoId])
 
   useEffect(() => {
-    if (modalIsOpen && cardsRef.current) {
-      const cardsPosition =
-        cardsRef.current.getBoundingClientRect().top + window.scrollY
-      setModalTop(cardsPosition)
+    if (modalIsOpen) {
+      // Define o modal no topo da janela visível
+      setModalTop(100)
     }
   }, [modalIsOpen])
 
